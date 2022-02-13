@@ -1,0 +1,5 @@
+{% extends "layout.html" %}
+{% block content %}
+    <button onclick=location.href="{{ url_for('users.registration',usertype='private')}}">Registration Private</button>
+    <button onclick=location.href="{{ url_for('users.registration',usertype='business')}}">Registration Business</button>
+{% endblock content %}

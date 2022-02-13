@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block content %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + event.creator.image_file) }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ event.creator.name }}</a>
+        <small class="text-muted">{{ event.date_posted.strftime('%Y-%m-%d') }}</small>
+      </div>
+      <h2 class="article-title">{{ event.title }}</h2>
+      <h3>When: </h3>
+      <p class="article-content">{{ event.date_event.strftime('%Y-%m-%d') }}</p>
+      <h3>Where: </h3>
+      <p class="article-content">{{ event.location }}</p>
+        {% if event.price!=0.0 %}
+            <h3>Cost: </h3>
+            <p class="article-content">${{ event.price }}</p>
+        {% endif %}
+        <h3>Description: </h3>
+      <p class="article-content">{{ event.content }}</p>
+    <h3>Weaknesses: </h3>
+        <p class="article-content">{{ event.weaknesses }}</p>
+    <h3>Equipment: </h3>
+    <p class="article-content">{{ event.equipment }}</p>
+    {% if event.min_users!=0 %}
+    <h3>Minimum number of participants</h3>
+        <p class="article-content">{{ event.min_users }}</p>
+    {% endif %}
+    </div>
+  </article>
+
+    <button onclick=location.href="{{ url_for('events.join_event', event_id=event.id)}}">Join event</button>
+  <!-- delete Modal preso da bootstrap-->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Delete Event?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <form action="{{ url_for('events.delete_event', event_id=event.id) }}" method="POST">
+            <input class="btn btn-danger" type="submit" value="Delete"> <!-- il btn-danger è per farlo rosso -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

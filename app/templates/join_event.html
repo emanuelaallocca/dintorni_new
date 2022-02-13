@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Join event</h1>
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+<div class="form-group">
+    <legend class="border-bottom mb-4">{{ legend }}</legend>
+    <div class="form-group">
+        Car
+    </div>{{form.car(class="btn btn-outline-info")}}
+    <div class="form-group">
+        Bus
+    </div>{{form.bus(class="btn btn-outline-info")}}
+    <div class="form-group">
+        Your own
+    </div>{{form.yourown(class="btn btn-outline-info")}}
+</div>
+{% endblock content %}
