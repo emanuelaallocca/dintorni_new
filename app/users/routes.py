@@ -66,6 +66,28 @@ def account():
     image_file = url_for('static', filename='profile_pics/'+current_user.image_file)#devo mettere la cartella+la route
     return render_template('account.html', title='Account',image_file=image_file, form=form)
 
+@users.route("/account_business", methods=['GET', 'POST'])
+@login_required
+def account_business():
+    #image file is where we store --> now create a variable
+    form= UpdateAccountForm() #importo il form sopra e poi gli dico form= al tipo di form importato sopra
+    #e poi lo faccio returnare sotto
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data)
+            current_user.image_file = picture_file
+        current_user.name = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('your account has been updated', 'success')
+        return redirect(url_for('users.account_business'))
+    elif request.method == 'GET':
+        form.name.data = current_user.username
+        form.email.data = current_user.email
+    image_file = url_for('static', filename='profile_pics/'+current_user.image_file)#devo mettere la cartella+la route
+    return render_template('account_business.html', title='Account Business',image_file=image_file, form=form)
+
+
 @users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
