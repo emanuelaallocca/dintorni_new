@@ -1,6 +1,8 @@
+import wtforms
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField, DateField, IntegerField, FloatField
-from wtforms.validators import DataRequired
+from wtforms import StringField, TextAreaField, SubmitField, DateField, IntegerField, FloatField, ValidationError
+from wtforms.validators import DataRequired, Regexp, ValidationError
+from datetime import date
 
 
 class EventForm(FlaskForm):
@@ -13,6 +15,10 @@ class EventForm(FlaskForm):
     min_users= IntegerField ('Min Partecipant', validators=[DataRequired()])
     weaknesses = TextAreaField('Weaknesses', validators=[DataRequired()])
     submit = SubmitField('Event')
+    def correct_date(self):
+        if date.year<date.today().year:
+            raise EventForm.ValidationError('date should be grater than today')
+
 
 class JoinEventForm(FlaskForm):
     car = SubmitField('Car')

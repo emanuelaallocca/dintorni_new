@@ -1,28 +1,28 @@
 {% extends "layout.html" %}
 {% block content %}
-{% for event in events.items %}
+    <h1 class="mb-3">Events you are going to go({{ events.total }})</h1>
+    {% for event in events.items %}
         <article class="media content-section">
           <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + event.creator.image_file) }}">
           <div class="media-body">
             <div class="article-metadata">
               <a class="mr-2" href="{{ url_for('users.business_events', name=event.creator.name) }}">{{ event.creator.name }}</a>
               <small class="text-muted">{{ event.date_posted.strftime('%Y-%m-%d') }}</small>
-
             </div>
-            <h3><a class="article-title" href="{{ url_for('events.event', event_id=event.id) }}">{{ event.title }}</a></h3>
+            <h2><a class="article-title" href="{{ url_for('events.event', event_id=event.id) }}">{{ event.title }}</a></h2>
             <p class="article-content">{{ event.content }}</p>
           </div>
         </article>
     {% endfor %}
-    <!-- CREO UN ALTRO FOR-->
     {% for page_num in events.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-      {% if page_num %} <!-- IL NUMERO DELLA PAG NON DEVE ESSERE NULLO ALLORA LO LINKO ALLA PAG-->
+      {% if page_num %}
         {% if events.page == page_num %}
-          <a class="btn btn-info mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+          <a class="btn btn-info mb-4" href="{{ url_for('users.user_events', username=user.username, page=page_num) }}">{{ page_num }}</a>
         {% else %}
-          <a class="btn btn-outline-info mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+          <a class="btn btn-outline-info mb-4" href="{{ url_for('users.user_events', username=user.username, page=page_num) }}">{{ page_num }}</a>
         {% endif %}
       {% else %}
+        ...
       {% endif %}
     {% endfor %}
 {% endblock content %}

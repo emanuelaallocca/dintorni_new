@@ -48,9 +48,7 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return "User(" + self.username + "," + self.email + "," + self.image_file + ")"
 
-
 # post class per mettere i post
-
 
 class Business(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -80,7 +78,6 @@ class Business(db.Model, UserMixin):
     def __repr__(self):
         return "Business(" + self.name + "," + self.email + ")"
 
-
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # unic id
     title = db.Column(db.String(100), nullable=False)  # db string di 20 caratteri
@@ -92,7 +89,6 @@ class Post(db.Model):
 
     def __repr__(self):
         return "Post(" + self.title + "," + self.date_posted + ")"
-
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -112,7 +108,6 @@ class Event(db.Model):
 
     def __repr__(self):
         return "Event(" + self.title + "," + self.date_event + "," + self.location + "," + self.price + "," + self.equipment + "," + self.min_users + "," + self.date_posted + "," + self.content + "," + self.weaknesses + ")"
-
 
 class JoinEvent(db.Model):
     id = db.Column(db.Integer, primary_key=True)

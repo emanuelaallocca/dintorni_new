@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import bcrypt, db
-from app.users.forms import RegistrationForm, RegistrationBusinessForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
+from app.users.forms import RegistrationForm, RegistrationBusinessForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm,UpdateAccountBusinessForm
 from app.users.utils import save_picture
 from models import User, Post, Business, Event, JoinEvent
 from flask_login import login_user, current_user, logout_user, login_required
@@ -69,20 +69,18 @@ def account():
 @users.route("/account_business", methods=['GET', 'POST'])
 @login_required
 def account_business():
-    #image file is where we store --> now create a variable
-    form= UpdateAccountForm() #importo il form sopra e poi gli dico form= al tipo di form importato sopra
-    #e poi lo faccio returnare sotto
+    form= UpdateAccountBusinessForm()
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
             current_user.image_file = picture_file
-        current_user.name = form.username.data
+        current_user.name = form.name.data
         current_user.email = form.email.data
         db.session.commit()
         flash('your account has been updated', 'success')
         return redirect(url_for('users.account_business'))
     elif request.method == 'GET':
-        form.name.data = current_user.username
+        form.name.data = current_user.name
         form.email.data = current_user.email
     image_file = url_for('static', filename='profile_pics/'+current_user.image_file)#devo mettere la cartella+la route
     return render_template('account_business.html', title='Account Business',image_file=image_file, form=form)
@@ -119,13 +117,13 @@ def logout():
     return redirect(url_for('main.home'))
 
 @users.route("/user/events_joined")
-def events_joined():
+def user_events():
     page = request.args.get('page', 1, type=int)
     user_id = current_user.id
     events_joined = JoinEvent.query.filter_by(user_id=user_id)
     for ej in events_joined:
         events = Event.query.filter_by(id=ej.event_id)
-    return render_template('partecipations.html', events_joined=events)
+    return render_template('user_events.html', events=events)
 
 @users.route("/user/<string:username>")
 def user_posts(username):
@@ -137,7 +135,7 @@ def user_posts(username):
     return render_template('user_posts.html', posts=posts, user=user)
 
 @users.route("/user/<string:name>")
-def user_events(name):
+def business_events(name):
     page = request.args.get('page', 1, type=int)
     business = Business.query.filter_by(name=name).first_or_404()
     events = Event.query.filter_by(creator=business)\
@@ -173,6 +171,4 @@ def reset_token(token):
         return redirect(url_for('users.login'))
     return render_template('reset_token.html', title='Reset Password', form=form)
 
-#@users.route("/join_event/<int:event_id>", methods=['GET', 'POST'])
-#@login_required
-#def join_event(event_id):
+

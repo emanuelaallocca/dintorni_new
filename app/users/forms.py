@@ -34,12 +34,27 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Remember Me') #boolean --> cookie
     submit = SubmitField('Login')
 
+class UpdateAccountBusinessForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired(), Length(min=5, max=20)])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpeg','png','jpg'])])
+    submit = SubmitField('Update')
+    def validate_name(self, name):
+        if name.data != current_user.name:
+          business = Business.query.filter_by(name = name.data).first()
+          if business:
+             raise ValidationError('This username is already taken')
+
+    def validate_email(self, email):
+        if email.data != current_user.email:
+          business = Business.query.filter_by(name = name.data).first()
+          if business:
+             raise ValidationError('This email is already taken')
+
 class UpdateAccountForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=5, max=20)]) #no empty + condictions
     email = StringField('Email', validators=[DataRequired(), Email()])
-
     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpeg','png','jpg'])])
-
     submit = SubmitField('Update')
     #creo una funzione per questa classe
     #username and email sono gli stessi, perche devono rimanere validi
