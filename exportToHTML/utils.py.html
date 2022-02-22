@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>utils.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #808080; font-style: italic;}
+.s3 { color: #0000ff;}
+.s4 { color: #008000; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+utils.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span>flask <span class="s0">import </span>url_for, current_app
+<span class="s0">from </span>app <span class="s0">import </span>mail
+<span class="s0">import </span>secrets
+<span class="s0">import </span>os
+<span class="s2">#from PIL import Image - non so perche non vada min 38.18 lezione 7</span>
+<span class="s0">from </span>flask_mail <span class="s0">import </span>Message
+
+
+
+<span class="s0">def </span>save_picture(form_picture):
+    random_hex = secrets.token_hex(<span class="s3">8</span>)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex+f_ext
+    picture_path = os.path.join(current_app.root_path, <span class="s4">'static/profile_pics'</span>, picture_fn)
+    form_picture.save(picture_path)
+    <span class="s2">#return the name of the file we want to save in db</span>
+    <span class="s0">return </span>picture_fn
+
+<span class="s0">def </span>send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message(<span class="s4">'Password Reset Request'</span>, sender=<span class="s4">'noreply@demo.com'</span>, recipients=[user.email])
+    msg.body=<span class="s4">f'''to reset pwd follow the link:</span><span class="s0">{</span>url_for(<span class="s4">'reset_token'</span>, token= token, _external=<span class="s0">True</span>)<span class="s0">}</span><span class="s4">'''</span>
+    mail.send(msg)</pre>
+</body>
+</html>
