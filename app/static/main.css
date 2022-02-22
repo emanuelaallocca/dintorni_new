@@ -83,3 +83,7 @@ a.article-title:hover {
     background-color: #FFFF00;
     color: #FFC0CB;
 }
+
+.card>div:hover {
+  transform: scale(1.5) !important;
+}

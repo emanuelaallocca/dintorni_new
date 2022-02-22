@@ -59,6 +59,9 @@ def intialize_db():
         c = Business(name=business['name'], email=email, password=bcrypt.generate_password_hash('1234567890').decode('utf-8'))
         db.session.add(c)
         events = [
+            {'title': 'nuovo evento', 'date': '2022-03-10'},
+            {'title': 'nuovo evento', 'date': '2022-03-10'},
+            {'title': 'nuovo evento', 'date': '2022-03-10'},
             {'title': 'nuovo evento', 'date': '2022-03-10'}
         ]
 

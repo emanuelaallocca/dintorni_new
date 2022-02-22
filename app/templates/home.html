@@ -4,8 +4,8 @@
 
 <div class="card-columns" style="width: 100%" >
     {% for event in events.items %}
-      <div class="card">
-        <img class="card-img-top"  src="{{ url_for('static', filename='profile_pics/' + event.creator.image_file) }}" alt="Event image">
+      <div class="card" style="">
+        <img class="card-img-top" style="width: 100%; height: 15vw; object-fit: cover;" src="{{ url_for('static', filename='profile_pics/' + event.creator.image_file) }}" alt="Event image">
         <div class="card-body">
           <h5 class="card-title text-center">{{ event.title }}</h5>
               <h6 class="card-subtitle mb-2 text-muted text-center" href="{{ url_for('users.user_events', name=event.creator.name) }}">{{ event.creator.name }}</h6>
@@ -18,6 +18,29 @@
     {% endfor %}
 </div>
 
+
+
+    <!--<div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                {% for event in events.items %}
+                    <div class="col md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" style="width: 100%; height: 225px; display: block;" src="{{ url_for('static', filename='profile_pics/' + event.creator.image_file) }}" alt="Event image" data-holdered-rendered="true">
+                            <div class="card-body">
+                                <p class="card-text">{{ event.content }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                     <a href="{{ url_for('events.event', event_id=event.id) }}" class="btn btn-secondary btn-sm text-white" style="color: #04192E">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>-->
+
+
     <!-- CREO UN ALTRO FOR-->
     {% for page_num in events.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
       {% if page_num %} <!-- IL NUMERO DELLA PAG NON DEVE ESSERE NULLO ALLORA LO LINKO ALLA PAG-->
@@ -29,4 +52,8 @@
       {% else %}
       {% endif %}
     {% endfor %}
+
+
+
 {% endblock content %}
+
