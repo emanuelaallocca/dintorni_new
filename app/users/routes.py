@@ -23,7 +23,7 @@ def registration(usertype):
         if form.validate_on_submit():  # dice se è valido il form dopo il submit
             hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
             # create a new user
-            user = User(username=form.username.data, email=form.email.data, telephone=form.telephone.data,
+            user = User(name = form.name.data, surname = form.surname.data, username=form.username.data, email=form.email.data, telephone=form.telephone.data,
                         password=hashed_password)
             db.session.add(user)
             db.session.commit()
@@ -55,14 +55,20 @@ def account():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
             current_user.image_file = picture_file
+        current_user.name = form.name.data
+        current_user.surname = form.surname.data
         current_user.username = form.username.data
         current_user.email = form.email.data
+        current_user.telephone = form.telephone.data
         db.session.commit()
         flash('your account has been updated', 'success')
         return redirect(url_for('users.account'))
     elif request.method == 'GET':
+        form.name.data = current_user.name
+        form.surname.data = current_user.surname
         form.username.data = current_user.username
         form.email.data = current_user.email
+        form.telephone.data = current_user.telephone
     image_file = url_for('static', filename='profile_pics/'+current_user.image_file)#devo mettere la cartella+la route
     return render_template('account.html', title='Account',image_file=image_file, form=form)
 

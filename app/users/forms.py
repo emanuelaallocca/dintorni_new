@@ -6,6 +6,8 @@ from flask_login import current_user
 from flask_wtf import FlaskForm #a validator about what file we can validate
 
 class RegistrationForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired(), Length(min=5, max=20)])
+    surname = StringField('Surname', validators=[DataRequired(), Length(min=5, max=20)])
     username = StringField('Username', validators=[DataRequired(), Length(min=5, max=20)]) #no empty + condictions
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -52,7 +54,10 @@ class UpdateAccountBusinessForm(FlaskForm):
              raise ValidationError('This email is already taken')
 
 class UpdateAccountForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(min=5, max=20)]) #no empty + condictions
+    name = StringField('Name', validators=[DataRequired(), Length(min=5, max=20)])
+    surname = StringField('Surname', validators=[DataRequired(), Length(min=5, max=20)])
+    username = StringField('Username', validators=[DataRequired(), Length(min=5, max=20)])
+    telephone = IntegerField('Telephone Number', validators=[DataRequired()])#no empty + condictions
     email = StringField('Email', validators=[DataRequired(), Email()])
     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpeg','png','jpg'])])
     submit = SubmitField('Update')
