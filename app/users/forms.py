@@ -70,13 +70,13 @@ class UpdateAccountForm(FlaskForm):
 
     def validate_username(self, username):
         if username.data != current_user.username:
-          user = User.query.filter_by(username=username.data).first()
+          user = Private.query.filter_by(username=username.data).first()
           if user:
              raise ValidationError('This username is already taken')
 
     def validate_email(self, email):
         if email.data != current_user.email:
-          user = User.query.filter_by(email=email.data).first()
+          user = Private.query.filter_by(email=email.data).first()
           if user:
              raise ValidationError('This email is already taken')
 
@@ -86,9 +86,7 @@ class RequestResetForm(FlaskForm):
     def validate_email(self, email):
         #guardo se è nel db --> cerco l'user attraverso la mail questa volta
         user = User.query.filter_by(email=email.data).first()
-        business = Business.query.filter_by(email=email.data).first()
         if user is None:
-            if business is None:
              raise ValidationError('there is not an account')
 
 class ResetPasswordForm(FlaskForm):

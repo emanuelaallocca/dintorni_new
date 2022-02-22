@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask import render_template, url_for, redirect, request
 from app import db, bcrypt
-from models import Post, Event, Business, User, JoinEvent, Private
+from models import Post, Event, Business, User, JoinEvent, Private, Bambola
 from app.main import main
 from PIL import Image #non so perche non vada min 38.18 lezione 7
 from app import bcrypt
@@ -11,9 +11,9 @@ from app import bcrypt
 @main.route("/home")
 def home():
     page = request.args.get('page', 1, type=int) #possiamo passare il numero di post che vogliamo per pagina
-    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5) #richiamo tutti i post
+    #posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5) #richiamo tutti i post
     events = Event.query.order_by(Event.date_posted.desc()).paginate(page=page, per_page=5)
-    return render_template('home.html', posts=posts, events = events)
+    return render_template('home.html', events = events)
 
 
 
@@ -70,6 +70,7 @@ def intialize_db():
             e = Event(title=event['title'], date_event = dt, creator=c)
         db.session.add(e)
         db.session.commit()
+
 
 
 
