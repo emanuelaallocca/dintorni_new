@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask import render_template, url_for, redirect, request
 from app import db, bcrypt
-from models import Post, Event, Business, User, JoinEvent
+from models import Post, Event, Business, User, JoinEvent, Private
 from app.main import main
 from PIL import Image #non so perche non vada min 38.18 lezione 7
 from app import bcrypt
@@ -45,18 +45,21 @@ def intialize_db():
         username = user['name'].lower()+'_'+user['surname'].lower()
         telephone = 3397960955
 
-        userdb = User(name=user['name'], surname=user['surname'], email=email, password=bcrypt.generate_password_hash('1234567890').decode('utf-8'), username=username, telephone=telephone)
+        userdb = Private(name=user['name'], surname=user['surname'], email=email, password=bcrypt.generate_password_hash('1234567890').decode('utf-8'),
+                         username=username, telephone=telephone)
         db.session.add(userdb)
         db.session.commit()
 
     businesses = [
-        {'name': 'amazon'},
-        {'name': 'tesla'}
+        {'name': 'amazon', 'vat_number':123, 'city':'Torino', 'address':'via torino'},
+        {'name': 'tesla', 'vat_number':123, 'city':'Torino', 'address':'via torino'}
     ]
 
     for business in businesses:
         email = business['name'].lower()+'@mail.com'
-        c = Business(name=business['name'], email=email, password=bcrypt.generate_password_hash('1234567890').decode('utf-8'))
+        telephone = 3397960955
+        c = Business(name=business['name'], email=email, password=bcrypt.generate_password_hash('1234567890').decode('utf-8'), vat_number=business['vat_number'],
+                     city=business['city'], address=business['address'], telephone=telephone)
         db.session.add(c)
         events = [
             {'title': 'nuovo evento', 'date': '2022-03-10'}

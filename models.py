@@ -13,26 +13,21 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 # metto condizione di if per capire chi si sta loggando
 
 @login_manager.user_loader
-def load_user(user_id):
-    user = User.query.get(int(user_id))
-    business = Business.query.get(int(user_id))
+def load_user(email):
+    user = User.query.get(email)
+    business = Business.query.get(email)
     if user != None:
-        return User.query.get(int(user_id))
+        return User.query.get(email)
     elif business != None:
-        return Business.query.get(int(user_id))
+        return Business.query.get(email)
 
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
-    surname = db.Column(db.String(50))
-    username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
     telephone = db.Column(db.Integer(), nullable=False)
-    posts = db.relationship('Post', backref='author', lazy=True)
-    joined = db.relationship("JoinEvent")
 
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
@@ -52,14 +47,34 @@ class User(db.Model, UserMixin):
 
 # post class per mettere i post
 
-class Business(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
+class Private(User, db.Model):
+    id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    name = db.Column(db.String(50))
+    surname = db.Column(db.String(50))
+    username = db.Column(db.String(20), unique=True, nullable=False)
+    posts = db.relationship('Post', backref='author', lazy=True)
+    joined = db.relationship("JoinEvent")
+
+    def get_reset_token(self, expires_sec=1800):
+        s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
+        return s.dumps({'user_id': self.id}).decode('utf-8')
+
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
+
+    def __repr__(self):
+        return "User(" + self.username + "," + self.email + "," + self.image_file + ")"
+
+class Business(User, db.Model):
+    id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     name = db.Column(db.String(20), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
-    password = db.Column(db.String(60), nullable=False)
     vat_number = db.Column(db.Integer())#rimettere i nullable
-    telephone = db.Column(db.Integer())
     city = db.Column(db.String(20))
     address = db.Column(db.String(30))
     events = db.relationship('Event', backref='creator', lazy=True)
