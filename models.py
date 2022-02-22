@@ -26,6 +26,7 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
     telephone = db.Column(db.Integer(), nullable=False)
+    type= db.Column(db.String(20))
 
     __mapper_args__={
         'polymorphic_identity': 'user',
@@ -121,15 +122,15 @@ class Post(db.Model):
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    date_event = db.Column(db.Date)
-    location = db.Column(db.Text)
-    price = db.Column(db.Float)
-    equipment = db.Column(db.Text)
-    min_users = db.Column(db.Integer)
+    date_event = db.Column(db.Date, default='eccolo')
+    location = db.Column(db.Text, default='eccolo')
+    price = db.Column(db.Float, default=1)
+    equipment = db.Column(db.Text, default='eccolo')
+    min_users = db.Column(db.Integer, default=2)
     date_posted = db.Column(db.DateTime,
                             default=datetime.utcnow())  # default è listante corrente in cui posto
-    content = db.Column(db.Text)
-    weaknesses = db.Column(db.Text)
+    content = db.Column(db.Text, default='eccolo')
+    weaknesses = db.Column(db.Text, default='eccolo')
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'))  # db integer, è una chiave devo specificare la relazi
 
     def __repr__(self):
