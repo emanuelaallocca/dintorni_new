@@ -24,13 +24,15 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    surname = db.Column(db.String(50))
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
     telephone = db.Column(db.Integer(), nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
-    events = relationship("JoinEvent")
+    joined = db.relationship("JoinEvent")
 
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
@@ -56,10 +58,10 @@ class Business(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
-    vat_number = db.Column(db.Integer(), nullable=False)
-    telephone = db.Column(db.Integer(), nullable=False)
-    city = db.Column(db.String(20), nullable=False)
-    address = db.Column(db.String(30), nullable=False)
+    vat_number = db.Column(db.Integer())#rimettere i nullable
+    telephone = db.Column(db.Integer())
+    city = db.Column(db.String(20))
+    address = db.Column(db.String(30))
     events = db.relationship('Event', backref='creator', lazy=True)
 
     def get_reset_token(self, expires_sec=1800):
@@ -93,29 +95,27 @@ class Post(db.Model):
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    date_event = db.Column(db.Date, nullable=False)
-    location = db.Column(db.Text, nullable=False)
-    price = db.Column(db.Float, nullable=False)
-    equipment = db.Column(db.Text, nullable=False)
-    min_users = db.Column(db.Integer, nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False,
+    date_event = db.Column(db.Date)
+    location = db.Column(db.Text)
+    price = db.Column(db.Float)
+    equipment = db.Column(db.Text)
+    min_users = db.Column(db.Integer)
+    date_posted = db.Column(db.DateTime,
                             default=datetime.utcnow())  # default è listante corrente in cui posto
-    content = db.Column(db.Text, nullable=False)
-    weaknesses = db.Column(db.Text, nullable=False)
-    business_id = db.Column(db.Integer, db.ForeignKey('business.id'),
-                            nullable=False)  # db integer, è una chiave devo specificare la relazione
-    partecipanti = relationship("JoinEvent")
+    content = db.Column(db.Text)
+    weaknesses = db.Column(db.Text)
+    business_id = db.Column(db.Integer, db.ForeignKey('business.id'))  # db integer, è una chiave devo specificare la relazi
 
     def __repr__(self):
-        return "Event(" + self.title + "," + self.date_event + "," + self.location + "," + self.price + "," + self.equipment + "," + self.min_users + "," + self.date_posted + "," + self.content + "," + self.weaknesses + ")"
+        return "Event(" + self.title +str(self.date_posted) +")"
 
 class JoinEvent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     transport_type = db.Column(db.String, nullable=False)
-    user = relationship("Event")
-    event = relationship("User")
+    user = db.relationship("Event")
+    event = db.relationship("User")
 
     def __repr__(self):
         return "JoinEvent(" + self.transport_type + ")"
