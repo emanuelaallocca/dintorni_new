@@ -1,5 +1,6 @@
+from datetime import datetime
 from flask import render_template, url_for, redirect, request
-from app import db
+from app import db, bcrypt
 from models import Post, Event, Business, User, JoinEvent
 from app.main import main
 from PIL import Image #non so perche non vada min 38.18 lezione 7

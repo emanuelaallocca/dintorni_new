@@ -107,15 +107,15 @@ class Event(db.Model):
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'))  # db integer, è una chiave devo specificare la relazi
 
     def __repr__(self):
-        return "Event(" + self.title + "," + self.date_event + "," + self.location + "," + self.price + "," + self.equipment + "," + self.min_users + "," + self.date_posted + "," + self.content + "," + self.weaknesses + ")"
+        return "Event(" + self.title +str(self.date_posted) +")"
 
 class JoinEvent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     transport_type = db.Column(db.String, nullable=False)
-    user = relationship("Event")
-    event = relationship("User")
+    user = db.relationship("Event")
+    event = db.relationship("User")
 
     def __repr__(self):
         return "JoinEvent(" + self.transport_type + ")"
