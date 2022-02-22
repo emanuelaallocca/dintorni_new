@@ -78,3 +78,12 @@ a.article-title:hover {
 .account-heading {
   font-size: 2.5rem;
 }
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color: #FFFF00;
+    color: #FFC0CB;
+}
+
+.card>div:hover {
+  transform: scale(1.5) !important;
+}

@@ -1,8 +1,8 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import bcrypt, db
-from app.users.forms import RegistrationForm, RegistrationBusinessForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
+from app.users.forms import RegistrationForm, RegistrationBusinessForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm,UpdateAccountBusinessForm
 from app.users.utils import save_picture
-from models import User, Post, Business, Event, JoinEvent
+from models import User, Post, Business, Event, JoinEvent, Private
 from flask_login import login_user, current_user, logout_user, login_required
 from app.users import users
 
@@ -23,7 +23,7 @@ def registration(usertype):
         if form.validate_on_submit():  # dice se è valido il form dopo il submit
             hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
             # create a new user
-            user = User(username=form.username.data, email=form.email.data, telephone=form.telephone.data,
+            user = Private(name = form.name.data, surname = form.surname.data, username=form.username.data, email=form.email.data, telephone=form.telephone.data,
                         password=hashed_password)
             db.session.add(user)
             db.session.commit()
@@ -55,35 +55,47 @@ def account():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
             current_user.image_file = picture_file
+        current_user.name = form.name.data
+        current_user.surname = form.surname.data
         current_user.username = form.username.data
         current_user.email = form.email.data
+        current_user.telephone = form.telephone.data
         db.session.commit()
         flash('your account has been updated', 'success')
         return redirect(url_for('users.account'))
     elif request.method == 'GET':
+        form.name.data = current_user.name
+        form.surname.data = current_user.surname
         form.username.data = current_user.username
         form.email.data = current_user.email
+        form.telephone.data = current_user.telephone
     image_file = url_for('static', filename='profile_pics/'+current_user.image_file)#devo mettere la cartella+la route
     return render_template('account.html', title='Account',image_file=image_file, form=form)
 
 @users.route("/account_business", methods=['GET', 'POST'])
 @login_required
 def account_business():
-    #image file is where we store --> now create a variable
-    form= UpdateAccountForm() #importo il form sopra e poi gli dico form= al tipo di form importato sopra
-    #e poi lo faccio returnare sotto
+    form= UpdateAccountBusinessForm()
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
             current_user.image_file = picture_file
-        current_user.name = form.username.data
+        current_user.name = form.name.data
         current_user.email = form.email.data
+        current_user.vat_number = form.vat_number.data
+        current_user.telephone = form.telephone.data
+        current_user.city = form.city.data
+        current_user.address = form.address.data
         db.session.commit()
         flash('your account has been updated', 'success')
         return redirect(url_for('users.account_business'))
     elif request.method == 'GET':
-        form.name.data = current_user.username
+        form.name.data = current_user.name
         form.email.data = current_user.email
+        form.vat_number = current_user.vat_number
+        form.telephone.data = current_user.telephone
+        form.city.data = current_user.city
+        form.address.data = current_user.address
     image_file = url_for('static', filename='profile_pics/'+current_user.image_file)#devo mettere la cartella+la route
     return render_template('account_business.html', title='Account Business',image_file=image_file, form=form)
 
@@ -95,7 +107,7 @@ def login():
 
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = Private.query.filter_by(email=form.email.data).first()
         business = Business.query.filter_by(email=form.email.data).first()
         if user != None:
          if user and bcrypt.check_password_hash(user.password, form.password.data):
@@ -119,30 +131,33 @@ def logout():
     return redirect(url_for('main.home'))
 
 @users.route("/user/events_joined")
-def events_joined():
+def user_events():
     page = request.args.get('page', 1, type=int)
-    user_id = current_user.id
-    events_joined = JoinEvent.query.filter_by(user_id=user_id)
-    for ej in events_joined:
-        events = Event.query.filter_by(id=ej.event_id)
-    return render_template('partecipations.html', events_joined=events)
+    print (current_user.id)
+    jevents = JoinEvent.query.filter_by(user_id= current_user.id).all()
+    events = []
+    print(jevents)
+    for e in jevents:
+        ev = Event.query.filter_by(id = e.event_id).first()
+        if ev:
+            events.append(ev)
+    print (events)
+    return render_template('user_events.html', user=current_user, events = events)
 
 @users.route("/user/<string:username>")
 def user_posts(username):
     page = request.args.get('page', 1, type=int)
-    user = User.query.filter_by(username=username).first_or_404()
+    user = Private.query.filter_by(username=username).first_or_404()
     posts = Post.query.filter_by(author=user)\
         .order_by(Post.date_posted.desc())\
         .paginate(page=page, per_page=5)
     return render_template('user_posts.html', posts=posts, user=user)
 
-@users.route("/user/<string:name>")
-def user_events(name):
+@users.route("/<string:name>")
+def business_events(name):
     page = request.args.get('page', 1, type=int)
     business = Business.query.filter_by(name=name).first_or_404()
-    events = Event.query.filter_by(creator=business)\
-        .order_by(Post.date_posted.desc())\
-        .paginate(page=page, per_page=5)
+    events = Event.query.filter_by(creator=business).order_by(Event.date_posted.desc()).paginate(page=page, per_page=5)
     return render_template('business_events.html', events=events, business=business)
 
 
@@ -173,6 +188,4 @@ def reset_token(token):
         return redirect(url_for('users.login'))
     return render_template('reset_token.html', title='Reset Password', form=form)
 
-#@users.route("/join_event/<int:event_id>", methods=['GET', 'POST'])
-#@login_required
-#def join_event(event_id):
+

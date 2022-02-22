@@ -4,6 +4,7 @@ from app.events.forms import EventForm, JoinEventForm
 from models import Event, JoinEvent
 from flask_login import current_user, login_required
 from app.events import events
+from datetime import date
 
 
 @events.route("/event/new", methods=['GET', 'POST'])
@@ -11,14 +12,14 @@ from app.events import events
 def new_event():
     form = EventForm()
     if form.validate_on_submit():
-        event = Event(title=form.title.data, date_event=form.date.data,
+         event = Event(title=form.title.data, date_event=form.date.data,
                       location = form.location.data, price = form.price.data, equipment = form.equipment.data,
                       min_users = form.min_users.data, content=form.content.data, weaknesses = form.weaknesses.data,
                       creator=current_user)
-        db.session.add(event)
-        db.session.commit()
-        flash('event created', 'success')
-        return redirect(url_for('main.home'))
+         db.session.add(event)
+         db.session.commit()
+         flash('event created', 'success')
+         return redirect(url_for('main.home'))
     return render_template('create_event.html', title='New Event', form=form, legend='New Event')
 
 @events.route("/event/<int:event_id>", methods=['GET', 'POST'])
