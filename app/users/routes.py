@@ -138,9 +138,7 @@ def user_posts(username):
 def business_events(name):
     page = request.args.get('page', 1, type=int)
     business = Business.query.filter_by(name=name).first_or_404()
-    events = Event.query.filter_by(creator=business)\
-        .order_by(Post.date_posted.desc())\
-        .paginate(page=page, per_page=5)
+    events = Event.query.filter_by(creator=business).order_by(Event.date_posted.desc()).paginate(page=page, per_page=5)
     return render_template('business_events.html', events=events, business=business)
 
 
