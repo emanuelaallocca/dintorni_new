@@ -1,10 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="content-section">
+    <div class="content-section text-center form-signin">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
+            <img class="mb-4" src="/app/static/img/logo.png" width="72" height="72">
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Log In</legend>
+                <!--<legend class="border-bottom mb-4">Please log in</legend>-->
+                <legend class="border-bottom mb-4">Please log in</legend>
+
                 <div class="form-group">
                     {{ form.email.label(class="form-control-label") }}
                     {% if form.email.errors %}
@@ -50,4 +53,6 @@
             <a class="ml-2" href="{{ url_for('users.registration', usertype="private") }}">Sign Up Now if you are a Private</a>
         </small>
     </div>
+
+
 {% endblock content %}
