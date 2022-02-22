@@ -17,9 +17,9 @@
         <title>DinTOrni</title>
     {% endif %}
 </head>
-<body style="background-color: #F8E9E9 ; " >
+<body style="background-color: #E8E9EB; " >
     <header class="site-header">
-      <nav class="navbar navbar-expand-md navbar-light bg-color:#3B0D11 text-color:white fixed-top" style="background-color:#3B0D11;">
+      <nav class="navbar navbar-expand-md navbar-light text-color:white fixed-top" style="background-color:#313638;">
         <div class="container">
           <a class="navbar-brand mr-4 text-white" href="/">
               <img src="app/static/img/icon_w.png" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -68,8 +68,10 @@
             {% endif %}
           {% endwith %}
           {% block content %}{% endblock %}
-        </div
+        </div>
       </div>
+
+
     </main>
 
 
@@ -78,5 +80,57 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<footer class="text-center text-white" style="background-color: #F06543">
+  <!-- Grid container -->
+  <div class="container p-1pb-0">
+    <!-- Section: Form -->
+    <section class="mt-2 mb-0 pt-2 pb-2">
+      <form action="">
+        <!--Grid row-->
+        <div class="row d-flex mt-1 pt-1 mb-0 justify-content-center" style="margin-top: 10px; margin-bottom: 10px">
+          <!--Grid column-->
+          <div class="col-auto">
+            <p class="pt-2">
+              <strong>Sign up for our newsletter</strong>
+            </p>
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-md-5 col-12">
+            <!-- Email input -->
+            <div class="form-outline form-white mb-4">
+              <input type="email" id="form5Example29" class="form-control" />
+              <label class="form-label" for="form5Example29">Email address</label>
+            </div>
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-auto">
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-outline-light mb-4">
+              Subscribe
+            </button>
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+      </form>
+    </section>
+    <!-- Section: Form -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    ©️ 2022 Copyright:
+    <a class="text-white" href="{{ url_for('main.home') }}"> www.dinTOrni.it</a>
+  </div>
+  <!-- Copyright -->
+</footer>
 </body>
+
+
 </html>

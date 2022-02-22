@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1 class="mb-3">Events you are going to go({{ events.total }})</h1>
+    <h1 class="mb-3">Events you joined</h1>
     {% for event in events %}
         <article class="media content-section">
           <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + event.creator.image_file) }}">
