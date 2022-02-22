@@ -7,6 +7,7 @@
     <link rel="icon" href="/app/static/img/icon0.png">
 
     <!-- Bootstrap CSS -->
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 
@@ -16,9 +17,9 @@
         <title>DinTOrni</title>
     {% endif %}
 </head>
-<body>
+<body style="background-color: #F8E9E9 ; " >
     <header class="site-header">
-      <nav class="navbar navbar-expand-md navbar-light bg-color:#04192E text-white fixed-top" style="background-color:#04192E;">
+      <nav class="navbar navbar-expand-md navbar-light bg-color:#3B0D11 text-color:white fixed-top" style="background-color:#3B0D11;">
         <div class="container">
           <a class="navbar-brand mr-4 text-white" href="/">
               <img src="app/static/img/icon_w.png" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -36,16 +37,16 @@
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
                 {% if current_user.is_authenticated %}
-                    <a class="nav-item nav-link text-white font-weight-bold" href="{{ url_for('events.new_event') }}">New Event</a>
-                     <a class="nav-item nav-link text-white font-weight-bold" href="{{ url_for('posts.new_post') }}">New Post</a>
-                      <a class="nav-item nav-link text-white font-weight-bold" href="{{ url_for('users.account') }}">Account</a>
-                    <a class="nav-item nav-link text-white font-weight-bold" href="{{ url_for('users.account_business') }}">Account Business</a>
-                      <a class="nav-item nav-link text-white font-weight-bold" href="{{ url_for('users.logout') }}">Logout</a>
-                    <a class="nav-item nav-link text-white font-weight-bold" href="{{ url_for('users.user_events') }}">My Events</a>
+                    <a class="nav-item nav-link text-white " href="{{ url_for('events.new_event') }}">New Event</a>
+                     <a class="nav-item nav-link text-white" href="{{ url_for('posts.new_post') }}">New Post</a>
+                      <a class="nav-item nav-link text-white" href="{{ url_for('users.account') }}">Account</a>
+                    <a class="nav-item nav-link text-white" href="{{ url_for('users.account_business') }}">Account Business</a>
+                      <a class="nav-item nav-link text-white " href="{{ url_for('users.logout') }}">Logout</a>
+                    <a class="nav-item nav-link text-white" href="{{ url_for('users.user_events') }}">My Events</a>
 
                 {% else %}
-              <a class="nav-item nav-link text-white font-weight-bold" href="{{ url_for('users.login') }}">Login</a>
-              <a class="nav-item nav-link text-white font-weight-bold"  href="{{ url_for('users.general') }}">Registration</a>
+              <a class="nav-item nav-link text-white" href="{{ url_for('users.login') }}">Login</a>
+              <a class="nav-item nav-link text-white"  href="{{ url_for('users.general') }}">Registration</a>
 
               {% endif %}
             </div>
@@ -53,7 +54,8 @@
         </div>
       </nav>
     </header>
-    <main role="main" class="container bg-color:white bg-opacity:0.6"  >
+
+    <main role="main" class="container" >
       <div class="row">
         <div class="col-lg-12">
           {% with messages = get_flashed_messages(with_categories=true) %}
@@ -67,20 +69,7 @@
             {% endif %}
           {% endwith %}
           {% block content %}{% endblock %}
-        </div>
-        <div class="col-md-4">
-          <div class="content-section">
-            <h3>Our Sidebar</h3>
-            <p class='text-muted'>You can put any information here you'd like.
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-light">Latest Posts</li>
-                <li class="list-group-item list-group-item-light">Announcements</li>
-                <li class="list-group-item list-group-item-light">Calendars</li>
-                <li class="list-group-item list-group-item-light">etc</li>
-              </ul>
-            </p>
-          </div>
-        </div>
+        </div
       </div>
     </main>
 
