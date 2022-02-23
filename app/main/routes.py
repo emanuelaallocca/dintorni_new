@@ -1,9 +1,14 @@
 from datetime import datetime
+
+import socketio
 from flask import render_template, url_for, redirect, request
+from flask_socketio import join_room, leave_room
+
 from app import db, bcrypt
 from models import Post, Event, Business, User, JoinEvent, Private
 from app.main import main
 from PIL import Image #non so perche non vada min 38.18 lezione 7
+import app
 
 
 @main.route("/")
@@ -14,13 +19,9 @@ def home():
     events = Event.query.order_by(Event.date_posted.desc()).paginate(page=page, per_page=10)
     return render_template('home.html', events = events)
 
-
-
 @main.route("/about")
 def about():
     return render_template('about.html', title='About')
-
-
 
 @main.route("/reset_db")
 def reset_db():
@@ -74,10 +75,5 @@ def intialize_db():
             e = Event(title=event['title'], date_event = dt, creator=c)
         db.session.add(e)
         db.session.commit()
-
-
-
-
-
-
     return redirect(url_for('users.logout'))
+

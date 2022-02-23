@@ -8,6 +8,7 @@ from flask_login import UserMixin
 from sqlalchemy.orm import class_mapper
 
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from pymongo import MongoClient
 
 
 # logico che fa capire che utente si è loggato
@@ -131,7 +132,9 @@ class Event(db.Model):
                             default=datetime.utcnow())  # default è listante corrente in cui posto
     content = db.Column(db.Text, default='eccolo')
     weaknesses = db.Column(db.Text, default='eccolo')
-    image_event = db.Column(db.String(20), nullable=False, default='default.jpg')
+    image_event1 = db.Column(db.String(20), nullable=False, default='default.jpg')
+    image_event2 = db.Column(db.String(20), nullable=False, default='default.jpg')
+    image_event3 = db.Column(db.String(20), nullable=False, default='default.jpg')
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'))  # db integer, è una chiave devo specificare la relazi
 
     def __repr__(self):
@@ -148,3 +151,7 @@ class JoinEvent(db.Model):
     def __repr__(self):
         return "JoinEvent(" + self.transport_type + ")"
 
+
+client = MongoClient("your_mongodb_uri_here")
+chat_db = client.get_database("ChatDB")
+users_collection = chat_db.get_collection("user")
