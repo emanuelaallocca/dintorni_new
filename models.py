@@ -131,6 +131,7 @@ class Event(db.Model):
                             default=datetime.utcnow())  # default è listante corrente in cui posto
     content = db.Column(db.Text, default='eccolo')
     weaknesses = db.Column(db.Text, default='eccolo')
+    image_event = db.Column(db.String(20), nullable=False, default='default.jpg')
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'))  # db integer, è una chiave devo specificare la relazi
 
     def __repr__(self):
