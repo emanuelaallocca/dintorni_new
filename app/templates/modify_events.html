@@ -3,10 +3,10 @@
     <div class="content-section">
       <div class="media">
           <!-- dove ha la foto profilo -->
-<img class="rounded-circle account-img" src="{{ event.image_event }}"> <!-- gli passo la variabile dell'immagine-->
+<img class="rounded-circle account-img" src="{{ image_event }}"> <!-- gli passo la variabile dell'immagine-->
         <div class="media-body">
-          <h2 class="account-heading">{{ current_user.username }}</h2>
-          <p class="text-secondary">{{ current_user.email }}</p>
+          <h2 class="account-heading">{{ event.title}}</h2>
+          <p class="text-secondary">{{ current_user.name }}</p>
         </div>
       </div>
         <form method="POST" action="" enctype="multipart/form-data"> <!-- importante perchè l'immagine vada-->
