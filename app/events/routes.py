@@ -78,7 +78,7 @@ def update_event(event_id):
     form.equipment.data = event.equipment
     form.min_users.data = event.min_users
     form.weaknesses.data = event.weaknesses
-    image_event = url_for('static', filename='events_pics/' + event.image_event)
+    image_event = url_for('static', filename='events_pics/' + event.image_event1)
     return render_template('modify_events.html', title='Update Event', form=form, legend='Update Event', image_event=image_event, event=event)
 
 
