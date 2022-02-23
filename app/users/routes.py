@@ -131,18 +131,26 @@ def logout():
     return redirect(url_for('main.home'))
 
 @users.route("/user/events_joined")
+@login_required
 def user_events():
     page = request.args.get('page', 1, type=int)
     print (current_user.id)
     jevents = JoinEvent.query.filter_by(user_id= current_user.id).all()
     events = []
-    print(jevents)
     for e in jevents:
         ev = Event.query.filter_by(id = e.event_id).first()
         if ev:
             events.append(ev)
     print (events)
     return render_template('user_events.html', user=current_user, events = events)
+
+@users.route("/eventscreated")
+@login_required
+def events_created():
+    page = request.args.get('page', 1, type=int)
+    business = Business.query.filter_by(name=current_user.name).first_or_404()
+    events = Event.query.filter_by(creator=business).order_by(Event.date_posted.desc()).paginate(page=page, per_page=5)
+    return render_template('events_created.html', events=events, business=business)
 
 @users.route("/user/<string:username>")
 def user_posts(username):
