@@ -1,5 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
-    <button onclick=location.href="{{ url_for('users.registration',usertype='private')}}">Registration Private</button>
-    <button onclick=location.href="{{ url_for('users.registration',usertype='business')}}">Registration Business</button>
+    <!--<div class="container align-items-center pt-3 mt-3 pb-3 mb-3" style="height: 700px">-->
+    <div class="container fill d-flex justify-content-center" style="height: 700px">
+            <button type="button" class="btn-lg rounded-pill margin-right text-white" style="background-color: #313638; height: 50px; align-items: center; margin-right: 30px" onclick=location.href="{{ url_for('users.registration',usertype='private')}}">Registration Private</button>
+            <button type="button" class="btn-lg btn-rounded margin-left text-white" style="background-color: #313638; height: 50px; align-items: center; margin-left: 30px" onclick=location.href="{{ url_for('users.registration',usertype='business')}}">Registration Business</button>
+        <!--</div>-->
+    </div>
 {% endblock content %}
