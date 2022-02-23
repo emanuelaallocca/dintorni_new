@@ -16,7 +16,7 @@ import app
 def home():
     page = request.args.get('page', 1, type=int) #possiamo passare il numero di post che vogliamo per pagina
     #posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5) #richiamo tutti i post
-    events = Event.query.order_by(Event.date_posted.desc()).paginate(page=page, per_page=5)
+    events = Event.query.order_by(Event.date_posted.desc()).paginate(page=page, per_page=10)
     return render_template('home.html', events = events)
 
 @main.route("/about")

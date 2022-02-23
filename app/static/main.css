@@ -129,8 +129,8 @@ a.article-title:hover {
 }
 .card.card-has-bg:hover .card-img-overlay {
   transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
-  background: #234f6d;
-  background: linear-gradient(0deg, rgba(4, 69, 114, 0.5) 0%, #044572 100%);
+  /*background: #234f6d;
+  background: linear-gradient(0deg, rgba(4, 69, 114, 0.5) 0%, #044572 100%);*/
 }
 .card .card-footer {
   background: none;
@@ -148,7 +148,7 @@ a.article-title:hover {
 .card:hover {
   cursor: pointer;
   transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
-  transform: scale(1.05);
+  transform: scale(0.95);
 }
 .card:hover .card-body {
   margin-top: 30px;
@@ -156,6 +156,6 @@ a.article-title:hover {
 }
 .card .card-img-overlay {
   transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
-  background: #234f6d;
-  background: linear-gradient(0deg, rgba(35, 79, 109, 0.3785889356) 0%, #455f71 100%);
+  /*background: #234f6d;
+  background: linear-gradient(0deg, rgba(35, 79, 109, 0.3785889356) 0%, #455f71 100%);*/
 }
