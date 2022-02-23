@@ -98,7 +98,7 @@ class ResetPasswordForm(FlaskForm):
 class RegistrationBusinessForm(FlaskForm):
     name = StringField('Username', validators=[DataRequired(), Length(min=5, max=20)]) #no empty + condictions
     email = StringField('Email', validators=[DataRequired(), Email()])
-    vat_number = StringField('VAT Number', validators=[DataRequired()])
+    vat_number = IntegerField('VAT Number', validators=[DataRequired()])
     telephone = IntegerField('Telephone Number', validators=[DataRequired()])
     city = StringField('City', validators=[DataRequired()])
     address = StringField('Address', validators=[DataRequired()])

@@ -92,7 +92,7 @@ def account_business():
     elif request.method == 'GET':
         form.name.data = current_user.name
         form.email.data = current_user.email
-        form.vat_number = current_user.vat_number
+        form.vat_number.data = current_user.vat_number
         form.telephone.data = current_user.telephone
         form.city.data = current_user.city
         form.address.data = current_user.address

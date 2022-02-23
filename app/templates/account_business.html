@@ -2,7 +2,6 @@
 {% block content %}
     <div class="content-section">
       <div class="media">
-          <!-- dove ha la foto profilo -->
 <img class="rounded-circle account-img" src="{{ image_file }}"> <!-- gli passo la variabile dell'immagine-->
         <div class="media-body">
           <h2 class="account-heading">{{ current_user.name }}</h2>
@@ -27,8 +26,11 @@
                         {{ form.name(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
+
+
                 <div class="form-group">
                     {{ form.email.label(class="form-control-label") }}
+
                     {% if form.email.errors %}
                         {{ form.email(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
@@ -40,6 +42,22 @@
                         {{ form.email(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
+
+                <div class="form-group">
+                    {{ form.vat_number.label(class="form-control-label") }}
+
+                    {% if form.vat_number.errors %}
+                        {{ form.vat_number(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.vat_number.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.vat_number(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
              <div class="form-group">
                     {{ form.telephone.label(class="form-control-label") }}
 
@@ -54,6 +72,8 @@
                         {{ form.telephone(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
+
+
              <div class="form-group">
                     {{ form.city.label(class="form-control-label") }}
 
@@ -68,6 +88,8 @@
                         {{ form.city(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
+
+
             <div class="form-group">
                     {{ form.address.label(class="form-control-label") }}
 
@@ -83,6 +105,7 @@
                     {% endif %}
                 </div>
 
+
                 <div class="form-group">
                     {{ form.picture.label() }}
                     {{ form.picture(class="form-control-file") }}
@@ -92,7 +115,11 @@
                         {% endfor %}
                     {% endif %}
                 </div>
+
+
             </fieldset>
+
+
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>

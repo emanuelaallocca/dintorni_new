@@ -4,7 +4,6 @@ from app import db, bcrypt
 from models import Post, Event, Business, User, JoinEvent, Private
 from app.main import main
 from PIL import Image #non so perche non vada min 38.18 lezione 7
-from app import bcrypt
 
 
 @main.route("/")
@@ -51,14 +50,16 @@ def intialize_db():
         db.session.commit()
 
     businesses = [
-        {'name': 'amazon', 'vat_number':123, 'city':'Torino', 'address':'via torino'},
-        {'name': 'tesla', 'vat_number':123, 'city':'Torino', 'address':'via torino'}
+        {'name': 'amazon',  'city':'Torino', 'address':'via torino'},
+        {'name': 'tesla', 'city':'Torino', 'address':'via torino'}
     ]
 
     for business in businesses:
         email = business['name'].lower()+'@mail.com'
         telephone = 3397960955
-        c = Business(name=business['name'], email=email, password=bcrypt.generate_password_hash('1234567890').decode('utf-8'), vat_number=business['vat_number'],
+        vat_number = 123456
+        c = Business(name=business['name'], email=email, password=bcrypt.generate_password_hash('1234567890').decode('utf-8'),
+                     vat_number=vat_number,
                      city=business['city'], address=business['address'], telephone=telephone)
         db.session.add(c)
         events = [
