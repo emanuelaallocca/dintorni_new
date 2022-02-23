@@ -1,11 +1,12 @@
 from flask import render_template, url_for, flash, redirect, request, abort
 from app import db
-from app.events.forms import EventForm, JoinEventForm
+from app.events.forms import EventForm, JoinEventForm, ModifyEventForm
+from app.events.utils import save_picture
 from models import Event, JoinEvent
 from flask_login import current_user, login_required
 from app.events import events
 from datetime import date
-
+from PIL import Image
 
 @events.route("/event/new", methods=['GET', 'POST'])
 @login_required
@@ -44,8 +45,11 @@ def update_event(event_id):
     event = Event.query.get_or_404(event_id)
     if event.creator!=current_user:
         abort(403) #risposta per forbidden route
-    form = EventForm()
+    form = ModifyEventForm()
     if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data)
+            event.image_event = picture_file
         event.title=form.title.data
         event.content=form.content.data
         event.date_event = form.date.data
@@ -56,11 +60,11 @@ def update_event(event_id):
         event.weaknesses = form.weaknesses.data
         db.session.commit()
         flash('update done', 'success')
-        return redirect(url_for('events.event', event_id=event_id))
+        return redirect(url_for('users.events_created', event_id=event_id))
     elif request.method=='GET':
         form.title.data = event.title
         form.content.data = event.content
-        form.date_event.data = event.date
+        form.date.data = event.date_event
         form.location.data = event.location
         form.price.data = event.price
         form.equipment.data = event.equipment
@@ -68,13 +72,14 @@ def update_event(event_id):
         form.weaknesses.data = event.weaknesses
     form.title.data=event.title
     form.content.data=event.content
-    form.date_event.data = event.date
+    form.date.data = event.date_event
     form.location.data = event.location
     form.price.data = event.price
     form.equipment.data = event.equipment
     form.min_users.data = event.min_users
     form.weaknesses.data = event.weaknesses
-    return render_template('create_event.html', title='Update Event', form=form, legend='Update Event')
+    image_event = url_for('static', filename='events_pics/' + event.image_event)
+    return render_template('modify_events.html', title='Update Event', form=form, legend='Update Event', image_event=image_event, event=event)
 
 
 

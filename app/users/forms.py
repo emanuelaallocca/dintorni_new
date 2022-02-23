@@ -28,8 +28,6 @@ class RegistrationForm(FlaskForm):
         if user:
             raise ValidationError('This email is already taken')
 
-
-
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
