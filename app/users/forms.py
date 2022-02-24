@@ -6,7 +6,7 @@ from flask_login import current_user
 from flask_wtf import FlaskForm #a validator about what file we can validate
 
 class RegistrationForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired(), Length(min=5, max=20)])
+    name = StringField('Name', validators=[DataRequired(), Length(min=5, max=50)])
     surname = StringField('Surname', validators=[DataRequired(), Length(min=5, max=20)])
     username = StringField('Username', validators=[DataRequired(), Length(min=5, max=20)]) #no empty + condictions
     email = StringField('Email', validators=[DataRequired(), Email()])

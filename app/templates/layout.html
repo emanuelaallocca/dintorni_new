@@ -10,6 +10,8 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css'>
+
 
     {% if title %}
         <title>DinTOrni - {{ title }}</title>
@@ -22,9 +24,8 @@
       <nav class="navbar navbar-expand-md navbar-light text-color:white fixed-top" style="background-color:#313638;">
         <div class="container">
           <a class="navbar-brand mr-4 text-white" href="/">
-              <img src="app/static/img/icon_w.png" width="30" height="30" class="d-inline-block align-top" alt="">
-              <img src="app/static/img/nome_w.png" width="30" height="30" class="d-inline-block align-top" alt="">
-              DinTOrni
+              <img style="max-width:50px; margin-top: -7px;" src="{{ url_for('static', filename='img/' + 'icon_w.png') }}">
+              <img style="max-width:100px; margin-top: -7px;" src="{{ url_for('static', filename='img/' + 'nome_w.png') }}">
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -38,13 +39,13 @@
             <div class="navbar-nav">
                 {% if current_user.is_authenticated %}
                     <a class="nav-item nav-link text-white" href="{{ url_for('events.new_event') }}">New Event</a>
-                    <a class="nav-item nav-link text-white" href="{{ url_for('posts.new_post') }}">New Post</a>
+                    <a class="nav-item nav-link text-white" href="{{ url_for('posts.new_post') }}">Review</a>
                     <a class="nav-item nav-link text-white" href="{{ url_for('users.account') }}">Account</a>
                     <a class="nav-item nav-link text-white" href="{{ url_for('users.account_business') }}">Account Business</a>
                     <a class="nav-item nav-link text-white " href="{{ url_for('users.logout') }}">Logout</a>
                     <a class="nav-item nav-link text-white" href="{{ url_for('users.user_events') }}">My Events</a>
                     <a class="nav-item nav-link text-white" href="{{ url_for('users.events_created') }}">Events Created</a>
-                    <a class="nav-item nav-link text-white" href="{{ url_for('users.index') }}">Chat</a>
+
                 {% else %}
               <a class="nav-item nav-link text-white" href="{{ url_for('users.login') }}">Login</a>
               <a class="nav-item nav-link text-white"  href="{{ url_for('users.general') }}">Registration</a>
@@ -103,7 +104,7 @@
           <div class="col-md-5 col-12">
             <!-- Email input -->
             <div class="form-outline form-white mb-4">
-              <input type="email" id="form5Example29" class="form-control" placeholder="Enter your email to discover new experiences around you!"/>
+              <input type="email" id="form5Example29" class="form-control" />
              <!-- <label class="form-label" for="form5Example29">Enter your email to discover new experiences around you!</label>-->
             </div>
           </div>

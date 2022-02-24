@@ -5,7 +5,6 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from config import Config
 from flask import Flask, render_template, request, redirect, url_for
-from flask_socketio import SocketIO, join_room, leave_room
 
 
 db = SQLAlchemy()
@@ -14,7 +13,6 @@ login_manager = LoginManager()
 login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
 mail = Mail()
-socketio = SocketIO()
 
 
 def create_app(config_class=Config):
@@ -25,7 +23,6 @@ def create_app(config_class=Config):
     bcrypt.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
-    SocketIO(app)
 
 
 

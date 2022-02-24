@@ -8,7 +8,7 @@ from flask_login import UserMixin
 from sqlalchemy.orm import class_mapper
 
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from pymongo import MongoClient
+
 
 
 # logico che fa capire che utente si è loggato
@@ -151,7 +151,3 @@ class JoinEvent(db.Model):
     def __repr__(self):
         return "JoinEvent(" + self.transport_type + ")"
 
-
-client = MongoClient("your_mongodb_uri_here")
-chat_db = client.get_database("ChatDB")
-users_collection = chat_db.get_collection("user")

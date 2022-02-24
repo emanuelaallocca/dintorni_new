@@ -1,9 +1,78 @@
 {% extends "layout.html" %}
 {% block content %}
-    <!--<div class="container align-items-center pt-3 mt-3 pb-3 mb-3" style="height: 700px">-->
+
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container login-container pb-5" style="height: 500px">
+            <div class="row">
+                <div class="col-md-6 login-form-1">
+                    <h3>Are you a Local Business?</h3>
+                    <form>
+
+                        <div>
+                            <p class="text-center font-weight-light">If you're a local business in Piedmont and you want to improve your visibility creating new events and sharing the experiences with the right people, you'd better click below:</p>
+                            <p class="text-center font-weight-light">this website is perfect for you!</p>
+                        </div>
+
+                        <div class="form-group text-center justify-content-center pt-3">
+                            <input type="button" class="btnSubmit" value="Register" onclick=location.href="{{ url_for('users.registration',usertype='business')}}" />
+                        </div>
+
+                    </form>
+                </div>
+                <div class="col-md-6 login-form-2">
+                    <h3>Are you a User?</h3>
+                    <form>
+                        <div>
+                            <p class="text-center font-weight-light text-white">If you're a curious person and you are looking for new experiences to better know history and traditions of Piedmont, you'd better click below.</p>
+                            <p class="text-center font-weight-light text-white">this website is perfect for you!</p>
+                        </div>
+                        <div class="form-group text-center justify-content-center pt-3">
+                            <input type="button" class="btnSubmit" value="Register" onclick=location.href="{{ url_for('users.registration',usertype='private')}}" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    <!--<div class="container align-items-center pt-3 mt-3 pb-3 mb-3" style="height: 700px">
     <div class="container fill d-flex justify-content-center" style="height: 700px">
             <button type="button" class="btn-lg rounded-pill margin-right text-white" style="background-color: #313638; height: 50px; align-items: center; margin-right: 30px" onclick=location.href="{{ url_for('users.registration',usertype='private')}}">Registration Private</button>
             <button type="button" class="btn-lg btn-rounded margin-left text-white" style="background-color: #313638; height: 50px; align-items: center; margin-left: 30px" onclick=location.href="{{ url_for('users.registration',usertype='business')}}">Registration Business</button>
-        <!--</div>-->
+        </div>
+    </div>-->
+
+
+    <div class="container">
+    <div class="mgb-40 padb-30 auto-invert line-b-4 align-center">
+        <h4 class="font-cond-l fg-accent lts-md mgb-10" contenteditable="false">Not yet convinced?</h4>
+        <h1 class="font-cond-b fg-text-d lts-md fs-300 fs-300-xs no-mg" contenteditable="false">Read users reviews</h1>
     </div>
+    <ul class="hash-list cols-3 cols-1-xs pad-30-all align-center text-sm">
+        <li>
+          <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="wpx-100 img-round mgb-20" title="" alt="" data-edit="false" data-editor="field" data-field="src[Image Path]; title[Image Title]; alt[Image Alternate Text]">
+          <p class="fs-110 font-cond-l" contenteditable="false">" I wanted to know more about my region, Piedmont, because I'm living here since 2011 and I just realized that I didn't know anything about traditions and culture. So I participated to a workshop about tipical food in Casale Monferrato and I discovered a lot of new things! "</p>
+          <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">Mario Rallo</h5>
+          <small class="font-cond case-u lts-sm fs-80 fg-text-l" contenteditable="false">Pharmacist - Pinerolo</small>
+        </li>
+        <li>
+          <img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="wpx-100 img-round mgb-20" title="" alt="" data-edit="false" data-editor="field" data-field="src[Image Path]; title[Image Title]; alt[Image Alternate Text]">
+          <p class="fs-110 font-cond-l" contenteditable="false">" I am a student and I moved in Turin to attend Politecnico. I wanted to go to Langhe but I have no car and train is not so so feasible, so I joined an event and traveled by a car owned by a nice woman who is now a new friend. Highly recommended!  "</p>
+          <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">Francesca Verdi</h5>
+          <small class="font-cond case-u lts-sm fs-80 fg-text-l" contenteditable="false">Student - Turin</small>
+        </li>
+        <li>
+          <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="wpx-100 img-round mgb-20" title="" alt="" data-edit="false" data-editor="field" data-field="src[Image Path]; title[Image Title]; alt[Image Alternate Text]">
+          <p class="fs-110 font-cond-l" contenteditable="false">" I had a free weekend from work and I wanted to do something different. I love traveling with my car but sometimes it's expensive so I shared the trip with Paolo and Giovanna and I could afford the wine tasting in Barolo. Wonderful experience! "</p>
+          <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">Lara Borsato</h5>
+          <small class="font-cond case-u lts-sm fs-80 fg-text-l" contenteditable="false">Babysitter - Alba</small>
+        </li>
+      </ul>
+</div>
+
+
+
+
+
 {% endblock content %}
