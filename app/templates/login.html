@@ -25,8 +25,7 @@
                                             <img style="max-width:50px; margin-top: -7px;" src="{{ url_for('static', filename='img/' + 'logo.png') }}">
                                         </div>
 
-                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
-
+                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5><fieldset class="form-group">
                                         <div class="form-outline mb-4">
                                             {{ form.email.label(class="form-control-label") }}
                                             {% if form.email.errors %}
@@ -57,10 +56,8 @@
                                         <div class="form-check">
                                             {{ form.remember(class="form-check-input") }}
                                             {{ form.remember.label(class="form-check-label") }}
-                                        </div>
-
+                                        </div></fieldset>
                                         <div class="pt-1 mb-4">
-
                                             {{ form.submit(class="btn btn-dark btn-lg btn-block") }}
                                         </div>
 
@@ -79,10 +76,7 @@
   </div>
 </section>
 
-
-
-
-    <div class="content-section text-center form-signin">
+        <div class="content-section text-center form-signin">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <img class="mb-4" src="/app/static/img/logo.png" width="72" height="72">
@@ -135,6 +129,5 @@
             <a class="ml-2" href="{{ url_for('users.registration', usertype="private") }}">Sign Up Now if you are a Private</a>
         </small>
     </div>
-
 
 {% endblock content %}
