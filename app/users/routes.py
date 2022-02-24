@@ -1,8 +1,5 @@
-import socketio
 from flask import render_template, url_for, flash, redirect, request
-from flask_socketio import send, join_room, leave_room
-
-from app import bcrypt, db, socketio
+from app import bcrypt, db
 from app.users.forms import RegistrationForm, RegistrationBusinessForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm,UpdateAccountBusinessForm
 from app.users.utils import save_picture
 from models import User, Post, Business, Event, JoinEvent, Private
@@ -197,44 +194,4 @@ def reset_token(token):
         return redirect(url_for('users.login'))
     return render_template('reset_token.html', title='Reset Password', form=form)
 
-@users.route('/index')
-def index():
-    return render_template("index.html")
 
-
-@users.route('/chat')
-@login_required
-def chat():
-    username = request.args.get('username')
-    room = request.args.get('room')
-
-    if username==current_user.username:
-        jevents = JoinEvent.query.filter_by(user_id=current_user.id).all()
-        ev = Event
-        for e in jevents:
-            if e.event_id == room:
-             ev = Event.query.filter_by(id=e.event_id).first()
-            if ev=='':
-                return render_template('index.html')
-            else:
-             return render_template('chat.html', username=username, room=room)
-    else:
-        return redirect(url_for('main.home'))
-
-@socketio.on('send_message')
-def handle_send_message_event(data):
-        current_user.logger.info("{} has sent message to the room {}: {}".format(data['username'],
-                                                                        data['room'],
-                                                                        data['message']))
-        socketio.emit('receive_message', data, room=data['room'])
-
-@socketio.on('join_room')
-def handle_join_room_event(data):
-    current_user.logger.info("{} has joined the room {}".format(data['username'], data['room']))
-    join_room(data['room'])
-    socketio.emit('join_room_announcement', data, room=data['room'])
-
-@socketio.on('leave_room')
-def handle_leave_room_event(data):
-    current_user.logger.info("{} has left the room {}".format(data['username'], data['room']))
-    leave_room(data['room'])
