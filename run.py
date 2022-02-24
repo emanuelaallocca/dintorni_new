@@ -1,4 +1,4 @@
-#import socketio
+import socketio
 
 from app import create_app
 
