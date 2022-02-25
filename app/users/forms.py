@@ -39,7 +39,7 @@ class UpdateAccountBusinessForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpeg','png','jpg'])])
     vat_number = IntegerField('Vat Number', validators=[DataRequired()])  # rimettere i nullable
-    telephone = IntegerField('Telephone', validators=[DataRequired(), Length(10)])
+    telephone = IntegerField('Telephone', validators=[DataRequired()])
     city = StringField('City', validators=[DataRequired()])
     address = StringField('Address', validators=[DataRequired()])
     submit = SubmitField('Update')
@@ -51,8 +51,9 @@ class UpdateAccountBusinessForm(FlaskForm):
 
     def validate_email(self, email):
         if email.data != current_user.email:
-          business = Business.query.filter_by(name = name.data).first()
-          if business:
+          business = Business.query.filter_by(email=email.data).first()
+          user = Private.query.filter_by(email=email.data).first()
+          if business or user:
              raise ValidationError('This email is already taken')
 
 class UpdateAccountForm(FlaskForm):
@@ -74,8 +75,9 @@ class UpdateAccountForm(FlaskForm):
 
     def validate_email(self, email):
         if email.data != current_user.email:
+          business = Business.query.filter_by(email=email.data).first()
           user = Private.query.filter_by(email=email.data).first()
-          if user:
+          if user or business:
              raise ValidationError('This email is already taken')
 
 class RequestResetForm(FlaskForm):

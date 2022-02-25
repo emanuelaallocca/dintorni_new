@@ -83,7 +83,7 @@ class Business(User, db.Model):
     _tablename__ = 'business'
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     name = db.Column(db.String(20), unique=True, nullable=False)
-    vat_number = db.Column(db.String(20))#rimettere i nullable
+    vat_number = db.Column(db.Integer())#rimettere i nullable
     city = db.Column(db.String(20))
     address = db.Column(db.String(30))
     events = db.relationship('Event', backref='creator', lazy=True)
