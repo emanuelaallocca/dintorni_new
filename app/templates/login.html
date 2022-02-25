@@ -20,12 +20,11 @@
                             <div class="col-md-6 col-lg-7 d-flex align-items-center">
                                 <div class="card-body p-4 p-lg-5 text-black">
                                     <form method="POST" action="">
-                                        <div class="d-flex align-items-center mb-3 pb-1">
-                                            <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                                            <img style="max-width:50px; margin-top: -7px;" src="{{ url_for('static', filename='img/' + 'logo.png') }}">
+                                        <div class="d-flex align-items-center justify-content-center mb-3 pb-1">
+                                            <img style="max-width:100px; margin-top: -7px;" src="{{ url_for('static', filename='img/' + 'logo.png') }}">
                                         </div>
 
-                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+                                        <h5 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Sign into your account</h5>
 
                                         <div class="form-outline mb-4">
                                             {{ form.email.label(class="form-control-label") }}
