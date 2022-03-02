@@ -11,7 +11,7 @@
                         <div class="row g-0">
                             <div class="col-md-6 col-lg-5 d-none d-md-block">
                                 <img
-                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                                        src="{{ url_for('static', filename='img/' + 'img.png') }}"
                                         alt="login form"
                                         class="img-fluid" style="border-radius: 1rem 0 0 1rem;"
                                 />
@@ -23,7 +23,7 @@
                                                 <img style="max-width:100px; margin-top: -7px;" src="{{ url_for('static', filename='img/' + 'logo.png') }}">
                                             </div>
 
-                                            <h5 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Sign into your account</h5>
+                                            <h5 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px; color: #04192E; ">Sign into your account</h5>
 
                                         <fieldset class="form-group">
                                             <div class="form-outline mb-4">
@@ -62,10 +62,10 @@
                                             {{ form.submit(class="btn btn-dark btn-lg btn-block") }}
                                         </div>
                                     </form>
-                                        <a class="small text-muted" href="{{ url_for('users.reset_request') }}">Forgot password?</a>
-                                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="{{ url_for('users.general') }}" style="color: #393f81;">Register here</a></p>
-                                        <a href="#!" class="small text-muted">Terms of use.</a>
-                                        <a href="#!" class="small text-muted">Privacy policy</a>
+                                        <a class="small text-muted" style="color: #04192E;" href="{{ url_for('users.reset_request') }}">Forgot password?</a>
+
+                                         <p class="mb-5 pb-lg-2" style="color: #04192E;">Don't have an account? <a href="{{ url_for('users.general') }}" style="color: #393f81;">Register here</a></p>
+
 
                                 </div>
                             </div>

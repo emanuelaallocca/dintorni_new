@@ -1,27 +1,48 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="content-section">
+
+
+    <section class="vh-100" style="background-color: #E8E9EB;">
+    <div class="container py-5 h-100">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Reset Password</legend>
-                <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
-                    {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.email.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-xl-10">
+                    <div class="card">
+                        <div class="row g-0">
+                                <div class="card-body p-4 p-lg-5 text-black">
+                                    <fieldset class="form-group">
+                                        <legend class="border-bottom mb-4">Reset your Password</legend>
+                                        <div class="form-group">
+                                            {{ form.email.label(class="form-control-label") }}
+                                            {% if form.email.errors %}
+                                                {{ form.email(class="form-control form-control-lg is-invalid") }}
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.email.errors %}
+                                                        <span>{{ error }}</span>
+                                                    {% endfor %}
+                                                </div>
+                                            {% else %}
+                                                {{ form.email(class="form-control form-control-lg") }}
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group text-center pt-3">
+                                            {{ form.submit(class="btn btn-info") }}
+                                        </div>
+
+                                    </fieldset>
+                                </div>
+
                         </div>
-                    {% else %}
-                        {{ form.email(class="form-control form-control-lg") }}
-                    {% endif %}
+                    </div>
                 </div>
-            </fieldset>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
             </div>
+
         </form>
     </div>
+   </section>
+
+
+
+
 {% endblock content %}
