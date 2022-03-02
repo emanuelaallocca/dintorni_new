@@ -32,7 +32,7 @@ def event(event_id):
 @login_required
 def delete_event(event_id):
     event = Event.query.get_or_404(event_id)
-    if event.author != current_user:
+    if event.creator != current_user:
         abort(403)
     db.session.delete(event)
     db.session.commit()
