@@ -39,9 +39,10 @@
             <div class="navbar-nav">
                 {%  if current_user.is_authenticated %}
                         {%  if current_user.username != null %}
-                            <a class="nav-item nav-link text-white" href="{{ url_for('posts.new_post') }}">Review</a>
+                            <a class="nav-item nav-link text-white" href="{{ url_for('posts.reviews') }}">Review</a>
+                            <a class="nav-item nav-link text-white" href="{{ url_for('users.user_posts', username = current_user.username) }}">My Reviews</a>
                             <a class="nav-item nav-link text-white" href="{{ url_for('users.account') }}">Account</a>
-                            <a class="nav-item nav-link text-white" href="{{ url_for('users.user_events') }}">My Events</a>
+                            <a class="nav-item nav-link text-white" href="{{ url_for('users.user_events')}}">My Events</a>
                         {%  else %}
                             <a class="nav-item nav-link text-white" href="{{ url_for('events.new_event') }}">New Event</a>
                             <a class="nav-item nav-link text-white" href="{{ url_for('users.account_business') }}">Account Business</a>
