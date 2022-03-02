@@ -1,15 +1,10 @@
 from datetime import datetime
-
 from flask import current_app
 from sqlalchemy.orm import relationship
-
 from app import db, login_manager
 from flask_login import UserMixin
 from sqlalchemy.orm import class_mapper
-
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-
-
 
 # logico che fa capire che utente si è loggato
 # metto condizione di if per capire chi si sta loggando
@@ -48,7 +43,6 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return "User(" + self.username + "," + self.email + "," + self.image_file + ")"
-
 
 class Private(User, db.Model):
     _tablename__ = 'private'
@@ -123,7 +117,7 @@ class Post(db.Model):
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    date_event = db.Column(db.Date, default='eccolo')
+    date_event = db.Column(db.Date)
     location = db.Column(db.Text, default='eccolo')
     price = db.Column(db.Float, default=1)
     equipment = db.Column(db.Text, default='eccolo')

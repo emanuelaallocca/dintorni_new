@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import render_template, url_for, flash, redirect, request
 
 from app import bcrypt, db
@@ -134,6 +136,25 @@ def logout():
 @users.route("/user/events_joined")
 @login_required
 def user_events():
+    page = request.args.get('page', 1, type=int)
+    jevents = JoinEvent.query.filter_by(user_id= current_user.id).all()
+    events = []
+    for e in jevents:
+        ev = Event.query.filter_by(id = e.event_id).first()
+        if ev:
+            if ev.date_event > datetime.today().date():
+                events.append(ev)
+    events_already_done = []
+    for e in jevents:
+        ev = Event.query.filter_by(id=e.event_id).first()
+        if ev:
+            if ev.date_event < datetime.today().date():
+                events_already_done.append(ev)
+    return render_template('user_events.html', user=current_user, events = events, events_already_done=events_already_done)
+
+@users.route("/user/events_joined")
+@login_required
+def user_reviews_todo():
     page = request.args.get('page', 1, type=int)
     jevents = JoinEvent.query.filter_by(user_id= current_user.id).all()
     events = []
