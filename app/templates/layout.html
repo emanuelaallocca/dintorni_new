@@ -31,21 +31,23 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
-            <div class="navbar-nav mr-auto">
+            <!--<div class="navbar-nav mr-auto">
               <a class="nav-item nav-link text-white" href="{{ url_for('main.home') }}">Home</a>
               <a class="nav-item nav-link text-white" href="{{ url_for('main.about') }}">About</a>
-            </div>
+            </div>-->
             <!-- Navbar Right Side -->
-            <div class="navbar-nav">
+            <div class="navbar-nav ml-auto ms-auto">
+                <a class="nav-item nav-link text-white" href="{{ url_for('main.home') }}">Home</a>
+                <a class="nav-item nav-link text-white" href="{{ url_for('main.about') }}">About</a>
                 {%  if current_user.is_authenticated %}
                         {%  if current_user.username != null %}
                             <a class="nav-item nav-link text-white" href="{{ url_for('posts.new_post') }}">Review</a>
                             <a class="nav-item nav-link text-white" href="{{ url_for('users.account') }}">Account</a>
-                            <a class="nav-item nav-link text-white" href="{{ url_for('users.user_events') }}">My Events</a>
+                            <a class="nav-item nav-link text-white" href="{{ url_for('users.user_events') }}">My events</a>
                         {%  else %}
-                            <a class="nav-item nav-link text-white" href="{{ url_for('events.new_event') }}">New Event</a>
-                            <a class="nav-item nav-link text-white" href="{{ url_for('users.account_business') }}">Account Business</a>
-                            <a class="nav-item nav-link text-white" href="{{ url_for('users.events_created') }}">Events Created</a>
+                            <a class="nav-item nav-link text-white" href="{{ url_for('events.new_event') }}">New event</a>
+                            <a class="nav-item nav-link text-white" href="{{ url_for('users.account_business') }}">Account</a>
+                            <a class="nav-item nav-link text-white" href="{{ url_for('users.events_created') }}">My events</a>
 
                         {% endif %}
                 {% endif %}
