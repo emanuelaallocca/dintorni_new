@@ -2,17 +2,17 @@
 {% block content %}
 
 
-    <section class="vh-100" style="background-color: #E8E9EB;">
-    <div class="container py-5 h-100">
+    <section class="vh-100 pb-5" style="background-color: #E8E9EB;">
+    <div class="container py-5 h-100 align-content-center">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col col-xl-10">
+                <div class="col col-xl-10 align-items-center">
                     <div class="card">
                         <div class="row g-0">
                                 <div class="card-body p-4 p-lg-5 text-black">
                                     <fieldset class="form-group">
-                                        <legend class="border-bottom mb-4">Reset your Password</legend>
+                                        <legend class="border-bottom mb-4 justify-content-center">Reset your Password</legend>
                                         <div class="form-group">
                                             {{ form.email.label(class="form-control-label") }}
                                             {% if form.email.errors %}
@@ -27,9 +27,8 @@
                                             {% endif %}
                                         </div>
                                         <div class="form-group text-center pt-3">
-                                            {{ form.submit(class="btn btn-info") }}
+                                            {{ form.submit(class="btn btn-secondary btn-sm mb-4") }}
                                         </div>
-
                                     </fieldset>
                                 </div>
                         </div>

@@ -50,7 +50,7 @@ def intialize_db():
         db.session.commit()
 
     businesses = [
-        {'name': 'amazon',  'city':'Torino', 'address':'via torino'},
+        {'name': 'Azienda vinicola Colucci',  'city':'Alba', 'address':'via Vincenzo Gioberti, 63'},
         {'name': 'tesla', 'city':'Torino', 'address':'via torino'}
     ]
 

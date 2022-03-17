@@ -5,9 +5,9 @@
     <div class="row justify-content-center">
         <!-- 1 column -->
         <div class="col-md-5">
-            <div class="project-info-box mt-0 mb-3 pb-3 text-center">
+            <div class="project-info-box mt-3 mb-3 pb-3 text-center">
                 <h1>{{ event.title }}</h1>
-                <p class="mb-0 pt-2 text-center">{{ event.content }}</p>
+
             </div><!-- / project-info-box -->
 
             <table class="table align-middle" style="background-color: rgba(4,25,46,0.10);">
@@ -48,19 +48,7 @@
 
             <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">Open image</button>-->
 
-            <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-xl">
-                  <div class="modal-content" >
-                      <img class="d-block w-100" style="height: 600px; width: 900px; object-fit: cover" src="{{ url_for('static', filename='events_pics/' + event.image_event1) }}" alt="First slide">
-                  </div>
-                  <div class="modal-content">
-                      <img class="d-block w-100" style="height: 600px; width: 900px; object-fit: cover" src="{{ url_for('static', filename='events_pics/' + event.image_event2) }}" alt="First slide">
-                  </div>
-                  <div class="modal-content">
-                      <img class="d-block w-100" style="height: 600px; width: 900px; object-fit: cover" src="{{ url_for('static', filename='events_pics/' + event.image_event3) }}" alt="First slide">
-                  </div>
-              </div>
-            </div>
+
 
 
 
@@ -85,8 +73,8 @@
         </div>
 
         <!-- 2 column -->
-        <div class="col-md-5 d-flex justify-content-end" style="width: 450px">
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="col-md-5 justify-content-end" style="width: 450px">
+            <div id="carouselExampleControls" class="carousel slide pt-3" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img class="d-block w-100 h-100" style="height: 300px; width: 450px; object-fit: cover" src="{{ url_for('static', filename='events_pics/' + event.image_event1) }}" data-toggle="modal" data-target=".bd-example-modal-xl" alt="First slide">
@@ -107,7 +95,22 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
+            <p class="mb-0 pt-5 text-center">{{ event.content }}</p>
         </div>
+
+        <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-xl">
+                  <div class="modal-content" >
+                      <img class="d-block w-100" style="height: 600px; width: 900px; object-fit: cover" src="{{ url_for('static', filename='events_pics/' + event.image_event1) }}" alt="First slide">
+                  </div>
+                  <div class="modal-content">
+                      <img class="d-block w-100" style="height: 600px; width: 900px; object-fit: cover" src="{{ url_for('static', filename='events_pics/' + event.image_event2) }}" alt="First slide">
+                  </div>
+                  <div class="modal-content">
+                      <img class="d-block w-100" style="height: 600px; width: 900px; object-fit: cover" src="{{ url_for('static', filename='events_pics/' + event.image_event3) }}" alt="First slide">
+                  </div>
+              </div>
+            </div>
 
         <!--<div class="col-md-5 d-flex justify-content-end p-2">
             <img src="{{ url_for('static', filename='events_pics/' + event.image_event1) }}" alt="event-image" class=" rounded"

@@ -1,18 +1,58 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Join event</h1>
-<form method="POST" action="">
+
+    <h1 class="pt-3 justify-content-center text-center">Join the Event</h1>
+    <form method="POST" action="">
     {{ form.hidden_tag() }}
-<div class="form-group">
-    <legend class="border-bottom mb-4">{{ legend }}</legend>
-    <div class="form-group">
-        Car
-    </div>{{form.car(class="btn btn-outline-info")}}
-    <div class="form-group">
-        Bus
-    </div>{{form.bus(class="btn btn-outline-info")}}
-    <div class="form-group">
-        Your own
-    </div>{{form.yourown(class="btn btn-outline-info")}}
-</div>
+    <div class="container login-container pb-5">
+            <div class="row">
+                <div class="col-md-4 login-form-1">
+                    <h3>CAR?</h3>
+                    <form>
+
+                        <div>
+                            <p class="text-center font-weight-light">Do you want to go with car?</p>
+                            <p class="text-center font-weight-light">Great!</p>
+                        </div>
+
+                        <div class="form-group text-center justify-content-center pt-3">
+                        {{form.car(class="btnSubmit")}}
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4 login-form-2">
+                    <h3>Bus?</h3>
+                    <form>
+                        <div>
+                            <p class="text-center font-weight-light text-white">If you're a curious person and you are looking for new experiences to better know history and traditions of Piedmont, you'd better click below to start exploring events.</p>
+                            <p class="text-center font-weight-light text-white">this website is perfect for you!</p>
+                        </div>
+
+                        <div class="form-group text-center justify-content-center pt-3">
+                        {{form.bus(class="btnSubmit")}}
+                        </div>
+
+                    </form>
+                </div>
+                <div class="col-md-4 login-form-1">
+                    <h3>Your own?</h3>
+                    <form>
+
+                        <div>
+                            <p class="text-center font-weight-light">If you're a local business in Piedmont and you want to improve your visibility creating new events and sharing the experiences with the right people, you'd better click below:</p>
+                            <p class="text-center font-weight-light">this website is perfect for you!</p>
+                        </div>
+
+                        <div class="form-group text-center justify-content-center pt-3">
+                            {{form.yourown(class="btnSubmit")}}
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </form>
 {% endblock content %}
