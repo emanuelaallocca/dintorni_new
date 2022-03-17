@@ -4,34 +4,40 @@ from flask_wtf.file import FileAllowed
 from wtforms import StringField, TextAreaField, SubmitField, DateField, IntegerField, FloatField, ValidationError, \
     FileField
 from wtforms.validators import DataRequired, Regexp, ValidationError
-from datetime import date
+from datetime import date, datetime
 
 
 class EventForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    date = DateField('Date', validators=[DataRequired()])
-    location = TextAreaField('Location', validators=[DataRequired()])
-    content = TextAreaField('Content', validators=[DataRequired()])
-    price = FloatField('Price',validators=[DataRequired()])
-    equipment = TextAreaField('Equipment Required', validators=[DataRequired()])
-    min_users= IntegerField ('Min Partecipant', validators=[DataRequired()])
-    weaknesses = TextAreaField('Weaknesses', validators=[DataRequired()])
+    title = StringField('Title', validators=[DataRequired()], render_kw={'placeholder':'Insert a title'})
+    date = DateField('Date', validators=[DataRequired()], render_kw={'placeholder':'Insert the event date'})
+    location = TextAreaField('Location', validators=[DataRequired()], render_kw={'placeholder':'Insert the event location'})
+    content = TextAreaField('Content', validators=[DataRequired()], render_kw={'placeholder':'Insert the event description'})
+    price = FloatField('Price',validators=[DataRequired()], render_kw={'placeholder':'Insert the event price'})
+    equipment = TextAreaField('Equipment Required', validators=[DataRequired()], render_kw={'placeholder':'Insert the equipment needed'})
+    min_users= IntegerField ('Min Partecipant', validators=[DataRequired()], render_kw={'placeholder':'Insert the minimum amount of partecipants'})
+    weaknesses = TextAreaField('Weaknesses', validators=[DataRequired()], render_kw={'placeholder':'Insert the event problematics'})
     submit = SubmitField('Event')
-    def correct_date(self):
-        if date.year<date.today().year:
-            raise EventForm.ValidationError('date should be grater than today')
+
+    def validate_date(self, date):
+        if date.data<datetime.today().date():
+            raise ValidationError('Date should be grater than today')
+
 
 class ModifyEventForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    date = DateField('Date', validators=[DataRequired()])
-    location = TextAreaField('Location', validators=[DataRequired()])
-    content = TextAreaField('Content', validators=[DataRequired()])
-    price = FloatField('Price', validators=[DataRequired()])
-    equipment = TextAreaField('Equipment Required', validators=[DataRequired()])
-    min_users = IntegerField('Min Partecipant', validators=[DataRequired()])
-    weaknesses = TextAreaField('Weaknesses', validators=[DataRequired()])
+    title = StringField('Title', validators=[DataRequired()], render_kw={'placeholder':'Insert a new title'})
+    date = DateField('Date', validators=[DataRequired()], render_kw={'placeholder':'Insert the new event date'})
+    location = TextAreaField('Location', validators=[DataRequired()], render_kw={'placeholder':'Insert the new event location'})
+    content = TextAreaField('Content', validators=[DataRequired()], render_kw={'placeholder':'Insert the new event description'})
+    price = FloatField('Price', validators=[DataRequired()], render_kw={'placeholder':'Insert the new event price'})
+    equipment = TextAreaField('Equipment Required', validators=[DataRequired()], render_kw={'placeholder':'Insert the new equipment needed'})
+    min_users = IntegerField('Min Partecipant', validators=[DataRequired()], render_kw={'placeholder':'Insert the new minimum amount of partecipants'})
+    weaknesses = TextAreaField('Weaknesses', validators=[DataRequired()], render_kw={'placeholder':'Insert the event problematics'})
     picture = FileField('Update Event Image', validators=[FileAllowed(['jpeg', 'png', 'jpg'])])
     submit = SubmitField('Update')
+
+    def validate_date(self, date):
+        if date.data<datetime.today().date():
+            raise ValidationError('Date should be grater than today')
 
 class JoinEventForm(FlaskForm):
     car = SubmitField('Car')
