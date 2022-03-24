@@ -16,7 +16,7 @@ class EventForm(FlaskForm):
     equipment = TextAreaField('Equipment Required', validators=[DataRequired()], render_kw={'placeholder':'Equipment needed'})
     min_users= IntegerField ('Min Partecipant', validators=[DataRequired()], render_kw={'placeholder':'Min partecipants'})
     weaknesses = TextAreaField('Weaknesses', validators=[DataRequired()], render_kw={'placeholder':'Weaknesses'})
-    submit = SubmitField('Event')
+    submit = SubmitField('Create')
 
     def validate_date(self, date):
         if date.data<datetime.today().date():
@@ -40,6 +40,7 @@ class ModifyEventForm(FlaskForm):
             raise ValidationError('Date should be grater than today')
 
 class JoinEventForm(FlaskForm):
-    car = SubmitField('Car')
-    bus = SubmitField('Bus')
-    yourown = SubmitField('Your own')
+    yourcar = SubmitField('Go')
+    someonescar = SubmitField('Go')
+    bus = SubmitField('Go')
+    yourown = SubmitField('Go')
