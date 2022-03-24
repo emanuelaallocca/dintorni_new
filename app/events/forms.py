@@ -8,14 +8,14 @@ from datetime import date, datetime
 
 
 class EventForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()], render_kw={'placeholder':'Insert a title'})
-    date = DateField('Date', validators=[DataRequired()], render_kw={'placeholder':'Insert the event date'})
-    location = TextAreaField('Location', validators=[DataRequired()], render_kw={'placeholder':'Insert the event location'})
-    content = TextAreaField('Content', validators=[DataRequired()], render_kw={'placeholder':'Insert the event description'})
-    price = FloatField('Price',validators=[DataRequired()], render_kw={'placeholder':'Insert the event price'})
-    equipment = TextAreaField('Equipment Required', validators=[DataRequired()], render_kw={'placeholder':'Insert the equipment needed'})
-    min_users= IntegerField ('Min Partecipant', validators=[DataRequired()], render_kw={'placeholder':'Insert the minimum amount of partecipants'})
-    weaknesses = TextAreaField('Weaknesses', validators=[DataRequired()], render_kw={'placeholder':'Insert the event problematics'})
+    title = StringField('Title', validators=[DataRequired()], render_kw={'placeholder':'Title'})
+    date = DateField('Date', validators=[DataRequired()], render_kw={'placeholder':'Date'})
+    location = TextAreaField('Location', validators=[DataRequired()], render_kw={'placeholder':'Location'})
+    content = TextAreaField('Content', validators=[DataRequired()], render_kw={'placeholder':'Description'})
+    price = FloatField('Price',validators=[DataRequired()], render_kw={'placeholder':'Price'})
+    equipment = TextAreaField('Equipment Required', validators=[DataRequired()], render_kw={'placeholder':'Equipment needed'})
+    min_users= IntegerField ('Min Partecipant', validators=[DataRequired()], render_kw={'placeholder':'Min partecipants'})
+    weaknesses = TextAreaField('Weaknesses', validators=[DataRequired()], render_kw={'placeholder':'Weaknesses'})
     submit = SubmitField('Event')
 
     def validate_date(self, date):
@@ -24,14 +24,14 @@ class EventForm(FlaskForm):
 
 
 class ModifyEventForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()], render_kw={'placeholder':'Insert a new title'})
-    date = DateField('Date', validators=[DataRequired()], render_kw={'placeholder':'Insert the new event date'})
-    location = TextAreaField('Location', validators=[DataRequired()], render_kw={'placeholder':'Insert the new event location'})
-    content = TextAreaField('Content', validators=[DataRequired()], render_kw={'placeholder':'Insert the new event description'})
-    price = FloatField('Price', validators=[DataRequired()], render_kw={'placeholder':'Insert the new event price'})
-    equipment = TextAreaField('Equipment Required', validators=[DataRequired()], render_kw={'placeholder':'Insert the new equipment needed'})
-    min_users = IntegerField('Min Partecipant', validators=[DataRequired()], render_kw={'placeholder':'Insert the new minimum amount of partecipants'})
-    weaknesses = TextAreaField('Weaknesses', validators=[DataRequired()], render_kw={'placeholder':'Insert the event problematics'})
+    title = StringField('Title', validators=[DataRequired()], render_kw={'placeholder':'New title'})
+    date = DateField('Date', validators=[DataRequired()], render_kw={'placeholder':'New date'})
+    location = TextAreaField('Location', validators=[DataRequired()], render_kw={'placeholder':'New location'})
+    content = TextAreaField('Content', validators=[DataRequired()], render_kw={'placeholder':'New description'})
+    price = FloatField('Price', validators=[DataRequired()], render_kw={'placeholder':'New price'})
+    equipment = TextAreaField('Equipment Required', validators=[DataRequired()], render_kw={'placeholder':'Equipment'})
+    min_users = IntegerField('Min Partecipant', validators=[DataRequired()], render_kw={'placeholder':'Min partecipants'})
+    weaknesses = TextAreaField('Weaknesses', validators=[DataRequired()], render_kw={'placeholder':'Weaknesses'})
     picture = FileField('Update Event Image', validators=[FileAllowed(['jpeg', 'png', 'jpg'])])
     submit = SubmitField('Update')
 

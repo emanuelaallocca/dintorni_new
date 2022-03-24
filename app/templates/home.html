@@ -12,7 +12,7 @@
             <h6 class="card-subtitle mb-2 text-muted text-center" href="{{ url_for('users.user_events', name=event.creator.name) }}">{{ event.creator.name }}</h6>
             <p class="card-text text-center mb-3">{{ event.content[:35] + "..." }}</p>
             <div class="col text-center mb-0 mt-3">
-                  <a href="{{ url_for('events.event', event_id=event.id) }}" class="btn btn-secondary btn-sm text-white mb-0" style="color: #04192E">Details</a>
+                  <a href="{{ url_for('events.event', event_id=event.id) }}" class="btn btn-outline-dark btn-sm mb-0" style="color: #04192E">Details</a>
             </div>
         </div>
       </div>

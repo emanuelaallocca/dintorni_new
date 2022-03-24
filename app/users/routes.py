@@ -73,7 +73,7 @@ def account():
         form.email.data = current_user.email
         form.telephone.data = current_user.telephone
     image_file = url_for('static', filename='profile_pics/'+current_user.image_file)#devo mettere la cartella+la route
-    return render_template('account.html', title='Account',image_file=image_file, form=form)
+    return render_template('update_account_user.html', title='Account',image_file=image_file, form=form)
 
 @users.route("/account_business", methods=['GET', 'POST'])
 @login_required
@@ -100,7 +100,7 @@ def account_business():
         form.city.data = current_user.city
         form.address.data = current_user.address
     image_file = url_for('static', filename='profile_pics/'+current_user.image_file)#devo mettere la cartella+la route
-    return render_template('account_business.html', title='Account Business',image_file=image_file, form=form)
+    return render_template('update_account_business.html', title='Account Business',image_file=image_file, form=form)
 
 
 @users.route("/login", methods=['GET', 'POST'])

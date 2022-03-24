@@ -1,21 +1,25 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<div class="row justify-content-center">
+     <div class="p-3">
+        <h1>{{ event.title }}</h1>
+    </div>
+</div>
 <div class="container d-flex justify-content-center" >
+
+
     <div class="row justify-content-center">
         <!-- 1 column  prova prova-->
         <div class="col-md-5">
-            <div class="project-info-box mt-3 mb-3 pb-3 text-center">
-                <h1>{{ event.title }}</h1>
-
-            </div><!-- / project-info-box -->
+            <!-- / project-info-box -->
 
             <table class="table align-middle" style="background-color: rgba(4,25,46,0.10);">
 
                 <tbody>
                 <tr>
                     <th scope="row">Event organizer</th>
-                    <td>{{ event.creator.name }}</td>
+                    <td><a class="" href="{{ url_for('users.account_business') }}">{{ event.creator.name }}</a></td>
                 </tr>
                 <tr>
                     <th scope="row">Date</th>
@@ -74,7 +78,7 @@
 
         <!-- 2 column -->
         <div class="col-md-5 justify-content-end" style="width: 450px">
-            <div id="carouselExampleControls" class="carousel slide pt-3" data-ride="carousel">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img class="d-block w-100 h-100" style="height: 300px; width: 450px; object-fit: cover" src="{{ url_for('static', filename='events_pics/' + event.image_event1) }}" data-toggle="modal" data-target=".bd-example-modal-xl" alt="First slide">
@@ -119,10 +123,11 @@
         <!-- / column -->
 
 
-
-        <div class="col-md-5 d-flex justify-content-center p-3">
-            <button class="btn text-white p-2" style="background-color: #313638" onclick=location.href="{{ url_for('events.join_event', event_id=event.id)}}">Join event</button>
-        </div><!-- / column -->
+        {%  if current_user.username != null %}
+            <div class="col-md-5 d-flex justify-content-center p-3">
+                <button class="btnSubmit text-white p-2" style="background-color: #313638" onclick=location.href="{{ url_for('events.join_event', event_id=event.id)}}">Join event</button>
+            </div><!-- / column -->
+        {% endif %}
 
     </div>
 </div>

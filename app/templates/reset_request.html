@@ -2,7 +2,7 @@
 {% block content %}
 
 
-    <section class="vh-100 pb-5" style="background-color: #E8E9EB;">
+    <!--<section class="vh-100 pb-5" style="background-color: #E8E9EB;">
     <div class="container py-5 h-100 align-content-center">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
@@ -38,9 +38,41 @@
 
         </form>
     </div>
-   </section>
+   </section>-->
 
-
+<div class="form-gap"></div>
+<div class="container pt-5 justify-content-center" style="height: 500px">
+	<div class="row justify-content-center">
+		<div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="text-center">
+                        <!--<h3><i class="fa fa-lock fa-4x"></i></h3>-->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100" height="100"><path fill-rule="evenodd" d="M6 9V7.25C6 3.845 8.503 1 12 1s6 2.845 6 6.25V9h.5a2.5 2.5 0 012.5 2.5v8a2.5 2.5 0 01-2.5 2.5h-13A2.5 2.5 0 013 19.5v-8A2.5 2.5 0 015.5 9H6zm1.5-1.75C7.5 4.58 9.422 2.5 12 2.5c2.578 0 4.5 2.08 4.5 4.75V9h-9V7.25zm-3 4.25a1 1 0 011-1h13a1 1 0 011 1v8a1 1 0 01-1 1h-13a1 1 0 01-1-1v-8z"></path></svg>
+                        <h2 class="text-center pt-2" style="color: #313638">Forgot Password?</h2>
+                        <p>You can reset your password here.</p>
+                        <div class="panel-body">
+                            <form id="register-form" role="form" autocomplete="off" class="form" method="post">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+                                        <!--<input id="email" name="email" placeholder="email address" class="form-control"  type="email">-->
+                                        {{ form.email(class="form-control form-control-lg") }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <!--<input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">-->
+                                    {{ form.submit(class="btn btn-lg btn-secondary btn-block", style="background-color: #313638") }}
+                                </div>
+                                <input type="hidden" class="hide" name="token" id="token" value="">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
 
 
 {% endblock content %}
