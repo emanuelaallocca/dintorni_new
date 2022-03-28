@@ -1,4 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
+    {% if transport_type == 'bus'  %}
+        <h1>bus</h1>
+    {% endif %}
 
+    {% if transport_type == 'yourown'  %}
+        <h1>yourown</h1>
+    {% endif %}
+
+    {% if transport_type == 'yourcar'  %}
+        <h1>yourcar</h1>
+    {% endif %}
+
+    {% if transport_type == 'someonescar'  %}
+        <h1>someone</h1>
+    {% endif %}
 {% endblock content %}

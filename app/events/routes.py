@@ -13,14 +13,25 @@ from PIL import Image
 def new_event():
     form = EventForm()
     if form.validate_on_submit():
-         event = Event(title=form.title.data, date_event=form.date.data,
+        if form.picture.data:
+            picture = save_picture(form.picture.data)
+            event = Event(title=form.title.data, date_event=form.date.data,
                       location = form.location.data, price = form.price.data, equipment = form.equipment.data,
                       min_users = form.min_users.data, content=form.content.data, weaknesses = form.weaknesses.data,
-                      creator=current_user)
-         db.session.add(event)
-         db.session.commit()
-         flash('event created', 'success')
-         return redirect(url_for('main.home'))
+                      creator=current_user, image_event1 = picture)
+            db.session.add(event)
+            db.session.commit()
+            flash('event created', 'success')
+            return redirect(url_for('main.home'))
+        else:
+            event = Event(title=form.title.data, date_event=form.date.data,
+                          location=form.location.data, price=form.price.data, equipment=form.equipment.data,
+                          min_users=form.min_users.data, content=form.content.data, weaknesses=form.weaknesses.data,
+                          creator=current_user)
+            db.session.add(event)
+            db.session.commit()
+            flash('event created', 'success')
+            return redirect(url_for('main.home'))
     return render_template('create_event.html', title='New Event', form=form, legend='New Event')
 
 @events.route("/event/<int:event_id>", methods=['GET', 'POST'])
@@ -82,7 +93,6 @@ def update_event(event_id):
     return render_template('modify_events.html', title='Update Event', form=form, legend='Update Event', image_event=image_event, event=event)
 
 
-
 @events.route("/event/<int:event_id>/joinevent", methods=['GET', 'POST'])
 @login_required
 def join_event(event_id):
@@ -90,22 +100,34 @@ def join_event(event_id):
     user_id = user.id
     form = JoinEventForm()
     if form.validate_on_submit():
-        if form.car.data:
-            join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type = 'car')
+        if form.someonescar.data:
+            join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type = 'someonescar')
             db.session.add(join_event)
             db.session.commit()
-            flash('event joined', 'success')
-            return redirect(url_for('main.home'))
+            return redirect(url_for('events.event_joined', event_id=event_id, transport_type= 'someonescar'))
+        elif form.yourcar.data:
+            join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type = 'yourcar')
+            db.session.add(join_event)
+            db.session.commit()
+            return redirect(url_for('events.event_joined', event_id=event_id, transport_type= 'yourcar'))
         elif form.bus.data:
             join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='bus')
             db.session.add(join_event)
             db.session.commit()
-            flash('event joined', 'success')
-            return redirect(url_for('main.home'))
+            return redirect(url_for('events.event_joined', event_id=event_id, transport_type= 'bus'))
         elif form.yourown.data:
-            join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='your own')
+            join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='yourown')
             db.session.add(join_event)
             db.session.commit()
-            flash('event joined', 'success')
-            return redirect(url_for('main.home'))
+            return redirect(url_for('events.event_joined', event_id=event_id, transport_type= 'yourown'))
     return render_template('join_event.html', title='Join Event', legend='Join Event', form=form)
+
+@events.route("/event/<int:event_id>/<string:transport_type>/event_joined", methods=['GET', 'POST'])
+@login_required
+def event_joined(event_id, transport_type):
+    return render_template('event_joined.html', transport_type = transport_type)
+
+@events.route("/<int:event_id>/business_info", methods=['GET', 'POST'])
+def business_info(event_id):
+    e = Event.query.get_or_404(event_id)
+    return render_template('account_business.html', event = e)

@@ -81,6 +81,10 @@ class Business(User, db.Model):
     city = db.Column(db.String(20))
     address = db.Column(db.String(30))
     events = db.relationship('Event', backref='creator', lazy=True)
+    link_facebook = db.Column(db.String())
+    link_instagram = db.Column(db.String())
+    link_twitter = db.Column(db.String())
+    link_website = db.Column(db.String())
 
     __mapper_args__ = {
         'polymorphic_identity': 'business',
@@ -117,15 +121,15 @@ class Post(db.Model):
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    date_event = db.Column(db.Date)
-    location = db.Column(db.Text, default='eccolo')
-    price = db.Column(db.Float, default=1)
-    equipment = db.Column(db.Text, default='eccolo')
-    min_users = db.Column(db.Integer, default=2)
+    date_event = db.Column(db.Date, nullable=False)
+    location = db.Column(db.Text, default='eccolo', nullable=False)
+    price = db.Column(db.Float, default=1, nullable = True)
+    equipment = db.Column(db.Text, default='eccolo', nullable=True)
+    min_users = db.Column(db.Integer, default=2, nullable=True)
     date_posted = db.Column(db.DateTime,
                             default=datetime.utcnow())  # default è listante corrente in cui posto
-    content = db.Column(db.Text, default='eccolo')
-    weaknesses = db.Column(db.Text, default='eccolo')
+    content = db.Column(db.Text, default='eccolo', nullable=False)
+    weaknesses = db.Column(db.Text, default='eccolo', nullable=True)
     image_event1 = db.Column(db.String(20), nullable=False, default='default.jpg')
     image_event2 = db.Column(db.String(20), nullable=False, default='default.jpg')
     image_event3 = db.Column(db.String(20), nullable=False, default='default.jpg')

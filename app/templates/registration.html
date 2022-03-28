@@ -4,36 +4,36 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <div class="container login-container pb-5" style="height: 500px">
-            <div class="row">
-                <div class="col-md-6 login-form-1">
-                    <h3>Are you a Local Business?</h3>
-                    <form>
+    <div class="row">
+        <div class="col-md-6 login-form-1">
+            <h3>Are you a Local Business?</h3>
+            <form>
 
-                        <div>
-                            <p class="text-center font-weight-light">If you're a local business in Piedmont and you want to improve your visibility creating new events and sharing the experiences with the right people, you'd better click below:</p>
-                            <p class="text-center font-weight-light">this website is perfect for you!</p>
-                        </div>
-
-                        <div class="form-group text-center justify-content-center pt-3">
-                            <input type="button" class="btnSubmit" value="Register" onclick=location.href="{{ url_for('users.registration',usertype='business')}}" />
-                        </div>
-
-                    </form>
+                <div>
+                    <p class="text-center font-weight-light">If you're a local business in Piedmont and you want to improve your visibility creating new events and sharing the experiences with the right people, you'd better click below:</p>
+                    <p class="text-center font-weight-light">this website is perfect for you!</p>
                 </div>
-                <div class="col-md-6 login-form-2">
-                    <h3>Are you a User?</h3>
-                    <form>
-                        <div>
-                            <p class="text-center font-weight-light text-white">If you're a curious person and you are looking for new experiences to better know history and traditions of Piedmont, you'd better click below to start exploring events.</p>
-                            <p class="text-center font-weight-light text-white">this website is perfect for you!</p>
-                        </div>
-                        <div class="form-group text-center justify-content-center pt-3">
-                            <input type="button" class="btnSubmit" value="Register" onclick=location.href="{{ url_for('users.registration',usertype='private')}}" />
-                        </div>
-                    </form>
+
+                <div class="form-group text-center justify-content-center pt-3">
+                    <input type="button" class="btnSubmit" value="Register" onclick=location.href="{{ url_for('users.registration',usertype='business')}}" />
                 </div>
-            </div>
+
+            </form>
         </div>
+        <div class="col-md-6 login-form-2">
+            <h3>Are you a User?</h3>
+            <form>
+                <div>
+                    <p class="text-center font-weight-light text-white">If you're a curious person and you are looking for new experiences to better know history and traditions of Piedmont, you'd better click below to start exploring events.</p>
+                    <p class="text-center font-weight-light text-white">this website is perfect for you!</p>
+                </div>
+                <div class="form-group text-center justify-content-center pt-3">
+                    <input type="button" class="btnSubmit" value="Register" onclick=location.href="{{ url_for('users.registration',usertype='private')}}" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
     <!--<div class="container align-items-center pt-3 mt-3 pb-3 mb-3" style="height: 700px">
     <div class="container fill d-flex justify-content-center" style="height: 700px">

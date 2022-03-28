@@ -3,68 +3,67 @@
 
 
     <h1 class="pt-4 justify-content-center text-center">How do you wanna go?</h1>
-    <form method="POST" action="">
-    {{ form.hidden_tag() }}
-    <div class="container login-container pb-5">
-            <div class="row justify-content-center">
-                <div class="col-md-4 pr-0 pl-0 login-form-1" style="height: 350px">
-                    <h3>YOUR CAR</h3>
-                    <form>
-                        <div>
-                            <p class="text-center font-weight-light">Do you wanna share your car?</p>
-                            <p class="text-center font-weight-light">Great! You will reduce costs and meet new friends</p>
-                        </div>
+    <div class="container login-container pb-5 mb-0">
+        <div class="row justify-content-center">
+            <div class="col-md-4 pr-0 pl-0 login-form-1" style="height: 350px">
+                <h3>YOUR CAR</h3>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <div>
+                        <p class="text-center font-weight-light">Do you wanna share your car?</p>
+                        <p class="text-center font-weight-light">Great! You will reduce costs and meet new friends</p>
+                    </div>
 
-                        <div class="form-group text-center justify-content-center pt-3">
-                        {{form.yourcar(class="btnSubmit")}}
-                        </div>
-                    </form>
-                </div>
-                <div class="col-md-4 pr-0 pl-0 login-form-2" style="height: 350px">
-                    <h3>SOMEONE'S CAR</h3>
-                    <form>
-                        <div>
-                            <p class="text-center font-weight-light text-white">Do you wanna use car sharing? Great, you will have the confort of the car and new friends to share the experience!</p>
-                            <p class="text-center font-weight-light text-white"></p>
-                        </div>
-                        <div class="form-group text-center justify-content-center pt-3">
-                        {{form.someonescar(class="btnSubmit")}}
-                        </div>
-                    </form>
-                </div>
+                    <div class="form-group text-center justify-content-center pt-3">
+                    {{form.yourcar(class="btnSubmit")}}
+                    </div>
+                </form>
             </div>
-
-
-            <div class="row justify-content-center">
-                <div class="col-md-4 pr-0 pl-0 login-form-2" style="height: 350px">
-                    <h3>BUS</h3>
-                    <form>
-                        <div>
-                            <p class="text-center font-weight-light text-white">Do you wanna go with our transport service? We have a bus for you: it will depart from Turin and it will take you directly to the event.</p>
-                            <p class="text-center font-weight-light text-white"></p>
-                        </div>
-
-                        <div class="form-group text-center justify-content-center pt-3">
-                        {{form.bus(class="btnSubmit")}}
-                        </div>
-
-                    </form>
-                </div>
-                <div class="col-md-4 pr-0 pl-0 login-form-1" style="height: 350px">
-                    <h3>GO ON YOUR OWN</h3>
-                    <form>
-                        <div>
-                            <p class="text-center font-weight-light">Do you already know how to reach the event?</p>
-                            <p class="text-center font-weight-light">Click here and skip this part!</p>
-                        </div>
-
-                        <div class="form-group text-center justify-content-center pt-3">
-                            {{form.yourown(class="btnSubmit")}}
-                        </div>
-                    </form>
-                </div>
+            <div class="col-md-4 pr-0 pl-0 login-form-2" style="height: 350px">
+                <h3>SOMEONE'S CAR</h3>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <div>
+                        <p class="text-center font-weight-light text-white">Do you wanna use car sharing? Great, you will have the confort of the car and new friends to share the experience!</p>
+                        <p class="text-center font-weight-light text-white"></p>
+                    </div>
+                    <div class="form-group text-center justify-content-center pt-3">
+                    {{form.someonescar(class="btnSubmit")}}
+                    </div>
+                </form>
+            </div>
         </div>
 
+        <div class="row justify-content-center">
+            <div class="col-md-4 pr-0 pl-0 login-form-2" style="height: 350px">
+                <h3>BUS</h3>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <div>
+                        <p class="text-center font-weight-light text-white">Do you wanna go with our transport service? We have a bus for you: it will depart from Turin and it will take you directly to the event.</p>
+                        <p class="text-center font-weight-light text-white"></p>
+                    </div>
+
+                    <div class="form-group text-center justify-content-center pt-3">
+                    {{form.bus(class="btnSubmit")}}
+                    </div>
+
+                </form>
+            </div>
+            <div class="col-md-4 pr-0 pl-0 login-form-1" style="height: 350px">
+                <h3>GO ON YOUR OWN</h3>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <div>
+                        <p class="text-center font-weight-light">Do you already know how to reach the event?</p>
+                        <p class="text-center font-weight-light">Click here and skip this part!</p>
+                    </div>
+
+                    <div class="form-group text-center justify-content-center pt-3">
+                        {{form.yourown(class="btnSubmit")}}
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    </form>
 {% endblock content %}

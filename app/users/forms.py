@@ -109,6 +109,11 @@ class RegistrationBusinessForm(FlaskForm):
     address = StringField('Address', validators=[DataRequired()], render_kw={'placeholder':'Your address'})
     password = PasswordField('Password', validators=[DataRequired()], render_kw={'placeholder':'Your password'})
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')], render_kw={'placeholder':'Confirm your password'})
+    link_facebook = StringField('Link Facebook', validators=[DataRequired()], render_kw={'placeholder':'Link Facebook'})
+    link_instagram = StringField('Link Instagram', validators=[DataRequired()], render_kw={'placeholder':'Link Instagram'})
+    link_twitter = StringField('Link Twitter', validators=[DataRequired()], render_kw={'placeholder':'Link Twitter'})
+    link_website = StringField('Link Website', validators=[DataRequired()], render_kw={'placeholder':'Link Website'})
+    term_conditions = BooleanField('Terms and conditions', validators=[DataRequired()])
     submit = SubmitField('SignUp')
     #creo una funzione per questa classe
 
@@ -133,3 +138,6 @@ class RegistrationBusinessForm(FlaskForm):
         if telephone!=10:
             raise ValidationError('Your telephone number must have 10 numbers')
 
+    def validate_terms(self, term_conditions):
+        if term_conditions!=True:
+            raise ValidationError('You have to accept terms and conditions')

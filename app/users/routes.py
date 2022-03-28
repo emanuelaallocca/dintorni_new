@@ -41,7 +41,9 @@ def registration(usertype):
             # create a new user
             business = Business(name=form.name.data, email=form.email.data, vat_number=form.vat_number.data,
                                 telephone=form.telephone.data, city=form.city.data, address=form.address.data,
-                                password=hashed_password)
+                                link_facebook= form.link_facebook.data, link_instagram = form.link_instagram.data,
+                                link_twitter = form.link_twitter.data, link_website = form.link_website.data,
+                                password=hashed_password )
             db.session.add(business)
             db.session.commit()
             flash('your account has been created! now you can loging', 'success')
@@ -89,6 +91,10 @@ def account_business():
         current_user.telephone = form.telephone.data
         current_user.city = form.city.data
         current_user.address = form.address.data
+        current_user.link_facebook = form.link_facebook.data
+        current_user.link_instagram = form.link_instagram.data
+        current_user.link_twitter = form.link_twitter.data
+        current_user.link_website = form.link_website.data
         db.session.commit()
         flash('your account has been updated', 'success')
         return redirect(url_for('users.account_business'))
@@ -99,6 +105,10 @@ def account_business():
         form.telephone.data = current_user.telephone
         form.city.data = current_user.city
         form.address.data = current_user.address
+        form.link_facebook.data = current_user.link_facebook
+        form.link_instagram.data = current_user.link_instagram
+        form.link_twitter.data = current_user.link_twitter
+        form.link_website.data = current_user.link_website
     image_file = url_for('static', filename='profile_pics/'+current_user.image_file)#devo mettere la cartella+la route
     return render_template('update_account_business.html', title='Account Business',image_file=image_file, form=form)
 
@@ -187,6 +197,7 @@ def business_events(name):
     business = Business.query.filter_by(name=name).first_or_404()
     events = Event.query.filter_by(creator=business).order_by(Event.date_posted.desc()).paginate(page=page, per_page=5)
     return render_template('business_events.html', events=events, business=business)
+
 
 
 @users.route("/reset_password", methods=['GET', 'POST'])
