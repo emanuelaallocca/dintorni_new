@@ -126,16 +126,31 @@
                         {{ form.weaknesses(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
-
                 <div class="form-group">
-                    {{ form.picture.label() }}
-                    {{ form.picture(class="form-control-file") }}
-                    {% if form.picture.errors %}
-                        {% for error in form.picture.errors %}
-                            <span class="text-danger">{{ error }}</span></br>
-                        {% endfor %}
-                    {% endif %}
-                </div>
+                        {{ form.picture1(class="form-control-file") }}
+                        {% if form.picture1.errors %}
+                            {% for error in form.picture1.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.picture2(class="form-control-file") }}
+                        {% if form.picture2.errors %}
+                            {% for error in form.picture2.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.picture3(class="form-control-file") }}
+                        {% if form.picture3.errors %}
+                            {% for error in form.picture3.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
             </fieldset>
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}
@@ -254,9 +269,25 @@
                     </div>
 
                     <div class="form-group">
-                        {{ form.picture(class="form-control-file") }}
-                        {% if form.picture.errors %}
-                            {% for error in form.picture.errors %}
+                        {{ form.picture1(class="form-control-file") }}
+                        {% if form.picture1.errors %}
+                            {% for error in form.picture1.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.picture2(class="form-control-file") }}
+                        {% if form.picture2.errors %}
+                            {% for error in form.picture2.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.picture3(class="form-control-file") }}
+                        {% if form.picture3.errors %}
+                            {% for error in form.picture3.errors %}
                                 <span class="text-danger">{{ error }}</span></br>
                             {% endfor %}
                         {% endif %}

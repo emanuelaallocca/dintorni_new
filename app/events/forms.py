@@ -16,7 +16,9 @@ class EventForm(FlaskForm):
     equipment = TextAreaField('Equipment Required', render_kw={'placeholder':'Equipment needed'})
     min_users= IntegerField ('Min Partecipant', render_kw={'placeholder':'Min partecipants'})
     weaknesses = TextAreaField('Weaknesses', render_kw={'placeholder':'Weaknesses'})
-    picture = FileField('Update Event Image', validators=[FileAllowed(['jpeg', 'png', 'jpg'])])
+    picture1 = FileField('Update Event Image', validators=[FileAllowed(['jpeg', 'png', 'jpg'])])
+    picture2 = FileField('Update Event Image', validators=[FileAllowed(['jpeg', 'png', 'jpg'])])
+    picture3 = FileField('Update Event Image', validators=[FileAllowed(['jpeg', 'png', 'jpg'])])
     submit = SubmitField('Create')
 
     def validate_date(self, date):
@@ -34,7 +36,9 @@ class ModifyEventForm(FlaskForm):
     equipment = TextAreaField('Equipment Required',render_kw={'placeholder':'Equipment'})
     min_users = IntegerField('Min Partecipant', render_kw={'placeholder':'Min partecipants'})
     weaknesses = TextAreaField('Weaknesses', render_kw={'placeholder':'Weaknesses'})
-    picture = FileField('Update Event Image', validators=[FileAllowed(['jpeg', 'png', 'jpg'])])
+    picture1 = FileField('Update Event Image', validators=[FileAllowed(['jpeg', 'png', 'jpg'])])
+    picture2 = FileField('Update Event Image', validators=[FileAllowed(['jpeg', 'png', 'jpg'])])
+    picture3 = FileField('Update Event Image', validators=[FileAllowed(['jpeg', 'png', 'jpg'])])
     submit = SubmitField('Update')
 
     def validate_date(self, date):
