@@ -1,4 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request, abort
+from sqlalchemy import null
+
 from app import db
 from app.events.forms import EventForm, JoinEventForm, ModifyEventForm
 from app.events.utils import save_picture
@@ -13,12 +15,35 @@ from PIL import Image
 def new_event():
     form = EventForm()
     if form.validate_on_submit():
-        if form.picture.data:
-            picture = save_picture(form.picture.data)
+        if form.picture1.data and form.picture2.data==null and form.picture3.data==null:
+            picture1 = save_picture(form.picture1.data)
             event = Event(title=form.title.data, date_event=form.date.data,
                       location = form.location.data, price = form.price.data, equipment = form.equipment.data,
                       min_users = form.min_users.data, content=form.content.data, weaknesses = form.weaknesses.data,
-                      creator=current_user, image_event1 = picture)
+                      creator=current_user, image_event1 = picture1)
+            db.session.add(event)
+            db.session.commit()
+            flash('event created', 'success')
+            return redirect(url_for('main.home'))
+        elif form.picture1.data and form.picture2.data and form.picture3.data==null:
+            picture1 = save_picture(form.picture1.data)
+            picture2 = save_picture(form.picture2.data)
+            event = Event(title=form.title.data, date_event=form.date.data,
+                      location = form.location.data, price = form.price.data, equipment = form.equipment.data,
+                      min_users = form.min_users.data, content=form.content.data, weaknesses = form.weaknesses.data,
+                      creator=current_user, image_event1 = picture1, image_event2 = picture2)
+            db.session.add(event)
+            db.session.commit()
+            flash('event created', 'success')
+            return redirect(url_for('main.home'))
+        elif form.picture1.data and form.picture2.data and form.picture3.data:
+            picture1 = save_picture(form.picture1.data)
+            picture2 = save_picture(form.picture2.data)
+            picture3 = save_picture(form.picture2.data)
+            event = Event(title=form.title.data, date_event=form.date.data,
+                      location = form.location.data, price = form.price.data, equipment = form.equipment.data,
+                      min_users = form.min_users.data, content=form.content.data, weaknesses = form.weaknesses.data,
+                      creator=current_user, image_event1 = picture1, image_event2 = picture2, image_event3 = picture3)
             db.session.add(event)
             db.session.commit()
             flash('event created', 'success')
@@ -58,9 +83,15 @@ def update_event(event_id):
         abort(403) #risposta per forbidden route
     form = ModifyEventForm()
     if form.validate_on_submit():
-        if form.picture.data:
-            picture_file = save_picture(form.picture.data)
-            event.image_event = picture_file
+        if form.picture1.data:
+            picture_file1 = save_picture(form.picture1.data)
+            event.image_event1 = picture_file1
+        if form.picture2.data:
+            picture_file2 = save_picture(form.picture2.data)
+            event.image_event2 = picture_file2
+        if form.picture3.data:
+            picture_file3 = save_picture(form.picture3.data)
+            event.image_event3 = picture_file3
         event.title=form.title.data
         event.content=form.content.data
         event.date_event = form.date.data
