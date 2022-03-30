@@ -494,23 +494,7 @@ img {
   margin: 0;
   position: relative;
 }
-.about-list label:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 11px;
-  width: 1px;
-  height: 12px;
-  background: #313638;
-  -moz-transform: rotate(15deg);
-  -o-transform: rotate(15deg);
-  -ms-transform: rotate(15deg);
-  -webkit-transform: rotate(15deg);
-  transform: rotate(15deg);
-  margin: auto;
-  opacity: 0.5;
-}
+
 .about-list p {
   margin: 0;
   font-size: 15px;
@@ -839,7 +823,7 @@ a {
 
 .form-control-file {
     border-radius: 1rem;
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;

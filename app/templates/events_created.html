@@ -1,19 +1,40 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1 class="mb-3">Events created {{ current_user.name }} ({{ events.total }})</h1>
-    {% for event in events.items %}
-        <article class="media content-section">
-          <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + event.creator.image_file) }}">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="{{ url_for('users.business_events', name=event.creator.name) }}">{{ event.creator.name }}</a>
-              <small class="text-muted">{{ event.date_event.strftime('%Y-%m-%d') }}</small>
+
+    <div class="container">
+    <div class="row text-center justify-content-center mb-5">
+        <div class="col-xl-6 col-lg-8 pt-5">
+            <h2 class="font-weight-bold">{{ current_user.name }} events - {{ events.total }}</h2>
+        </div>
+    </div>
+    </div>
+
+
+    <section>
+        <div class="container">
+            <div class="row justify-content-around">
+                    {% for event in events.items %}
+                        <div class="card" id="card_home" style="margin: 15px;">
+                            <img class="card-img-top" style="width: 100%; height: 15vw; object-fit: cover;" src="{{ url_for('static', filename='profile_pics/' + event.creator.image_file) }}">
+                            <div class="card-body align-center">
+                                <div class="article-metadata">
+                                    <a class="mr-2" href="{{ url_for('users.business_events', name=event.creator.name) }}">{{ event.creator.name }}</a>
+                                    <small class="text-muted">{{ event.date_event.strftime('%Y-%m-%d') }}</small>
+                                </div>
+                                <h2><a class="article-title" href="{{ url_for('events.update_event', event_id=event.id) }}">{{ event.title }}</a></h2>
+                                <p class="article-content">{{ event.content }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
             </div>
-            <h2><a class="article-title" href="{{ url_for('events.update_event', event_id=event.id) }}">{{ event.title }}</a></h2>
-            <p class="article-content">{{ event.content }}</p>
-          </div>
-        </article>
-    {% endfor %}
+        </div>
+
+
+    </section>
+
+
+
+    <div class="container fill d-flex justify-content-center mt-3">
     {% for page_num in events.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
       {% if page_num %}
         {% if events.page == page_num %}
@@ -25,4 +46,5 @@
         ...
       {% endif %}
     {% endfor %}
+    </div>
 {% endblock content %}

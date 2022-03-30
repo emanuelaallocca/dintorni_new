@@ -140,4 +140,148 @@
 
 
 
+
+
+
+
+<div class="container contact-form pt-0 mt-5">
+    <div class="contact-image">
+        <img src="{{ url_for('static', filename='img/' + 'icon0.png') }}"/>
+    </div>
+    <form method="post" action="" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+        <h3 class="" style="color: #313638">Join DinTOrni</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {% if form.name.errors %}
+                        {{ form.name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <!-- valid field for the section -->
+                        {{ form.name(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {% if form.telephone.errors %}
+                        {{ form.telephone(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.telephone.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.telephone(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {% if form.city.errors %}
+                        {{ form.city(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.city.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.city(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {% if form.vat_number.errors %}
+                        {{ form.vat_number(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.vat_number.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.vat_number(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {% if form.address.errors %}
+                        {{ form.address(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.address.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.address(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.confirm_password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!--terms-->
+        <div class="row justify-content-center pt-3">
+            <div class="d-flex align-items-center justify-content-between justify-content-md-start mt-2">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="">
+                <label class="form-check-label" for="flexCheckDefault">
+                    <small>I accept all <a href="/static/pdfs/terms-and-conditions-template.pdf" target="_blank">Terms and Condition</a> agreement</small>
+                </label>
+
+            </div>
+        </div>
+
+        <!--btn-->
+        <div class="row justify-content-center pt-3">
+            <div class="form-group">
+                {{ form.submit(class="btnSubmit text-white", style="background: #F06543; width: 100px") }}
+            </div>
+        </div>
+
+        <!--login-->
+        <div class="row justify-content-center align-content-end pt-3">
+            <small class="text-muted">
+                Already Have An Account? <a class="ml-2" href="{{ url_for('users.login') }}">Sign In</a>
+            </small>
+        </div>
+
+    </form>
+</div>
+
 {% endblock content %}

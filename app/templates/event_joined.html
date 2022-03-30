@@ -1,18 +1,65 @@
 {% extends "layout.html" %}
 {% block content %}
     {% if transport_type == 'bus'  %}
-        <h1>bus</h1>
+        <div class="container login-container pb-5 mb-0">
+        <div class="row justify-content-center pb-5">
+            <div class="col pr-0 pl-0 pb-5 login-form-1">
+                <h3 class="pb-3">You will reach the event by bus!</h3>
+                    <div>
+                        <p class="text-center font-weight-light">Congratulation, your choice is the most sustainable!</p>
+                        <p class="text-center font-weight-light">The bus will leave on the date of the event from Turin. <br>For more information you can contact the transport company:</p>
+                        <p class="text-center font-weight-light">+39 333 5657892</p>
+                        <p class="text-center font-weight-light">See you there!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endif %}
 
     {% if transport_type == 'yourown'  %}
-        <h1>yourown</h1>
+        <div class="container login-container pb-5 mb-0">
+        <div class="row justify-content-center pb-5">
+            <div class="col pr-0 pl-0 pb-5 login-form-1">
+                <h3 class="pb-3">You will reach the event autonomously!</h3>
+                    <div class="p-7">
+                        <p class="text-center font-weight-light">You're a very independent person!</p>
+                        <p class="text-center font-weight-light"></p>
+                        <p class="text-center font-weight-light">See you there!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endif %}
 
     {% if transport_type == 'yourcar'  %}
-        <h1>yourcar</h1>
+        <div class="container login-container pb-5 mb-0">
+        <div class="row justify-content-center pb-5">
+            <div class="col pr-0 pl-0 pb-5 login-form-1">
+                <h3 class="pb-3">You wanna share your car!</h3>
+                    <div>
+                        <p class="text-center font-weight-light">Good choice!</p>
+                        <p class="text-center font-weight-light">You will reduce costs and make new friends!</p>
+                        <p class="text-center font-weight-light"></p>
+                        <p class="text-center font-weight-light">See you there!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endif %}
 
     {% if transport_type == 'someonescar'  %}
-        <h1>someone</h1>
+        <div class="container login-container pb-5 mb-0">
+        <div class="row justify-content-center pb-5">
+            <div class="col pr-0 pl-0 pb-5 login-form-1">
+                <h3 class="pb-3">You will reach the event with someone's car!</h3>
+                    <div>
+                        <p class="text-center font-weight-light">There are a lot of people who wants to share their car to reach the event.</p>
+                        <p class="text-center font-weight-light">Choose your favourite one and contact him or her <br>to arrange your meeting, costs, data and place!</p>
+                        <p class="text-center font-weight-light"></p>
+                        <p class="text-center font-weight-light">See you there!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endif %}
 {% endblock content %}
