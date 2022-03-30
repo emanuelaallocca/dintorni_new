@@ -1,299 +1,123 @@
 {% extends "layout.html" %}
 {% block content %}
-    <!--<div class="content-section">
-        <div class="media">
-            <img class="rounded-circle account-img" src="{{ image_file }}">
-            <div class="media-body">
-                <h2 class="account-heading">{{ current_user.name }}</h2>
-                <p class="text-secondary">{{ current_user.email }}</p>
-            </div>
-        </div>
-        <form method="POST" action="" enctype="multipart/form-data">
-             importante perchè l'immagine vada-->
-            {{ form.hidden_tag() }}
-            <!--<fieldset class="form-group">
-                <legend class="border-bottom mb-4">Account Info</legend>
-                <div class="form-group">
-                    {{ form.name.label(class="form-control-label") }}
 
-                    {% if form.name.errors %}
-                        {{ form.name(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.name.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.name(class="form-control form-control-lg") }}
-                    {% endif %}
+<form method="POST" action="" enctype="multipart/form-data">
+    <!--importante perchè l'immagine vada-->
+    {{ form.hidden_tag() }}
+    <div class="container login-container pb-5" style="height: 500px">
+        <div class="row">
+            <div class="col-md-6 login-form-3">
+                <!--img-->
+                <div class="about-avatar">
+                    <img class="rounded-circle account-img" style="height: 300px; width: 300px" src="{{ image_file }}">
                 </div>
-
-
-                <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
-
-                    {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.email.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.email(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    {{ form.vat_number.label(class="form-control-label") }}
-
-                    {% if form.vat_number.errors %}
-                        {{ form.vat_number(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.vat_number.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.vat_number(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-
-             <div class="form-group">
-                    {{ form.telephone.label(class="form-control-label") }}
-
-                    {% if form.telephone.errors %}
-                        {{ form.telephone(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.telephone.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.telephone(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-
-             <div class="form-group">
-                    {{ form.city.label(class="form-control-label") }}
-
-                    {% if form.city.errors %}
-                        {{ form.city(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.city.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.city(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-
-            <div class="form-group">
-                    {{ form.address.label(class="form-control-label") }}
-
-                    {% if form.address.errors %}
-                        {{ form.address(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.address.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.address(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    {{ form.picture.label() }}
-                    {{ form.picture(class="form-control-file") }}
+                <div class="form-group justify-content-center align-center">
+                    {{ form.picture(class="form-control-file pt-2") }}
                     {% if form.picture.errors %}
                         {% for error in form.picture.errors %}
                             <span class="text-danger">{{ error }}</span></br>
                         {% endfor %}
                     {% endif %}
                 </div>
-            </fieldset>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
             </div>
-        </form>
-    </div>-->
-
-
-
-
-
-
-
-
-
-
-<form method="POST" action="" enctype="multipart/form-data">
-             <!--importante perchè l'immagine vada-->
-    {{ form.hidden_tag() }}
-    <section class="section about-section gray-bg" id="about">
-            <div class="container">
-                <div class="row align-items-center flex-row-reverse pb-3">
-                    <div class="col-lg-6">
-                        <div class="about-text go-to">
-                            <h3 class="dark-color">{{ current_user.name }}</h3>
-                            <h6 class="theme-color lead">{{ current_user.email }}</h6>
-                            <p>I services for customers of all sizes, specializing in creating stylish, modern websites, web services and online stores. My passion is to design digital user experiences through the bold interface and meaningful interactions.</p>
-                            <div class="row about-list pb-2">
-                                <!-- account info-->
-                                <div class="col-md-6">
-                                    <div class="media">
-                                        <label>Name</label>
-                                        {% if form.name.errors %}
-                                            {{ form.name(class="form-control input-sm form-control-sm is-invalid") }}
-                                            <div class="invalid-feedback">
-                                                {% for error in form.name.errors %}
-                                                    <span>{{ error }}</span>
-                                                {% endfor %}
-                                            </div>
-                                        {% else %}
-                                            {{ form.name(class="form-control input-sm form-control-sm") }}
-                                        {% endif %}
+            <div class="col-md-6 login-form-1">
+                <div class="about-text go-to">
+                    <h3 class="dark-color">{{ current_user.name }}</h3>
+                    <h6 class="theme-color lead text-center">{{ current_user.email }}</h6>
+                    <p class="text-center">Here you can modify all your data!</p>
+                    <div class="row about-list pb-2">
+                        <!-- account info-->
+                        <div class="col-md-6">
+                            <div class="media">
+                                <label>Name</label>
+                                {% if form.name.errors %}
+                                    {{ form.name(class="form-control input-sm form-control-sm is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.name.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
                                     </div>
-                                    <div class="media">
-                                        <label>VAT</label>
-                                        {% if form.vat_number.errors %}
-                                            {{ form.vat_number(class="form-control input-sm form-control-sm is-invalid") }}
-                                            <div class="invalid-feedback">
-                                                {% for error in form.vat_number.errors %}
-                                                    <span>{{ error }}</span>
-                                                {% endfor %}
-                                            </div>
-                                        {% else %}
-                                            {{ form.vat_number(class="form-control input-sm form-control-sm") }}
-                                        {% endif %}
+                                {% else %}
+                                    {{ form.name(class="form-control input-sm form-control-sm") }}
+                                {% endif %}
+                            </div>
+                            <div class="media">
+                                <label>VAT</label>
+                                {% if form.vat_number.errors %}
+                                    {{ form.vat_number(class="form-control input-sm form-control-sm is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.vat_number.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
                                     </div>
-                                    <div class="media">
-                                        <label>City</label>
-                                        {% if form.city.errors %}
-                                            {{ form.city(class="form-control input-sm form-control-sm is-invalid") }}
-                                            <div class="invalid-feedback">
-                                                {% for error in form.city.errors %}
-                                                    <span>{{ error }}</span>
-                                                {% endfor %}
-                                            </div>
-                                        {% else %}
-                                            {{ form.city(class="form-control input-sm form-control-sm") }}
-                                        {% endif %}
+                                {% else %}
+                                    {{ form.vat_number(class="form-control input-sm form-control-sm") }}
+                                {% endif %}
+                            </div>
+                            <div class="media">
+                                <label>City</label>
+                                {% if form.city.errors %}
+                                    {{ form.city(class="form-control input-sm form-control-sm is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.city.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="media">
-                                        <label>Email</label>
-                                        {% if form.email.errors %}
-                                            {{ form.email(class="form-control input-sm is-invalid") }}
-                                            <div class="invalid-feedback">
-                                                {% for error in form.email.errors %}
-                                                    <span>{{ error }}</span>
-                                                {% endfor %}
-                                            </div>
-                                        {% else %}
-                                            {{ form.email(class="form-control input-sm form-control-sm") }}
-                                        {% endif %}
+                                {% else %}
+                                    {{ form.city(class="form-control input-sm form-control-sm") }}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="media">
+                                <label>Email</label>
+                                {% if form.email.errors %}
+                                    {{ form.email(class="form-control input-sm is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.email.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
                                     </div>
-                                    <div class="media">
-                                        <label>Phone</label>
-                                        {% if form.telephone.errors %}
-                                            {{ form.telephone(class="form-control input-sm form-control-sm is-invalid") }}
-                                            <div class="invalid-feedback">
-                                                {% for error in form.telephone.errors %}
-                                                    <span>{{ error }}</span>
-                                                {% endfor %}
-                                            </div>
-                                        {% else %}
-                                            {{ form.telephone(class="form-control input-sm form-control-sm") }}
-                                        {% endif %}
+                                {% else %}
+                                    {{ form.email(class="form-control input-sm form-control-sm") }}
+                                {% endif %}
+                            </div>
+                            <div class="media">
+                                <label>Phone</label>
+                                {% if form.telephone.errors %}
+                                    {{ form.telephone(class="form-control input-sm form-control-sm is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.telephone.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
                                     </div>
-                                    <div class="media">
-                                        <label>Address</label>
-                                        {% if form.address.errors %}
-                                            {{ form.address(class="form-control input-sm form-control-sm is-invalid") }}
-                                            <div class="invalid-feedback">
-                                                {% for error in form.address.errors %}
-                                                    <span>{{ error }}</span>
-                                                {% endfor %}
-                                            </div>
-                                        {% else %}
-                                            {{ form.address(class="form-control input-sm form-control-sm") }}
-                                        {% endif %}
+                                {% else %}
+                                    {{ form.telephone(class="form-control input-sm form-control-sm") }}
+                                {% endif %}
+                            </div>
+                            <div class="media">
+                                <label>Address</label>
+                                {% if form.address.errors %}
+                                    {{ form.address(class="form-control input-sm form-control-sm is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.address.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
                                     </div>
-                                </div>
+                                {% else %}
+                                    {{ form.address(class="form-control input-sm form-control-sm") }}
+                                {% endif %}
                             </div>
                         </div>
                     </div>
-
-
-                    <!--IMMAGINE-->
-                    <div class="col-lg-6 justify-content-center align-center">
-                        <div class="about-avatar">
-                            <!--<img src="https://bootdey.com/img/Content/avatar/avatar7.png" title="" alt="">-->
-                            <img class="rounded-circle account-img" style="height: 300px; width: 300px" src="{{ image_file }}">
-                        </div>
-                        <div class="form-group justify-content-center align-center">
-                            {{ form.picture(class="form-control-file pt-2") }}
-                            {% if form.picture.errors %}
-                                {% for error in form.picture.errors %}
-                                    <span class="text-danger">{{ error }}</span></br>
-                                {% endfor %}
-                            {% endif %}
+                    <div class="row justify-content-center p-5">
+                        <div class="count-data text-center">
+                            {{ form.submit(class="btnSubmit text-white", style="background: #F06543; width: 250px;") }}
                         </div>
                     </div>
                 </div>
-
-
-                <!-- BARRA Social -->
-                <div class="counter pt-3">
-                    <div class="row">
-                        <div class="col-6 col-lg-3">
-                            <div class="count-data text-center">
-                                <!--<h6 class="count h2" data-to="500" data-speed="500">{{ current_user.events.total }}</h6>
-                                <p class="m-0px font-w-600">Events created</p>-->
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40"><path fill-rule="evenodd" d="M12.596 2.043c-1.301-.092-2.303.986-2.303 2.206v1.053c0 2.666-1.813 3.785-2.774 4.2a1.866 1.866 0 01-.523.131A1.75 1.75 0 005.25 8h-1.5A1.75 1.75 0 002 9.75v10.5c0 .967.784 1.75 1.75 1.75h1.5a1.75 1.75 0 001.742-1.58c.838.06 1.667.296 2.69.586l.602.17c1.464.406 3.213.824 5.544.824 2.188 0 3.693-.204 4.583-1.372.422-.554.65-1.255.816-2.05.148-.708.262-1.57.396-2.58l.051-.39c.319-2.386.328-4.18-.223-5.394-.293-.644-.743-1.125-1.355-1.431-.59-.296-1.284-.404-2.036-.404h-2.05l.056-.429c.025-.18.05-.372.076-.572.06-.483.117-1.006.117-1.438 0-1.245-.222-2.253-.92-2.941-.684-.675-1.668-.88-2.743-.956zM7 18.918c1.059.064 2.079.355 3.118.652l.568.16c1.406.39 3.006.77 5.142.77 2.277 0 3.004-.274 3.39-.781.216-.283.388-.718.54-1.448.136-.65.242-1.45.379-2.477l.05-.384c.32-2.4.253-3.795-.102-4.575-.16-.352-.375-.568-.66-.711-.305-.153-.74-.245-1.365-.245h-2.37c-.681 0-1.293-.57-1.211-1.328.026-.243.065-.537.105-.834l.07-.527c.06-.482.105-.921.105-1.25 0-1.125-.213-1.617-.473-1.873-.275-.27-.774-.455-1.795-.528-.351-.024-.698.274-.698.71v1.053c0 3.55-2.488 5.063-3.68 5.577-.372.16-.754.232-1.113.26v7.78zM3.75 20.5a.25.25 0 01-.25-.25V9.75a.25.25 0 01.25-.25h1.5a.25.25 0 01.25.25v10.5a.25.25 0 01-.25.25h-1.5z"></path></svg>
-                                <input class="form-control input-sm" type="text" placeholder="Facebook link">
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3">
-                            <div class="count-data text-center">
-                                <!--<h6 class="count h2" data-to="150" data-speed="150">150</h6>
-                                <p class="m-0px font-w-600">People who participated</p>-->
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40"><path fill-rule="evenodd" d="M6.736 4C4.657 4 2.5 5.88 2.5 8.514c0 3.107 2.324 5.96 4.861 8.12a29.66 29.66 0 004.566 3.175l.073.041.073-.04c.271-.153.661-.38 1.13-.674.94-.588 2.19-1.441 3.436-2.502 2.537-2.16 4.861-5.013 4.861-8.12C21.5 5.88 19.343 4 17.264 4c-2.106 0-3.801 1.389-4.553 3.643a.75.75 0 01-1.422 0C10.537 5.389 8.841 4 6.736 4zM12 20.703l.343.667a.75.75 0 01-.686 0l.343-.667zM1 8.513C1 5.053 3.829 2.5 6.736 2.5 9.03 2.5 10.881 3.726 12 5.605 13.12 3.726 14.97 2.5 17.264 2.5 20.17 2.5 23 5.052 23 8.514c0 3.818-2.801 7.06-5.389 9.262a31.146 31.146 0 01-5.233 3.576l-.025.013-.007.003-.002.001-.344-.666-.343.667-.003-.002-.007-.003-.025-.013A29.308 29.308 0 0110 20.408a31.147 31.147 0 01-3.611-2.632C3.8 15.573 1 12.332 1 8.514z"></path></svg>
-                                <input class="form-control input-sm" type="text" placeholder="Instagram link">
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3">
-                            <div class="count-data text-center">
-                                <!--<h6 class="count h2" data-to="850" data-speed="850">850</h6>
-                                <p class="m-0px font-w-600">Feedbacks</p>-->
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40"><path fill-rule="evenodd" d="M20.226 7.25a9.498 9.498 0 10-3.477 12.976.75.75 0 01.75 1.299c-5.26 3.037-11.987 1.235-15.024-4.026C-.562 12.24 1.24 5.512 6.501 2.475 11.76-.562 18.488 1.24 21.525 6.501a10.956 10.956 0 011.455 4.826c.013.056.02.113.02.173v2.25a3.5 3.5 0 01-6.623 1.581 5.5 5.5 0 111.112-3.682.76.76 0 01.011.129v1.972a2 2 0 104 0v-1.766a9.452 9.452 0 00-1.274-4.733zM16 12a4 4 0 10-8 0 4 4 0 008 0z"></path></svg>
-                                <input class="form-control input-sm" type="text" placeholder="Twitter link">
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3">
-                            <div class="count-data text-center">
-                                <!--<h6 class="count h2" data-to="850" data-speed="850">850</h6>
-                                <p class="m-0px font-w-600">Feedbacks</p>-->
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40"><path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"></path></svg>
-                                <input class="form-control input-sm" type="text" placeholder="Your website">
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!--update btn -->
-                <div class="container">
-                <div class="form-group justify-content-center align-center pt-5">
-                    {{ form.submit(class="btnSubmit text-white", style="background: #F06543; width: 250px;") }}
-                </div>
             </div>
-
-            </div>
-        </section>
+        </div>
+    </div>
 </form>
 {% endblock content %}
