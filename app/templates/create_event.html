@@ -1,139 +1,13 @@
 {% extends "layout.html" %}
 {% block content%}
-<!--<div class="content-section">
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">{{ legend }}</legend>
-
-            <div class="form-group">
-                {{ form.title.label(class="form-control-label") }}
-                {% if form.title.errors %}
-                    {{ form.title(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.title.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.title(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-
-        <div class="form-group">
-                {{ form.date.label(class="form-control-label") }}
-                {% if form.date.errors %}
-                    {{ form.date(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.date.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.date(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-
-         <div class="form-group">
-                {{ form.location.label(class="form-control-label") }}
-                {% if form.location.errors %}
-                    {{ form.location(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.location.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.location(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-
-         <div class="form-group">
-                {{ form.price.label(class="form-control-label") }}
-                {% if form.price.errors %}
-                    {{ form.price(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.price.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.price(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-
-         <div class="form-group">
-                {{ form.equipment.label(class="form-control-label") }}
-                {% if form.equipment.errors %}
-                    {{ form.equipment(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.equipment.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.equipment(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-
-            <div class="form-group">
-                {{ form.min_users.label(class="form-control-label") }}
-                {% if form.min_users.errors %}
-                    {{ form.min_users(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.min_users.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.min_users(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-
-            <div class="form-group">
-                {{ form.content.label(class="form-control-label") }}
-                {% if form.content.errors %}
-                    {{ form.content(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.content.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.content(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-            <div class="form-group">
-                {{ form.weaknesses.label(class="form-control-label") }}
-                {% if form.weaknesses.errors %}
-                    {{ form.weaknesses(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.weaknesses.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.weaknesses(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-
-        </fieldset>
-        <div class="form-group">
-            {{ form.submit(class="btn btn-outline-info") }}
-        </div>
-    </form>
-</div>-->
-
-
-
 <div class="container contact-form pt-0 mt-5">
     <div class="contact-image">
         <img src="{{ url_for('static', filename='img/' + 'icon0.png') }}"/>
     </div>
-    <form method="post">
+    <form method="post" action="" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
         <h3 class="" style="color: #313638">Create an event!</h3>
-       <div class="row">
+        <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     <!--<input type="text" name="txtName" class="form-control" placeholder="Your Name *" value="" />-->
@@ -197,8 +71,9 @@
                     {% endif %}
                 </div>
 
-                <div class="form-group">
-                    {{ form.picture1(class="form-control-file") }}
+
+                <!--<div class="form-group">
+                    {{ form.picture1(class="form-control-sm", id="formFileSm") }}
                     {% if form.picture1.errors %}
                         {% for error in form.picture1.errors %}
                             <span class="text-danger">{{ error }}</span></br>
@@ -206,7 +81,7 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    {{ form.picture2(class="form-control-file") }}
+                    {{ form.picture2(class="form-control-sm") }}
                     {% if form.picture2.errors %}
                         {% for error in form.picture2.errors %}
                             <span class="text-danger">{{ error }}</span></br>
@@ -214,17 +89,15 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    {{ form.picture3(class="form-control-file") }}
+                    {{ form.picture3(class="form-control-sm") }}
                     {% if form.picture3.errors %}
                         {% for error in form.picture3.errors %}
                             <span class="text-danger">{{ error }}</span></br>
                         {% endfor %}
                     {% endif %}
-                </div>
+                </div>-->
 
-                <div class="form-group">
-                    {{ form.submit(class="btnSubmit text-white", style="background: #F06543") }}
-                </div>
+
             </div>
             <div class="col-md-6">
                 <div class="form-group">
@@ -266,7 +139,39 @@
                 </div>
             </div>
         </div>
+        <div class="row justify-content-center align-content-center pt-4 pb-2">
+            <div class="col-md-4">
+                {{ form.picture1(class="form-control-file", id="formFileSm") }}
+                {% if form.picture1.errors %}
+                    {% for error in form.picture1.errors %}
+                        <span class="text-danger">{{ error }}</span></br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                {{ form.picture2(class="form-control-file") }}
+                {% if form.picture2.errors %}
+                    {% for error in form.picture2.errors %}
+                        <span class="text-danger">{{ error }}</span></br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                {{ form.picture3(class="form-control-file") }}
+                {% if form.picture3.errors %}
+                    {% for error in form.picture3.errors %}
+                        <span class="text-danger">{{ error }}</span></br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row justify-content-center align-content-end pt-3">
+            <div class="form-group">
+                {{ form.submit(class="btnSubmit text-white", style="background: #F06543; width: 100px") }}
+            </div>
+        </div>
+
     </form>
-    </div>
+</div>
 
 {% endblock content%}

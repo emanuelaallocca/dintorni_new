@@ -1,13 +1,29 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="content-section">
-        <form method="POST" action="">
-            {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join DinTOrni</legend>
-            <div class="form-group">
-                    {{ form.name.label(class="form-control-label") }}
 
+    <div class="container contact-form pt-0 mt-5">
+    <div class="contact-image">
+        <img src="{{ url_for('static', filename='img/' + 'icon0.png') }}"/>
+    </div>
+    <form method="post" action="" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+        <h3 class="" style="color: #313638">Join DinTOrni</h3>
+        <div class="row justify-content-center pb-3">
+            {% if form.username.errors %}
+                {{ form.username(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.username.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <!-- valid field for the section -->
+                {{ form.username(class="form-control form-control-lg", style="width: 250px") }}
+            {% endif %}
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
                     {% if form.name.errors %}
                         {{ form.name(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
@@ -16,13 +32,37 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        <!-- valid field for the section -->
                         {{ form.name(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
-            <div class="form-group">
-                    {{ form.surname.label(class="form-control-label") }}
+                <div class="form-group">
+                    {% if form.telephone.errors %}
+                        {{ form.telephone(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.telephone.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.telephone(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
 
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
                     {% if form.surname.errors %}
                         {{ form.surname(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
@@ -36,22 +76,6 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    {{ form.username.label(class="form-control-label") }}
-
-                    {% if form.username.errors %}
-                        {{ form.username(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.username.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        <!-- valid field for the section -->
-                        {{ form.username(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
                     {% if form.email.errors %}
                         {{ form.email(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
@@ -63,35 +87,7 @@
                         {{ form.email(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
-            <div class="form-group">
-                    {{ form.telephone.label(class="form-control-label") }}
-                    {% if form.telephone.errors %}
-                        {{ form.telephone(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.telephone.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.telephone(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
                 <div class="form-group">
-                    {{ form.password.label(class="form-control-label") }}
-                    {% if form.password.errors %}
-                        {{ form.password(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.password.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.password(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                <!-- faccio form di controllo, magari cambio nome -->
-                    {{ form.confirm_password.label(class="form-control-label") }}
                     {% if form.confirm_password.errors %}
                         {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
@@ -103,24 +99,36 @@
                         {{ form.confirm_password(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
-            <!-- finiti questi form devo fare il SUBMIT -->
-            </fieldset>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
             </div>
-        </form>
-    </div>
-    <div class="d-flex align-items-center justify-content-between justify-content-md-start mt-2">
-                        <label class="form-check-label" for="defaultCheck1">
-                            <small>I accept all <a href="/static/pdfs/terms-and-conditions-template.pdf" target="_blank">Terms and Condition</a> agreement</small>
-                        </label>
-                        <div class="ml-0 ml-md-3">
-                            {{ form.term_conditions }}
-                        </div>
-    </div>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            Already Have An Account? <a class="ml-2" href="{{ url_for('users.login') }}">Sign In</a>
-        </small>
-    </div>
+        </div>
+
+        <!--terms-->
+        <div class="row justify-content-center pt-3">
+            <div class="d-flex align-items-center justify-content-between justify-content-md-start mt-2">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="">
+                <label class="form-check-label" for="flexCheckDefault">
+                    <small>I accept all <a href="/static/pdfs/terms-and-conditions-template.pdf" target="_blank">Terms and Condition</a> agreement</small>
+                </label>
+                <div class="ml-0 ml-md-3">
+                    {{ form.term_conditions }}
+                </div>
+            </div>
+        </div>
+
+        <!--btn-->
+        <div class="row justify-content-center pt-3">
+            <div class="form-group">
+                {{ form.submit(class="btnSubmit text-white", style="background: #F06543; width: 100px") }}
+            </div>
+        </div>
+
+        <!--login-->
+        <div class="row justify-content-center align-content-end pt-3">
+            <small class="text-muted">
+                Already Have An Account? <a class="ml-2" href="{{ url_for('users.login') }}">Sign In</a>
+            </small>
+        </div>
+
+    </form>
+</div>
 {% endblock content %}

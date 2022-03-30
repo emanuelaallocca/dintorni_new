@@ -6,13 +6,13 @@ from flask_login import current_user
 from flask_wtf import FlaskForm #a validator about what file we can validate
 
 class RegistrationForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired(), Length(min=5, max=50)], render_kw={'placeholder':'Your name'})
-    surname = StringField('Surname', validators=[DataRequired(), Length(min=5, max=20)], render_kw={'placeholder':'Your surname'})
-    username = StringField('Username', validators=[DataRequired(), Length(min=5, max=20)], render_kw={'placeholder':'Your username'}) #no empty + condictions
-    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={'placeholder':'Your email'})
-    password = PasswordField('Password', validators=[DataRequired()], render_kw={'placeholder':'Your password'})
-    telephone = IntegerField('Telephone Number', validators=[DataRequired()], render_kw={'placeholder':'Your telephone number'})
-    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    name = StringField('Name', validators=[DataRequired(), Length(min=5, max=50)], render_kw={'placeholder':'Name'})
+    surname = StringField('Surname', validators=[DataRequired(), Length(min=5, max=20)], render_kw={'placeholder':'Surname'})
+    username = StringField('Username', validators=[DataRequired(), Length(min=5, max=20)], render_kw={'placeholder':'Username'}) #no empty + condictions
+    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={'placeholder':'Email'})
+    password = PasswordField('Password', validators=[DataRequired()], render_kw={'placeholder':'Password'})
+    telephone = IntegerField('Telephone Number', validators=[DataRequired()], render_kw={'placeholder':'Telephone'})
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')], render_kw={'placeholder':'Confirm password'})
     submit = SubmitField('SignUp')
     #creo una funzione per questa classe
 
