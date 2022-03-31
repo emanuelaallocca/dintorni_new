@@ -2,13 +2,16 @@
 {% block content %}
 
 
-<div class="card-columns" style="width: 100%; padding-top:20px; padding-bottom:30px;" >
+<div class="card-group" >
+    <div class="row justify-content-around">
     {% for event in events.items %}
-      <div class="card" id="card_home" style="">
+      <div class="card" id="card_home" style="margin: 15px;">
         <img class="card-img-top" style="width: 100%; height: 15vw; object-fit: cover;" src="{{ url_for('static', filename='events_pics/' + event.image_event1) }}" alt="Event image">
         <div class="card-body align-center">
             <p class="card-text text-center mb-0" style="color: #F06543">{{ event.date_event }} - {{ event.location }}</p>
-            <h5 class="card-title text-center mt-0">{{ event.title }}</h5>
+
+                <h5 class="card-title text-center mt-0">{{ event.title }}</h5>
+
             <h6 class="card-subtitle mb-2 text-muted text-center" href="{{ url_for('users.user_events', name=event.creator.name) }}">{{ event.creator.name }}</h6>
             <p class="card-text text-center mb-3">{{ event.content[:35] + "..." }}</p>
             <div class="col text-center mb-0 mt-3">
@@ -17,6 +20,7 @@
         </div>
       </div>
     {% endfor %}
+    </div>
 </div>
 
 

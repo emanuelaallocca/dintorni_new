@@ -3,29 +3,38 @@
 
     <div class="container">
     <div class="row text-center justify-content-center mb-5">
-        <div class="col-xl-6 col-lg-8 pt-5">
-            <h2 class="font-weight-bold">{{ current_user.name }} events - {{ events.total }}</h2>
+        <div class="col pt-5">
+            <h2 class="font-weight-bold">{{ current_user.name }} - {{ events.total }} events</h2>
         </div>
     </div>
     </div>
 
 
     <section>
-        <div class="container">
+        <div class="card-group">
             <div class="row justify-content-around">
-                    {% for event in events.items %}
-                        <div class="card" id="card_home" style="margin: 15px;">
-                            <img class="card-img-top" style="width: 100%; height: 15vw; object-fit: cover;" src="{{ url_for('static', filename='profile_pics/' + event.creator.image_file) }}">
-                            <div class="card-body align-center">
-                                <div class="article-metadata">
-                                    <a class="mr-2" href="{{ url_for('users.business_events', name=event.creator.name) }}">{{ event.creator.name }}</a>
-                                    <small class="text-muted">{{ event.date_event.strftime('%Y-%m-%d') }}</small>
-                                </div>
-                                <h2><a class="article-title" href="{{ url_for('events.update_event', event_id=event.id) }}">{{ event.title }}</a></h2>
-                                <p class="article-content">{{ event.content }}</p>
-                            </div>
+            {% for event in events.items %}
+                <div class="card" id="card_home" style="margin: 15px;">
+                    <img class="card-img-top" style="width: 100%; height: 15vw; object-fit: cover;" src="{{ url_for('static', filename='events_pics/' + event.image_event1) }}">
+                    <div class="card-body align-center">
+                        <!--<div class="article-metadata">
+                            <a class="mr-2" href="{{ url_for('users.business_events', name=event.creator.name) }}">{{ event.creator.name }}</a>
+                            <small class="text-muted">{{ event.date_event.strftime('%Y-%m-%d') }}</small>
                         </div>
-                    {% endfor %}
+                        <div>
+                            <h2><a class="article-title" href="{{ url_for('events.update_event', event_id=event.id) }}">{{ event.title }}</a></h2>
+                            <p class="article-content">{{ event.content }}</p>
+                        </div>-->
+                        <p class="card-text text-center mb-0" style="color: #F06543">{{ event.date_event.strftime('%d-%m-%Y') }} - {{ event.location }}</p>
+                        <h5 class="card-title text-center mt-0">{{ event.title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted text-center" href="{{ url_for('users.user_events', name=event.creator.name) }}">{{ event.creator.name }}</h6>
+                        <p class="card-text text-center mb-3">{{ event.content[:35] + "..." }}</p>
+                        <div class="col text-center mb-0 mt-3">
+                              <a href="{{ url_for('events.update_event', event_id=event.id) }}" class="btn btn-outline-dark btn-sm mb-0" style="color: #04192E">Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
 

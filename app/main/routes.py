@@ -51,11 +51,13 @@ def intialize_db():
 
     businesses = [
         {'name': 'Azienda vinicola Colucci',  'city':'Alba', 'address':'via Vincenzo Gioberti, 63'},
-        {'name': 'tesla', 'city':'Torino', 'address':'via torino'}
+        {'name': 'Rifugio La Marmotta', 'city':'Sauze d Oulx', 'address':'via Genova 88'},
+        {'name': 'Ristorante Il Tartufo', 'city':'Casale Monferrato', 'address':'Corso Lecce 58'}
     ]
 
     for business in businesses:
-        email = business['name'].lower()+'@mail.com'
+        s = business['name'].replace(" ", "")
+        email = s.lower() +'@mail.com'
         telephone = 3397960955
         vat_number = 123456
         c = Business(name=business['name'], email=email, password=bcrypt.generate_password_hash('1234567890').decode('utf-8'),
@@ -63,7 +65,7 @@ def intialize_db():
                      city=business['city'], address=business['address'], telephone=telephone)
         db.session.add(c)
         events = [
-            {'title': 'nuovo evento', 'date': '2022-04-10'},
+            {'title': 'Degustazione di prodotti tipici', 'date': '2022-04-10'},
             {'title': 'nuovo evento', 'date': '2022-05-10'},
             {'title': 'nuovo evento', 'date': '2022-03-10'},
             {'title': 'nuovo evento', 'date': '2022-03-10'}

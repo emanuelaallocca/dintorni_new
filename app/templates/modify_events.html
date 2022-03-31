@@ -1,24 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="container contact-form pt-0 mt-5">
+    <div class="container contact-form pt-0 pb-1 mt-5">
         <div class="contact-image">
             <img src="{{ url_for('static', filename='img/' + 'icon0.png') }}"/>
         </div>
         <form method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <h3 class="" style="color: #313638">Update your event</h3>
-            <!--image-->
-            <div class="row justify-content-center align-content-center pb-3">
-                <div class="col-md-4">
-                    <img class="rounded-circle account-img" src="{{ url_for('static', filename='events_pics/' + event.image_event1) }}">
-                </div>
-                <div class="col-md-4">
-                    <img class="rounded-circle account-img" src="{{ url_for('static', filename='events_pics/' + event.image_event2) }}">
-                </div>
-                <div class="col-md-4">
-                    <img class="rounded-circle account-img" src="{{ url_for('static', filename='events_pics/' + event.image_event3) }}">
-                </div>
-            </div>
 
             <!--dati-->
             <div class="row">
@@ -85,31 +73,6 @@
                         {% endif %}
                     </div>
 
-                    <!--<div class="form-group">
-                        {{ form.picture1(class="form-control-file") }}
-                        {% if form.picture1.errors %}
-                            {% for error in form.picture1.errors %}
-                                <span class="text-danger">{{ error }}</span></br>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.picture2(class="form-control-file") }}
-                        {% if form.picture2.errors %}
-                            {% for error in form.picture2.errors %}
-                                <span class="text-danger">{{ error }}</span></br>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.picture3(class="form-control-file btnSubmit") }}
-                        {% if form.picture3.errors %}
-                            {% for error in form.picture3.errors %}
-                                <span class="text-danger">{{ error }}</span></br>
-                            {% endfor %}
-                        {% endif %}
-                    </div>-->
-
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
@@ -154,6 +117,22 @@
 
             <!--upload img-->
             <div class="row justify-content-center align-content-center pt-4 pb-2">
+                <!--image-->
+                <div class="row justify-content-center align-content-center pb-3">
+                    <div class="col-md-4">
+                        <img class="rounded-circle account-img" src="{{ url_for('static', filename='events_pics/' + event.image_event1) }}">
+                    </div>
+                    <div class="col-md-4">
+                        <img class="rounded-circle account-img" src="{{ url_for('static', filename='events_pics/' + event.image_event2) }}">
+                    </div>
+                    <div class="col-md-4">
+                        <img class="rounded-circle account-img" src="{{ url_for('static', filename='events_pics/' + event.image_event3) }}">
+                    </div>
+                </div>
+            </div>
+
+            <!--choose img-->
+            <div class="row justify-content-center align-content-center pb-3">
                 <div class="col-md-4">
                     {{ form.picture1(class="form-control-file", id="formFileSm") }}
                     {% if form.picture1.errors %}
@@ -178,37 +157,37 @@
                         {% endfor %}
                     {% endif %}
                 </div>
-
+            </div>
                 <!--btn-->
-                <div class="row justify-content-center align-content-end pt-3">
+                <div class="row row justify-content-center align-center pt-3">
                     <div class="col-md-6">
                         {{ form.submit(class="btnSubmit text-white", style="background: #F06543; width: 100px") }}
                     </div>
-                    <div class="col-md-6">
-                        <!-- delete Modal preso da bootstrap-->
-                        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="deleteModalLabel">Delete Event?</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <form action="{{ url_for('events.delete_event', event_id=event.id) }}" method="POST">
-                                            <input class="btn btn-danger" type="submit" value="Delete"> <!-- il btn-danger è per farlo rosso -->
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                </div>
+        </form>
+
+
+    </div>
+
+    <div class="container align-center contact-form pt-4 pb-4 mt-5">
+        <h3 class="" style="color: #313638">Delete your event</h3>
+        <button class="btnSubmit text-white align-center" style="background: #F06543;" onclick="document.getElementById('id01').style.display='block'">Delete</button>
+            <div id="id01" class="modal">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <form class="modal-content" action="{{ url_for('events.delete_event', event_id=event.id) }}" method="POST">
+                    <div class="container">
+                        <h1>Delete Account</h1>
+                        <p>Are you sure you want to delete your account?</p>
+
+                        <div class="clearfix">
+                            <button type="button" class="cancelbtn">Cancel</button>
+                            <form action="{{ url_for('events.delete_event', event_id=event.id) }}" method="POST">
+                                <input class="btn btn-danger" type="submit" value="Delete"> <!-- il btn-danger è per farlo rosso -->
+                            </form>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
-
-        </form>
     </div>
 
 
