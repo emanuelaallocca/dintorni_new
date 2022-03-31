@@ -63,8 +63,8 @@ def intialize_db():
                      city=business['city'], address=business['address'], telephone=telephone)
         db.session.add(c)
         events = [
-            {'title': 'nuovo evento', 'date': '2022-03-10'},
-            {'title': 'nuovo evento', 'date': '2022-02-10'},
+            {'title': 'nuovo evento', 'date': '2022-04-10'},
+            {'title': 'nuovo evento', 'date': '2022-05-10'},
             {'title': 'nuovo evento', 'date': '2022-03-10'},
             {'title': 'nuovo evento', 'date': '2022-03-10'}
         ]

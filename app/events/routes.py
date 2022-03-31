@@ -129,11 +129,11 @@ def update_event(event_id):
 def join_event(event_id):
     user= current_user
     user_id = user.id
-    form = JoinEventForm()
-    event_already_joined = JoinEvent.query.filter_by(event_id=event_id, user_id=user_id)
-    if event_already_joined:
-        flash('You have already joined this event', 'error')
-        return redirect(url_for('main.home'))
+    form = JoinEventForm(event_id, user_id)
+    #event_already_joined = JoinEvent.query.filter_by(event_id=event_id, user_id=user_id)
+    #if event_already_joined:
+       # flash('You have already joined this event', 'unsuccess')
+        #return redirect(url_for('main.home'))
     if form.validate_on_submit():
         if form.someonescar.data:
             join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='someonescar')
