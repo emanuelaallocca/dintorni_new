@@ -41,6 +41,10 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Remember Me') #boolean --> cookie
     submit = SubmitField('Login')
 
+class AggiornaForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    viva = SubmitField('Update')
+
 class UpdateAccountBusinessForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(min=5, max=20)], render_kw={'placeholder':'Name'})
     email = StringField('Email', validators=[DataRequired(), Email()], render_kw={'placeholder':'Email'})
@@ -49,13 +53,15 @@ class UpdateAccountBusinessForm(FlaskForm):
     telephone = IntegerField('Telephone', validators=[DataRequired()], render_kw={'placeholder':'Telephone'})
     city = StringField('City', validators=[DataRequired()], render_kw={'placeholder':'City'})
     address = StringField('Address', validators=[DataRequired()], render_kw={'placeholder':'Address'})
-    link_facebook = StringField('Link Facebook', validators=[DataRequired()],
+    link_facebook = StringField('Link Facebook',
                                 render_kw={'placeholder': 'Link Facebook'})
-    link_instagram = StringField('Link Instagram', validators=[DataRequired()],
+    link_instagram = StringField('Link Instagram',
                                  render_kw={'placeholder': 'Link Instagram'})
-    link_twitter = StringField('Link Twitter', validators=[DataRequired()], render_kw={'placeholder': 'Link Twitter'})
-    link_website = StringField('Link Website', validators=[DataRequired()], render_kw={'placeholder': 'Link Website'})
+    link_twitter = StringField('Link Twitter', render_kw={'placeholder': 'Link Twitter'})
+    link_website = StringField('Link Website', render_kw={'placeholder': 'Link Website'})
     submit = SubmitField('Update')
+
+
     def validate_name(self, name):
         if name.data != current_user.name:
           business = Business.query.filter_by(name = name.data).first()

@@ -3,7 +3,8 @@ from datetime import datetime
 from flask import render_template, url_for, flash, redirect, request
 
 from app import bcrypt, db
-from app.users.forms import RegistrationForm, RegistrationBusinessForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm,UpdateAccountBusinessForm
+from app.users.forms import RegistrationForm, RegistrationBusinessForm, LoginForm, UpdateAccountForm, RequestResetForm, \
+    ResetPasswordForm, UpdateAccountBusinessForm
 from app.users.utils import save_picture
 from models import User, Post, Business, Event, JoinEvent, Private
 from flask_login import login_user, current_user, logout_user, login_required

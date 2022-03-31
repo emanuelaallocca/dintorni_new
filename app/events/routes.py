@@ -130,27 +130,31 @@ def join_event(event_id):
     user= current_user
     user_id = user.id
     form = JoinEventForm()
+    event_already_joined = JoinEvent.query.filter_by(event_id=event_id, user_id=user_id)
+    if event_already_joined:
+        flash('You have already joined this event', 'error')
+        return redirect(url_for('main.home'))
     if form.validate_on_submit():
         if form.someonescar.data:
-            join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type = 'someonescar')
+            join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='someonescar')
             db.session.add(join_event)
             db.session.commit()
-            return redirect(url_for('events.event_joined', event_id=event_id, transport_type= 'someonescar'))
+            return redirect(url_for('events.event_joined', event_id=event_id, transport_type='someonescar'))
         elif form.yourcar.data:
-            join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type = 'yourcar')
+            join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='yourcar')
             db.session.add(join_event)
             db.session.commit()
-            return redirect(url_for('events.event_joined', event_id=event_id, transport_type= 'yourcar'))
+            return redirect(url_for('events.event_joined', event_id=event_id, transport_type='yourcar'))
         elif form.bus.data:
             join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='bus')
             db.session.add(join_event)
             db.session.commit()
-            return redirect(url_for('events.event_joined', event_id=event_id, transport_type= 'bus'))
+            return redirect(url_for('events.event_joined', event_id=event_id, transport_type='bus'))
         elif form.yourown.data:
             join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='yourown')
             db.session.add(join_event)
             db.session.commit()
-            return redirect(url_for('events.event_joined', event_id=event_id, transport_type= 'yourown'))
+            return redirect(url_for('events.event_joined', event_id=event_id, transport_type='yourown'))
     return render_template('join_event.html', title='Join Event', legend='Join Event', form=form)
 
 @events.route("/event/<int:event_id>/<string:transport_type>/event_joined", methods=['GET', 'POST'])
