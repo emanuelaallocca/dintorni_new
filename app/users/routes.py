@@ -78,10 +78,20 @@ def account():
     image_file = url_for('static', filename='profile_pics/'+current_user.image_file)#devo mettere la cartella+la route
     return render_template('update_account_user.html', title='Account',image_file=image_file, form=form)
 
+@users.route("/account1", methods=['GET', 'POST'])
+@login_required
+def account1():
+    form1 = AggiornaForm()
+    if form1.validate_on_submit():
+        print("prova")
+    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+    return render_template('update_account_business.html', title='Account Business', image_file=image_file, form1=form1)
+
 @users.route("/account_business", methods=['GET', 'POST'])
 @login_required
 def account_business():
     form= UpdateAccountBusinessForm()
+
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
@@ -100,18 +110,19 @@ def account_business():
         flash('your account has been updated', 'success')
         return redirect(url_for('users.account_business'))
     elif request.method == 'GET':
-        form.name.data = current_user.name
-        form.email.data = current_user.email
-        form.vat_number.data = current_user.vat_number
-        form.telephone.data = current_user.telephone
-        form.city.data = current_user.city
-        form.address.data = current_user.address
-        form.link_facebook.data = current_user.link_facebook
-        form.link_instagram.data = current_user.link_instagram
-        form.link_twitter.data = current_user.link_twitter
-        form.link_website.data = current_user.link_website
+            form.name.data = current_user.name
+            form.email.data = current_user.email
+            form.vat_number.data = current_user.vat_number
+            form.telephone.data = current_user.telephone
+            form.city.data = current_user.city
+            form.address.data = current_user.address
+            form.link_facebook.data = current_user.link_facebook
+            form.link_instagram.data = current_user.link_instagram
+            form.link_twitter.data = current_user.link_twitter
+            form.link_website.data = current_user.link_website
     image_file = url_for('static', filename='profile_pics/'+current_user.image_file)#devo mettere la cartella+la route
     return render_template('update_account_business.html', title='Account Business',image_file=image_file, form=form)
+
 
 
 @users.route("/login", methods=['GET', 'POST'])

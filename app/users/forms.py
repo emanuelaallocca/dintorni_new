@@ -31,8 +31,10 @@ class RegistrationForm(FlaskForm):
 
 
     def validate_telephone(self, telephone):
-        s = str(telephone)
+        s = str(telephone.data)
         if len(s)!=10:
+
+            print(len(s))
             raise ValidationError('Your telephone number must have 10 numbers')
 
 class LoginForm(FlaskForm):
