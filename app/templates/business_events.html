@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+
     <h1 class="mb-3">Events by {{ business.name }} ({{ events.total }})</h1>
     {% for event in events.items %}
         <article class="media content-section">
@@ -14,6 +15,8 @@
           </div>
         </article>
     {% endfor %}
+
+
     {% for page_num in events.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
       {% if page_num %}
         {% if events.page == page_num %}
