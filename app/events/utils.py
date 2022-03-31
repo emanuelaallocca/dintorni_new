@@ -5,6 +5,7 @@ import os
 from PIL import Image #non so perche non vada min 38.18 lezione 7
 from flask_mail import Message
 
+from models import JoinEvent
 
 
 def save_picture(form_picture):

@@ -51,7 +51,7 @@ class Private(User, db.Model):
     surname = db.Column(db.String(50))
     username = db.Column(db.String(20), unique=True, nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
-    joined = db.relationship("JoinEvent")
+    joined = db.relationship("JoinEvent", backref = 'joined')
 
     __mapper_args__ = {
         'polymorphic_identity': 'private',
