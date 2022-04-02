@@ -134,7 +134,7 @@ def join_event(event_id):
             u= current_user.joined
             for e in u:
                 if e.event_id == event_id:
-                    flash('You have already joined this event', 'unsuccess')
+                    flash('You have already joined this event', 'danger')
                     return redirect(url_for('main.home'))
             join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='someonescar', time_hour= 0, time_minute= 0, place='null', number_of_sits=0)
             db.session.add(join_event)
@@ -144,14 +144,14 @@ def join_event(event_id):
                 u = current_user.joined
                 for e in u:
                     if e.event_id == event_id:
-                        flash('You have already joined this event', 'unsuccess')
+                        flash('You have already joined this event', 'danger')
                         return redirect(url_for('main.home'))
                 return redirect(url_for('events.your_car_info', event_id=event_id, transport_type='yourcar'))
         elif form.bus.data:
                 u = current_user.joined
                 for e in u:
                     if e.event_id == event_id:
-                        flash('You have already joined this event', 'unsuccess')
+                        flash('You have already joined this event', 'danger')
                         return redirect(url_for('main.home'))
                 join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='bus', time_hour= 0, time_minute= 0, place='null', number_of_sits=0)
                 db.session.add(join_event)
@@ -161,7 +161,7 @@ def join_event(event_id):
                 u = current_user.joined
                 for e in u:
                     if e.event_id == event_id:
-                        flash('You have already joined this event', 'unsuccess')
+                        flash('You have already joined this event', 'danger')
                         return redirect(url_for('main.home'))
                 join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='yourown', time_hour= 0, time_minute= 0, place='null', number_of_sits=0)
                 db.session.add(join_event)
@@ -172,12 +172,13 @@ def join_event(event_id):
 @events.route("/event/<int:event_id>/delete_event_joined", methods=['POST'])
 @login_required
 def delete_event_joined(event_id):
-    event = Event.query.get_or_404(event_id)
-    if event.creator != current_user:
-        abort(403)
-    db.session.delete(event)
-    db.session.commit()
-    flash('Your post has been deleted!', 'success')
+    user = current_user
+    u = current_user.joined
+    for e in u:
+        if e.event_id == event_id:
+            db.session.delete(e)
+            db.session.commit()
+    flash('Your event is no more joined!', 'success')
     return redirect(url_for('main.home'))
 
 @events.route("/event/<int:event_id>/<string:transport_type>/event_joined", methods=['GET', 'POST'])
