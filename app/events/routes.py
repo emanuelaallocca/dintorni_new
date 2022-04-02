@@ -197,5 +197,5 @@ def your_car_info(event_id, transport_type):
                 e.number_of_sits = form.number_of_sits.data
                 db.session.commit()
                 flash('You have update your info', 'success')
-                return redirect(url_for('main.home'))
+                return render_template('your_car_info_lastpage.html')
     return render_template('your_car_info.html', title='Join Event', legend='Join Event', form=form)
