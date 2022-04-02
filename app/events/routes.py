@@ -230,7 +230,7 @@ def someonescar_info(event_id, transport_type):
 @events.route("/event/<int:event_id>/<int:user_id>/someonescar_info", methods=['GET', 'POST'])
 @login_required
 def update_seats(event_id, user_id):
-    user = current_user
+    user = User.query.get_or_404(user_id)
     u = current_user.joined
     for e in u:
         if e.event_id == event_id:
@@ -239,3 +239,5 @@ def update_seats(event_id, user_id):
                 db.session.commit()
             else:
                 flash('No more seats', 'danger')
+                #return redirect(url_for('events.someonescar_info'), event_id = event_id, transport_type = 'someonescar')
+                return redirect(url_for('main.home'))
