@@ -226,3 +226,16 @@ def someonescar_info(event_id, transport_type):
             user = User.query.get_or_404(i)
             users_with_car.append(user)
     return render_template('someonescar.html', users = users_with_car, je_util = je_util, u_len = len(users_with_car) )
+
+@events.route("/event/<int:event_id>/<int:user_id>/someonescar_info", methods=['GET', 'POST'])
+@login_required
+def update_seats(event_id, user_id):
+    user = current_user
+    u = current_user.joined
+    for e in u:
+        if e.event_id == event_id:
+            if e.number_of_sits > 0:
+                e.number_of_sits = e.number_of_sits -1
+                db.session.commit()
+            else:
+                flash('No more seats', 'danger')
