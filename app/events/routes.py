@@ -146,7 +146,7 @@ def join_event(event_id):
                     if e.event_id == event_id:
                         flash('You have already joined this event', 'unsuccess')
                         return redirect(url_for('main.home'))
-                join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='yourcar', time= 0, place='null', number_of_sits=0)
+                join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='yourcar', time_hour= 0, time_minute= 0, place='null', number_of_sits=0)
                 db.session.add(join_event)
                 db.session.commit()
                 return redirect(url_for('events.your_car_info', event_id=event_id, transport_type='yourcar'))
@@ -156,7 +156,7 @@ def join_event(event_id):
                     if e.event_id == event_id:
                         flash('You have already joined this event', 'unsuccess')
                         return redirect(url_for('main.home'))
-                join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='bus', time=null, place=null, number_of_sits=null)
+                join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='bus', time_hour= 0, time_minute= 0, place=null, number_of_sits=null)
                 db.session.add(join_event)
                 db.session.commit()
                 return redirect(url_for('events.event_joined', event_id=event_id, transport_type='bus'))
@@ -166,7 +166,7 @@ def join_event(event_id):
                     if e.event_id == event_id:
                         flash('You have already joined this event', 'unsuccess')
                         return redirect(url_for('main.home'))
-                join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='yourown', time=null, place=null, number_of_sits=null)
+                join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='yourown', time_hour= 0, time_minute= 0, place=null, number_of_sits=null)
                 db.session.add(join_event)
                 db.session.commit()
                 return redirect(url_for('events.event_joined', event_id=event_id, transport_type='yourown'))
