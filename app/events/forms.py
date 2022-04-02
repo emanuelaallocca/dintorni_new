@@ -57,6 +57,11 @@ class UseYourCarForm(FlaskForm):
     place = StringField('Place of the meeting',validators=[DataRequired()], render_kw={'placeholder':'Place'})
     number_of_sits = IntegerField('Number of sits', validators=[DataRequired()], render_kw={'placeholder':'Number of sits'})
     submit = SubmitField('Ready?')
+
     def validate_number_of_sits(self, number_of_sits):
         if number_of_sits.data > 7 and number_of_sits.data < 0:
             raise ValidationError('The number of sits must be between 0 and 7')
+
+    def validate_hour(self, time_hour, time_minute):
+        if time_hour.data < 24 and time_hour > 0 and time_minute.data < 60 and time_minute.data > 0:
+            raise ValidationError('You have to insert the time in the 24h standard')
