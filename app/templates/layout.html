@@ -40,6 +40,8 @@
             <div class="navbar-nav ml-auto ms-auto">
                 <a class="nav-item nav-link text-white" href="{{ url_for('main.home') }}">Home</a>
                 <a class="nav-item nav-link text-white" href="{{ url_for('main.about') }}">About</a>
+                <a class="nav-item nav-link text-white" href="{{ url_for('posts.reviews') }}">Reviews</a>
+
                 {%  if current_user.is_authenticated %}
                         {%  if current_user.username != null %}
                             <a class="nav-item nav-link text-white" href="{{ url_for('posts.new_post') }}">Review</a>

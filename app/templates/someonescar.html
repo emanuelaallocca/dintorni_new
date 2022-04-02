@@ -1,29 +1,38 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="container login-container pb-5 mb-0">
+    <div class="container login-container pb-5 mb-5">
         <div class="row justify-content-center pb-5">
             <div class="col pr-0 pl-0 pb-5 login-form-1">
                 <h3 class="pb-3">You will reach the event with someone's car!</h3>
                 <h4 class="pb-3">{{ users.total }}</h4>
 
-                <div class="">
-                    {% for i in range(u_len) %}
-                        <div class="container align-content-center align-center login-container" style="width: 95%; background-color: #FCE0D9;">
-                            <div class="row justify-content-center">
-                                <div class="col pr-0 pl-0 pb-5 login-form-1">
-                                    <p class="text-center font-weight-light">{{ users[i].name }} {{ users[i].surname }}'s car is available!</p>
-                                    <p class="text-center font-weight-light">Meeting details: {{ je_util[i].place }} at {{ je_util[i].time_hour }}:{{ je_util[i].time_minute }}</p>
-                                    <p class="text-center font-weight-light">Number of seat still available: {{ je_util[i].number_of_sits }}
-                                </div>
-                                 <form action="{{ url_for('events.update_seats', event_id=je_util[i].event_id, user_id = je_util[i].user_id ) }}" method="POST">
-                                    <input class="btn btn-danger" type="submit" value="Go!">
-                                 </form>
-                            </div>
-                        </div>
-                    {% endfor %}
+                <div class="justify-content-center m-5">
+                    <table class="table table-sm justify-content-center" style="background-color: rgba(4,25,46,0.10);">
+                        <tr class="justify-content-center">
+
+                            <th scope="col" class="justify-content-center text-center">Driver</th>
+                            <th scope="col" class="justify-content-center text-center">Details of the meeting</th>
+                            <th scope="col" class="justify-content-center text-center">Seats still available</th>
+                            <th scope="col" class="justify-content-center text-center"></th>
+                        </tr>
+
+                        {% for i in range(u_len) %}
+                            <tr  class="justify-content-center align-items-center text-center">
+                                <td scope="col" class="justify-content-center align-items-center text-center">{{ users[i].name }} {{ users[i].surname }}</td>
+                                <td scope="col" class="justify-content-center align-center text-center">{{ je_util[i].place }} at {{ je_util[i].time_hour }}:{{ je_util[i].time_minute }}</td>
+                                <td scope="col" class="justify-content-center align-center text-center">{{ je_util[i].number_of_sits }}</td>
+                                <td scope="col" class="justify-content-center align-center text-center">
+                                    <form class="p-2" action="{{ url_for('events.update_seats', event_id=je_util[i].event_id, user_id = je_util[i].user_id ) }}" method="POST">
+                                        <input class="btn-outline-dark text-dark" type="submit" value="Go">
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
                 </div>
 
             </div>
         </div>
     </div>
+
 {% endblock %}
