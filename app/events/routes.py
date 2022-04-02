@@ -135,7 +135,7 @@ def join_event(event_id):
             for e in u:
                 if e.event_id == event_id:
                     flash('You have already joined this event', 'unsuccess')
-                    return redirect(url_for('main.home'))
+                    return redirect(url_for('events.someonescar_info'))
             join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='someonescar', time=datetime.utcnow(), place='null', number_of_sits=0)
             db.session.add(join_event)
             db.session.commit()
@@ -153,7 +153,7 @@ def join_event(event_id):
                     if e.event_id == event_id:
                         flash('You have already joined this event', 'unsuccess')
                         return redirect(url_for('main.home'))
-                join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='bus', time_hour= 0, time_minute= 0, place=null, number_of_sits=null)
+                join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='bus', time_hour= 0, time_minute= 0, place='null', number_of_sits=0)
                 db.session.add(join_event)
                 db.session.commit()
                 return redirect(url_for('events.event_joined', event_id=event_id, transport_type='bus'))
@@ -163,7 +163,7 @@ def join_event(event_id):
                     if e.event_id == event_id:
                         flash('You have already joined this event', 'unsuccess')
                         return redirect(url_for('main.home'))
-                join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='yourown', time_hour= 0, time_minute= 0, place=null, number_of_sits=null)
+                join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='yourown', time_hour= 0, time_minute= 0, place='null', number_of_sits=0)
                 db.session.add(join_event)
                 db.session.commit()
                 return redirect(url_for('events.event_joined', event_id=event_id, transport_type='yourown'))
