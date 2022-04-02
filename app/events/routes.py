@@ -208,7 +208,7 @@ def someonescar_info(event_id, transport_type):
     else:
         users_with_car =[]
         for i in id_users_with_car:
-            user = User.query.filter_by(id=i)
+            user = User.query.get_or_404(i)
             print(user)
             users_with_car.append(user)
     return render_template('someonescar.html', users = users_with_car)
