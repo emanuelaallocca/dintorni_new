@@ -4,7 +4,7 @@ from sqlalchemy import null
 from app import db
 from app.events.forms import EventForm, JoinEventForm, ModifyEventForm, UseYourCarForm
 from app.events.utils import save_picture
-from models import Event, JoinEvent
+from models import Event, JoinEvent, User
 from flask_login import current_user, login_required
 from app.events import events
 from datetime import date, time, datetime
@@ -146,9 +146,6 @@ def join_event(event_id):
                     if e.event_id == event_id:
                         flash('You have already joined this event', 'unsuccess')
                         return redirect(url_for('main.home'))
-                join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='yourcar', time_hour= 0, time_minute= 0, place='null', number_of_sits=0)
-                db.session.add(join_event)
-                db.session.commit()
                 return redirect(url_for('events.your_car_info', event_id=event_id, transport_type='yourcar'))
         elif form.bus.data:
                 u = current_user.joined
@@ -188,14 +185,29 @@ def your_car_info(event_id, transport_type):
     user = current_user
     form = UseYourCarForm()
     if form.validate_on_submit():
-        u = current_user.joined
-        for e in u:
-            if e.event_id == event_id:
-                e.time_hour = form.time_hour.data
-                e.time_minute = form.time_minute.data
-                e.place = form.place.data
-                e.number_of_sits = form.number_of_sits.data
-                db.session.commit()
-                flash('You have update your info', 'success')
-                return render_template('your_car_info_lastpage.html')
+        join_event = JoinEvent(event_id=event_id, user_id=user.id, transport_type='yourcar',
+                               time_hour=form.time_hour.data, time_minute=form.time_minute.data,
+                               place=form.place.data, number_of_sits=form.number_of_sits.data)
+        db.session.add(join_event)
+        db.session.commit()
+        flash('You have update your info', 'success')
+        return render_template('your_car_info_lastpage.html')
     return render_template('your_car_info.html', title='Join Event', legend='Join Event', form=form)
+
+@events.route("/event/<int:event_id>/<string:transport_type>/someonescar_info", methods=['GET', 'POST'])
+@login_required
+def someonescar_info(event_id, transport_type):
+    user = current_user
+    join_event = JoinEvent.query.filter_by(event_id=event_id)
+    id_users_with_car = []
+    for j in join_event:
+        if j.transport_type == 'yourcar':
+            id_users_with_car.append(j.user_id)
+    if id_users_with_car.isempty():
+        return render_template('no_car.html')
+    else:
+        users_with_car =[]
+        for i in id_users_with_car:
+            user = User.get_or_404(id = i)
+            users_with_car.append(user)
+    return render_template('someonescar.html', users = users_with_car)

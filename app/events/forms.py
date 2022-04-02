@@ -52,11 +52,20 @@ class JoinEventForm(FlaskForm):
     yourown = SubmitField('Go')
 
 class UseYourCarForm(FlaskForm):
-    time_hour = IntegerField('Time of meeting',validators=[DataRequired()], render_kw={'placeholder':'hour'})
-    time_minute = IntegerField('Time of meeting', validators=[DataRequired()], render_kw={'placeholder': 'minute'})
+    time_hour = IntegerField('Time of meeting',validators=[DataRequired()], render_kw={'placeholder':'Hour'})
+    time_minute = IntegerField('Time of meeting', validators=[DataRequired()], render_kw={'placeholder': 'Minute'})
     place = StringField('Place of the meeting',validators=[DataRequired()], render_kw={'placeholder':'Place'})
     number_of_sits = IntegerField('Number of sits', validators=[DataRequired()], render_kw={'placeholder':'Number of sits'})
     submit = SubmitField('Ready?')
+
     def validate_number_of_sits(self, number_of_sits):
-        if number_of_sits.data > 7 and number_of_sits.data < 0:
+        if number_of_sits.data > 7 or number_of_sits.data < 0:
             raise ValidationError('The number of sits must be between 0 and 7')
+
+    def validate_time_hour(self, time_hour):
+        if time_hour.data > 23 or time_hour.data < 0:
+            raise ValidationError('You have to insert the time in the 24h standard')
+
+    def validate_time_minute(self, time_minute):
+        if time_minute.data > 59 or time_minute.data < 0:
+            raise ValidationError('You have to insert the time in the 24h standard')
