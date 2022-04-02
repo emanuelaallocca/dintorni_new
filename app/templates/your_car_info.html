@@ -40,7 +40,7 @@
              </div>
          </div>
          <div class="row">
-             <div class="col-4">
+             <div class="col-6">
                  <div class="form-group">
                      {{ form.place.label(class="form-control-label") }}
                      {% if form.place.errors %}
@@ -54,6 +54,8 @@
                          {{ form.place(class="form-control form-control-lg") }}
                      {% endif %}
                  </div>
+             </div>
+             <div class="col-6">
                  <div class="form-group">
                      {{ form.number_of_sits.label(class="form-control-label") }}
                      {% if form.number_of_sits.errors %}
@@ -68,11 +70,15 @@
                      {% endif %}
                  </div>
              </div>
-             <div class="form-group">
-                 {{ form.submit(class="btn btn-outline-info") }}
-             </div>
          </div>
-         </div>
+        <div class="row align-content-center pt-3">
+            <div class="col align-self-center">
+                <div class="form-group mb-0 align-content-center align-center">
+                     {{ form.submit(class="btn text-white", style="background: #F06543") }}
+                </div>
+            </div>
+        </div>
+
     </form>
 </div>
 {% endblock content%}
