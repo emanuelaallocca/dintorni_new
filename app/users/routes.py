@@ -78,15 +78,6 @@ def account():
     image_file = url_for('static', filename='profile_pics/'+current_user.image_file)#devo mettere la cartella+la route
     return render_template('update_account_user.html', title='Account',image_file=image_file, form=form)
 
-@users.route("/account1", methods=['GET', 'POST'])
-@login_required
-def account1():
-    form1 = AggiornaForm()
-    if form1.validate_on_submit():
-        print("prova")
-    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-    return render_template('update_account_business.html', title='Account Business', image_file=image_file, form1=form1)
-
 @users.route("/account_business", methods=['GET', 'POST'])
 @login_required
 def account_business():
@@ -122,7 +113,6 @@ def account_business():
             form.link_website.data = current_user.link_website
     image_file = url_for('static', filename='profile_pics/'+current_user.image_file)#devo mettere la cartella+la route
     return render_template('update_account_business.html', title='Account Business',image_file=image_file, form=form)
-
 
 
 @users.route("/login", methods=['GET', 'POST'])
@@ -211,15 +201,12 @@ def business_events(name):
     events = Event.query.filter_by(creator=business).order_by(Event.date_posted.desc()).paginate(page=page, per_page=5)
     return render_template('business_events.html', events=events, business=business)
 
-
-
 @users.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():
     form = RequestResetForm()
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
     return render_template('reset_request.html', title='Reset Password', form=form)
-
 
 @users.route("/reset_password/<token>", methods=['GET', 'POST'])
 def reset_token(token):

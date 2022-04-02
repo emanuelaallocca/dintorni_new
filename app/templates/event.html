@@ -19,11 +19,7 @@
                 <tbody>
                 <tr>
                     <th scope="row">Event organizer</th>
-                    {%  if current_user.is_authenticated %}
-                        <td><a class="" href="{{ url_for('events.business_info', event_id = event.id) }}">{{ event.creator.name }}</a></td>
-                    {% else %}
-                        <td>{{ event.creator.name }}</td>
-                    {% endif %}
+                      <td><a class="" href="{{ url_for('events.business_info', event_id = event.id) }}">{{ event.creator.name }}</a></td>
                 </tr>
                 <tr>
                     <th scope="row">Date</th>

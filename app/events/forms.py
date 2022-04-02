@@ -2,7 +2,7 @@ import wtforms
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
 from wtforms import StringField, TextAreaField, SubmitField, DateField, IntegerField, FloatField, ValidationError, \
-    FileField
+    FileField, TimeField
 from wtforms.validators import DataRequired, Regexp, ValidationError
 from datetime import date, datetime
 
@@ -50,3 +50,13 @@ class JoinEventForm(FlaskForm):
     someonescar = SubmitField('Go')
     bus = SubmitField('Go')
     yourown = SubmitField('Go')
+
+class UseYourCarForm(FlaskForm):
+    time_hour = IntegerField('Time of meeting',validators=[DataRequired()], render_kw={'placeholder':'hour'})
+    time_minute = IntegerField('Time of meeting', validators=[DataRequired()], render_kw={'placeholder': 'minute'})
+    place = StringField('Place of the meeting',validators=[DataRequired()], render_kw={'placeholder':'Place'})
+    number_of_sits = IntegerField('Number of sits', validators=[DataRequired()], render_kw={'placeholder':'Number of sits'})
+    submit = SubmitField('Ready?')
+    def validate_number_of_sits(self, number_of_sits):
+        if number_of_sits.data > 7 and number_of_sits.data < 0:
+            raise ValidationError('The number of sits must be between 0 and 7')
