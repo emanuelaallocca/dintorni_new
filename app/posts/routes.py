@@ -16,7 +16,6 @@ from app.events import events
 @login_required
 def new_post():
     form = PostForm()
-    page = request.args.get('page', 1, type=int)
     jevents = JoinEvent.query.filter_by(user_id=current_user.id).all()
     events_already_done = []
     for e in jevents:
@@ -25,12 +24,12 @@ def new_post():
             if ev.date_event < datetime.today().date():
                 events_already_done.append(ev)
     if form.validate_on_submit():
-        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        post = Post(title=form.title.data, content=form.content.data, author=current_user, event_title = form.event_title.data)
         db.session.add(post)
         db.session.commit()
         flash('post created', 'success')
         return redirect(url_for('main.home'))
-    return render_template('create_post.html', title='New Post', form=form, legend='New Post', events = events)
+    return render_template('create_post.html', title='New Post', form=form, legend='New Post', events = events_already_done, ea_tot = len(events_already_done))
 
 @posts.route("/post/<int:post_id>", methods=['GET', 'POST'])
 @login_required

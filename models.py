@@ -114,7 +114,7 @@ class Post(db.Model):
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
                         nullable=False)  # db integer, è una chiave devo specificare la relazione
-
+    event_title = db.Column(db.String, nullable=False)
     def __repr__(self):
         return "Post(" + self.title + "," + self.date_posted + ")"
 
