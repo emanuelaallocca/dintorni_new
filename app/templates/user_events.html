@@ -1,15 +1,28 @@
 {% extends "layout.html" %}
 {% block content %}
-
-    <div class="container">
-    <div class="row text-center justify-content-center mb-5">
-        <div class="col-xl-6 col-lg-8 pt-5">
-            <h2 class="font-weight-bold">Current events</h2>
+    {% if e_tot==0 and ea_tot==0%}
+        <div class="container login-container pb-5 mb-0">
+        <div class="row justify-content-center pb-5">
+            <div class="col pr-0 pl-0 pb-5 login-form-1">
+                <h3 class="pb-3">You don't have events joined</h3>
+                    <div class="p-7">
+                        <p class="text-center font-weight-light">Look at the Home page and find an experience for you</p>
+                        <p class="text-center font-weight-light">See you there!</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
+    {% endif %}
 
-    {% if events.total!=0 %}
+
+    {% if e_tot!=0 %}
+        <div class="container">
+          <div class="row text-center justify-content-center mb-5">
+            <div class="col-xl-6 col-lg-8 pt-5">
+              <h2 class="font-weight-bold">Current events</h2>
+            </div>
+          </div>
+        </div>
      <section>
         <div class="container">
             <div class="row justify-content-around">
@@ -21,7 +34,7 @@
                                     <a class="mr-2" href="{{ url_for('users.business_events', name=event.creator.name) }}">{{ event.creator.name }}</a>
                                     <small class="text-muted">{{ event.date_event.strftime('%Y-%m-%d') }}</small>
                                 </div>
-                                <h2><a class="article-title" href="{{ url_for('events.update_event', event_id=event.id) }}">{{ event.title }}</a></h2>
+                                <h2><a class="article-title" href="{{ url_for('events.event', event_id=event.id) }}">{{ event.title }}</a></h2>
                                 <p class="article-content">{{ event.content }}</p>
                             </div>
                         </div>
@@ -33,15 +46,14 @@
 
 
 
-<div class="container">
+{% if ea_tot!=0 %}
+    <div class="container">
     <div class="row text-center justify-content-center mb-5">
         <div class="col-xl-6 col-lg-8 pt-5">
             <h2 class="font-weight-bold">Past events</h2>
         </div>
     </div>
 </div>
-
-{% if events_already_done.total!=0 %}
     <section>
         <div class="container pb-5">
             <div class="row justify-content-around">

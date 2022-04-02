@@ -141,6 +141,7 @@ def login():
     return render_template('login.html', title='Login', form=form)
 
 @users.route("/logout")
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('main.home'))
@@ -162,19 +163,20 @@ def user_events():
         if ev:
             if ev.date_event < datetime.today().date():
                 events_already_done.append(ev)
-    return render_template('user_events.html', user=current_user, events = events, events_already_done=events_already_done)
+    return render_template('user_events.html', user=current_user, events = events, e_tot = len(events),
+                           ea_tot = len(events_already_done), events_already_done=events_already_done)
 
 @users.route("/user/events_joined")
 @login_required
 def user_reviews_todo():
-    page = request.args.get('page', 1, type=int)
     jevents = JoinEvent.query.filter_by(user_id= current_user.id).all()
-    events = []
+    events_already_done = []
     for e in jevents:
-        ev = Event.query.filter_by(id = e.event_id).first()
+        ev = Event.query.filter_by(id=e.event_id).first()
         if ev:
-            events.append(ev)
-    return render_template('user_events.html', user=current_user, events = events)
+            if ev.date_event < datetime.today().date():
+                events_already_done.append(ev)
+    return render_template('create_post.html', user=current_user, events = events_already_done)
 
 @users.route("/eventscreated")
 @login_required

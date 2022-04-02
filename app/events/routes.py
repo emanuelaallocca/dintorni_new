@@ -169,6 +169,17 @@ def join_event(event_id):
                 return redirect(url_for('events.event_joined', event_id=event_id, transport_type='yourown'))
     return render_template('join_event.html', title='Join Event', legend='Join Event', form=form)
 
+@events.route("/event/<int:event_id>/delete_event_joined", methods=['POST'])
+@login_required
+def delete_event_joined(event_id):
+    event = Event.query.get_or_404(event_id)
+    if event.creator != current_user:
+        abort(403)
+    db.session.delete(event)
+    db.session.commit()
+    flash('Your post has been deleted!', 'success')
+    return redirect(url_for('main.home'))
+
 @events.route("/event/<int:event_id>/<string:transport_type>/event_joined", methods=['GET', 'POST'])
 @login_required
 def event_joined(event_id, transport_type):
@@ -200,15 +211,17 @@ def someonescar_info(event_id, transport_type):
     user = current_user
     join_event = JoinEvent.query.filter_by(event_id=event_id)
     id_users_with_car = []
+    je_util = []
     for j in join_event:
         if j.transport_type == 'yourcar':
             id_users_with_car.append(j.user_id)
+            je_util.append(j)
+
     if len(id_users_with_car)==0:
         return render_template('no_car.html')
     else:
         users_with_car =[]
         for i in id_users_with_car:
             user = User.query.get_or_404(i)
-            print(user)
             users_with_car.append(user)
-    return render_template('someonescar.html', users = users_with_car)
+    return render_template('someonescar.html', users = users_with_car, je_util = je_util, u_len = len(users_with_car) )
