@@ -215,8 +215,9 @@ def someonescar_info(event_id, transport_type):
     je_util = []
     for j in join_event:
         if j.transport_type == 'yourcar':
-            id_users_with_car.append(j.user_id)
-            je_util.append(j)
+            if j.number_of_sits > 0:
+                id_users_with_car.append(j.user_id)
+                je_util.append(j)
 
     if len(id_users_with_car)==0:
         return render_template('no_car.html')
@@ -231,13 +232,10 @@ def someonescar_info(event_id, transport_type):
 @login_required
 def update_seats(event_id, user_id):
     user = User.query.get_or_404(user_id)
-    u = current_user.joined
+    u = user.joined
     for e in u:
         if e.event_id == event_id:
-            if e.number_of_sits > 0:
-                e.number_of_sits = e.number_of_sits -1
-                db.session.commit()
-            else:
-                flash('No more seats', 'danger')
-                #return redirect(url_for('events.someonescar_info'), event_id = event_id, transport_type = 'someonescar')
-                return redirect(url_for('main.home'))
+            e.number_of_sits = e.number_of_sits -1
+            db.session.commit()
+            flash('Event joined!', 'success')
+            return redirect(url_for('main.home'))
