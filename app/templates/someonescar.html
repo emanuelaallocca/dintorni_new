@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container login-container pb-5 mb-0">
+        <div class="row justify-content-center pb-5">
+            <div class="col pr-0 pl-0 pb-5 login-form-1">
+                <h3 class="pb-3">You will reach the event with someone's car!</h3>
+                    <div>
+                        {% for u in users.items %}
+                            <div class="card" id="card_home" style="margin: 15px;">
+                                <div class="card-body align-center">
 
-</body>
-</html>
+                                <h5 class="card-title text-center mt-0">{{ u.name }}</h5>
+
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

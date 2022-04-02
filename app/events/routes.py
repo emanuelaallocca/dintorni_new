@@ -135,11 +135,11 @@ def join_event(event_id):
             for e in u:
                 if e.event_id == event_id:
                     flash('You have already joined this event', 'unsuccess')
-                    return redirect(url_for('events.someonescar_info'))
-            join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='someonescar', time=datetime.utcnow(), place='null', number_of_sits=0)
+                    return redirect(url_for('main.home'))
+            join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='someonescar', time_hour= 0, time_minute= 0, place='null', number_of_sits=0)
             db.session.add(join_event)
             db.session.commit()
-            return redirect(url_for('events.event_joined', event_id=event_id, transport_type='someonescar'))
+            return redirect(url_for('events.someonescar_info', event_id=event_id, transport_type='someonescar'))
         elif form.yourcar.data:
                 u = current_user.joined
                 for e in u:
@@ -203,11 +203,12 @@ def someonescar_info(event_id, transport_type):
     for j in join_event:
         if j.transport_type == 'yourcar':
             id_users_with_car.append(j.user_id)
-    if id_users_with_car.isempty():
+    if len(id_users_with_car)==0:
         return render_template('no_car.html')
     else:
         users_with_car =[]
         for i in id_users_with_car:
-            user = User.get_or_404(id = i)
+            user = User.query.filter_by(id=i)
+            print(user)
             users_with_car.append(user)
     return render_template('someonescar.html', users = users_with_car)
