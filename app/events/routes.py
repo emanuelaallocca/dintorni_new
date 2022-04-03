@@ -80,7 +80,7 @@ def delete_event(event_id):
 def update_event(event_id):
     event = Event.query.get_or_404(event_id)
     if event.creator!=current_user:
-        abort(403) #risposta per forbidden route
+        abort(403) #risposta  per forbidden route
     form = ModifyEventForm()
     if form.validate_on_submit():
         if form.picture1.data:
