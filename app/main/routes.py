@@ -57,6 +57,7 @@ def intialize_db():
         {'name': 'Ristorante Lenoci', 'city':'Casal Monferrato', 'address':'Corso Lecce, 58'}
     ]
 
+    list_business = []
     for business in businesses:
         s = business['name'].replace(" ", "")
         email = s.lower() +'@mail.com'
@@ -65,19 +66,26 @@ def intialize_db():
         c = Business(name=business['name'], email=email, password=bcrypt.generate_password_hash('1234567890').decode('utf-8'),
                      vat_number=vat_number,
                      city=business['city'], address=business['address'], telephone=telephone)
+        list_business.append(c)
         db.session.add(c)
         events = [
             {'title': 'Degustazione formaggi', 'date': '2022-06-10', 'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no'},
-            {'title': 'Ciaspolata + cena', 'date': '2022-05-03'},
-            {'title': 'Degustazione vini', 'date': '2022-04-25'},
-            {'title': 'Lago di Avigliana', 'date': '2022-04-25'},
-            {'title': 'Raccolta tartufi', 'date': '2022-04-25'},
-            {'title': 'Visita cantina', 'date': '2022-04-27'}
+            {'title': 'Ciaspolata + cena', 'date': '2022-05-03', 'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no'},
+            {'title': 'Degustazione vini', 'date': '2022-04-25',  'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no'},
+            {'title': 'Lago di Avigliana', 'date': '2022-04-25',  'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no'},
+            {'title': 'Raccolta tartufi', 'date': '2022-04-25',  'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no'},
+            {'title': 'Visita cantina', 'date': '2022-04-27',  'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no'}
         ]
 
-        for event in events:
+    i = 0
+    len_business = len(list_business)
+    for event in events:
+        if i<len_business:
             dt = datetime.strptime(event['date'], '%Y-%m-%d')
-            e = Event(title=event['title'], date_event = dt, creator=c)
+            e = Event(title=event['title'], date_event=dt, location=event['location'], price=event['price'],
+                      equipment=event['equipment'], min_users=event['min_users'], content='null', weaknesses='null',
+                      creator=list_business[i])
+            i = i + 1
         db.session.add(e)
         db.session.commit()
     return redirect(url_for('users.logout'))
