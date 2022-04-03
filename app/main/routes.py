@@ -6,7 +6,6 @@ from flask import render_template, url_for, redirect, request
 from app import db, bcrypt
 from models import Post, Event, Business, User, JoinEvent, Private
 from app.main import main
-#from PIL import Image #non so perche non vada min 38.18 lezione 7
 import app
 
 
@@ -14,7 +13,6 @@ import app
 @main.route("/home")
 def home():
     page = request.args.get('page', 1, type=int) #possiamo passare il numero di post che vogliamo per pagina
-    #posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5) #richiamo tutti i post
     events = Event.query.order_by(Event.date_posted.desc()).paginate(page=page, per_page=10)
     return render_template('home.html', events = events)
 
@@ -36,6 +34,8 @@ def intialize_db():
 
     users = [
         {'name': 'Emanuela', 'surname':'Allocca'},
+        {'name': 'Giulia', 'surname': 'Borna'},
+        {'name': 'Federico', 'surname': 'Marchini'},
         {'name': 'Chiara', 'surname': 'Martucci'}
     ]
 
@@ -50,9 +50,11 @@ def intialize_db():
         db.session.commit()
 
     businesses = [
-        {'name': 'Azienda vinicola Colucci',  'city':'Alba', 'address':'via Vincenzo Gioberti, 63'},
-        {'name': 'Rifugio La Marmotta', 'city':'Sauze d Oulx', 'address':'via Genova 88'},
-        {'name': 'Ristorante Il Tartufo', 'city':'Casale Monferrato', 'address':'Corso Lecce 58'}
+        {'name': 'Azienda Colucci',  'city':'Alba', 'address':'via Vincenzo Gioberti, 63'},
+        {'name': 'Rifugio La Marmotta', 'city':'Sestriere', 'address':'via Grazia Deledda, 38'},
+        {'name': 'Cascina Belfiore', 'city': 'Sauze d Oulx', 'address': 'via Genova, 88'},
+        {'name': 'Fratelli Rosselli', 'city': '', 'address':'via Salvemini, 12'},
+        {'name': 'Ristorante Lenoci', 'city':'Casal Monferrato', 'address':'Corso Lecce, 58'}
     ]
 
     for business in businesses:
@@ -65,10 +67,12 @@ def intialize_db():
                      city=business['city'], address=business['address'], telephone=telephone)
         db.session.add(c)
         events = [
-            {'title': 'Degustazione di prodotti tipici', 'date': '2022-04-10'},
-            {'title': 'nuovo evento', 'date': '2022-05-10'},
-            {'title': 'nuovo evento', 'date': '2022-03-10'},
-            {'title': 'nuovo evento', 'date': '2022-03-10'}
+            {'title': 'Degustazione formaggi', 'date': '2022-06-10', 'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no'},
+            {'title': 'Ciaspolata + cena', 'date': '2022-05-03'},
+            {'title': 'Degustazione vini', 'date': '2022-04-25'},
+            {'title': 'Lago di Avigliana', 'date': '2022-04-25'},
+            {'title': 'Raccolta tartufi', 'date': '2022-04-25'},
+            {'title': 'Visita cantina', 'date': '2022-04-27'}
         ]
 
         for event in events:
@@ -76,13 +80,5 @@ def intialize_db():
             e = Event(title=event['title'], date_event = dt, creator=c)
         db.session.add(e)
         db.session.commit()
-
-
-
-    j = JoinEvent(event_id=3, user_id=1,transport_type='bus',
-                               time_hour=0, time_minute=0,
-                               place='null', number_of_sits=0)
-    db.session.add(j)
-    db.session.commit()
     return redirect(url_for('users.logout'))
 
