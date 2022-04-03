@@ -36,6 +36,8 @@ def intialize_db():
 
     users = [
         {'name': 'Emanuela', 'surname':'Allocca'},
+        {'name': 'Giulia', 'surname': 'Borna'},
+        {'name': 'Federico', 'surname': 'Marchini'},
         {'name': 'Chiara', 'surname': 'Martucci'}
     ]
 
@@ -50,9 +52,11 @@ def intialize_db():
         db.session.commit()
 
     businesses = [
-        {'name': 'Azienda vinicola Colucci',  'city':'Alba', 'address':'via Vincenzo Gioberti, 63'},
-        {'name': 'Rifugio La Marmotta', 'city':'Sauze d Oulx', 'address':'via Genova 88'},
-        {'name': 'Ristorante Il Tartufo', 'city':'Casale Monferrato', 'address':'Corso Lecce 58'}
+        {'name': 'Azienda Colucci',  'city':'Alba', 'address':'via Vincenzo Gioberti, 63'},
+        {'name': 'Rifugio La Marmotta', 'city':'Sestriere', 'address':'via Grazia Deledda, 38'},
+        {'name': 'Cascina Belfiore', 'city': 'Sauze d Oulx', 'address': 'via Genova, 88'},
+        {'name': 'Fratelli Rosselli', 'city': '', 'address':'via Salvemini, 12'},
+        {'name': 'Ristorante Lenoci', 'city':'Casal Monferrato', 'address':'Corso Lecce, 58'}
     ]
 
     for business in businesses:
@@ -65,10 +69,12 @@ def intialize_db():
                      city=business['city'], address=business['address'], telephone=telephone)
         db.session.add(c)
         events = [
-            {'title': 'Degustazione di prodotti tipici', 'date': '2022-04-10'},
-            {'title': 'nuovo evento', 'date': '2022-05-10'},
-            {'title': 'nuovo evento', 'date': '2022-03-10'},
-            {'title': 'nuovo evento', 'date': '2022-03-10'}
+            {'title': 'Degustazione formaggi', 'date': '2022-06-10', 'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no'},
+            {'title': 'Ciaspolata + cena', 'date': '2022-05-03'},
+            {'title': 'Degustazione vini', 'date': '2022-04-25'},
+            {'title': 'Lago di Avigliana', 'date': '2022-04-25'},
+            {'title': 'Raccolta tartufi', 'date': '2022-04-25'},
+            {'title': 'Visita cantina', 'date': '2022-04-27'}
         ]
 
         for event in events:
