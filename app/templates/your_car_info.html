@@ -57,16 +57,16 @@
              </div>
              <div class="col-6">
                  <div class="form-group">
-                     {{ form.number_of_sits.label(class="form-control-label") }}
-                     {% if form.number_of_sits.errors %}
-                         {{ form.number_of_sits(class="form-control form-control-lg is-invalid") }}
+                     {{ form.number_of_seats.label(class="form-control-label") }}
+                     {% if form.number_of_seats.errors %}
+                         {{ form.number_of_seats(class="form-control form-control-lg is-invalid") }}
                          <div class="invalid-feedback">
-                             {% for error in form.number_of_sits.errors %}
+                             {% for error in form.number_of_seats.errors %}
                                  <span>{{ error }}</span>
                              {% endfor %}
                          </div>
                      {% else %}
-                         {{ form.number_of_sits(class="form-control form-control-lg") }}
+                         {{ form.number_of_seats(class="form-control form-control-lg") }}
                      {% endif %}
                  </div>
              </div>

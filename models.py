@@ -146,7 +146,7 @@ class JoinEvent(db.Model):
     time_hour = db.Column(db.Integer, nullable=False, default=0)
     time_minute = db.Column(db.Integer, nullable=False, default=0)
     place = db.Column (db.String, nullable=False, default='null')
-    number_of_sits = db.Column(db.Integer, nullable=False, default=0)
+    number_of_seats = db.Column(db.Integer, nullable=False, default=0)
     user = db.relationship("Event")
     event = db.relationship("User")
 

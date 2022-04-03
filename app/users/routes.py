@@ -19,7 +19,7 @@ def general():
 @users.route("/<usertype>/registration", methods=['GET', 'POST'])
 def registration(usertype):
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('main.home'))
 
     if usertype == 'private':
         form = RegistrationForm()

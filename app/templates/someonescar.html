@@ -20,7 +20,7 @@
                             <tr  class="justify-content-center align-items-center text-center">
                                 <td scope="col" class="justify-content-center align-items-center text-center">{{ users[i].name }} {{ users[i].surname }}</td>
                                 <td scope="col" class="justify-content-center align-center text-center">{{ je_util[i].place }} at {{ je_util[i].time_hour }}:{{ je_util[i].time_minute }}</td>
-                                <td scope="col" class="justify-content-center align-center text-center">{{ je_util[i].number_of_sits }}</td>
+                                <td scope="col" class="justify-content-center align-center text-center">{{ je_util[i].number_of_seats }}</td>
                                 <td scope="col" class="justify-content-center align-center text-center">
                                     <form class="p-2" action="{{ url_for('events.update_seats', event_id=je_util[i].event_id, user_id = je_util[i].user_id ) }}" method="POST">
                                         <input class="btn-outline-dark text-dark" type="submit" value="Go">

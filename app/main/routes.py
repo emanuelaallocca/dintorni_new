@@ -13,7 +13,7 @@ import app
 @main.route("/home")
 def home():
     page = request.args.get('page', 1, type=int) #possiamo passare il numero di post che vogliamo per pagina
-    events = Event.query.order_by(Event.date_posted.desc()).paginate(page=page, per_page=10)
+    events = Event.query.order_by(Event.date_event.desc()).paginate(page=page, per_page=10)
     return render_template('home.html', events = events)
 
 @main.route("/about")
@@ -59,7 +59,7 @@ def intialize_db():
 
     list_business = []
     for business in businesses:
-        s = business['name'].replace(" ", "")
+        s = business['name'].lower().replace(" ", "")
         email = s.lower() +'@mail.com'
         telephone = 3397960955
         vat_number = 123456
@@ -90,5 +90,5 @@ def intialize_db():
             i = i + 1
         db.session.add(e)
         db.session.commit()
-    return redirect(url_for('main.home'))
+    return redirect(url_for('users.logout'))
 

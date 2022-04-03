@@ -139,7 +139,7 @@ def join_event(event_id):
                         flash('You have already joined this event', 'danger')
                         return redirect(url_for('main.home'))
                 join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='someonescar', time_hour=0,
-                                       time_minute=0, place='null', number_of_sits=0)
+                                       time_minute=0, place='null', number_of_seats=0)
                 db.session.add(join_event)
                 db.session.commit()
                 return redirect(url_for('events.someonescar_info', event_id=event_id, transport_type='someonescar'))
@@ -157,7 +157,7 @@ def join_event(event_id):
                         flash('You have already joined this event', 'danger')
                         return redirect(url_for('main.home'))
                 join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='bus', time_hour=0,
-                                       time_minute=0, place='null', number_of_sits=0)
+                                       time_minute=0, place='null', number_of_seats=0)
                 db.session.add(join_event)
                 db.session.commit()
                 return redirect(url_for('events.event_joined', event_id=event_id, transport_type='bus'))
@@ -168,7 +168,7 @@ def join_event(event_id):
                         flash('You have already joined this event', 'danger')
                         return redirect(url_for('main.home'))
                 join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='yourown', time_hour=0,
-                                       time_minute=0, place='null', number_of_sits=0)
+                                       time_minute=0, place='null', number_of_seats=0)
                 db.session.add(join_event)
                 db.session.commit()
                 return redirect(url_for('events.event_joined', event_id=event_id, transport_type='yourown'))
@@ -207,7 +207,7 @@ def your_car_info(event_id, transport_type):
     if form.validate_on_submit():
         join_event = JoinEvent(event_id=event_id, user_id=user.id, transport_type='yourcar',
                                time_hour=form.time_hour.data, time_minute=form.time_minute.data,
-                               place=form.place.data, number_of_sits=form.number_of_sits.data)
+                               place=form.place.data, number_of_seats=form.number_of_seats.data)
         db.session.add(join_event)
         db.session.commit()
         flash('You have update your info', 'success')
@@ -223,7 +223,7 @@ def someonescar_info(event_id, transport_type):
     je_util = []
     for j in join_event:
         if j.transport_type == 'yourcar':
-            if j.number_of_sits > 0:
+            if j.number_of_seats > 0:
                 id_users_with_car.append(j.user_id)
                 je_util.append(j)
 
@@ -243,7 +243,7 @@ def update_seats(event_id, user_id):
     u = user.joined
     for e in u:
         if e.event_id == event_id:
-            e.number_of_sits = e.number_of_sits -1
+            e.number_of_seats = e.number_of_seats -1
             db.session.commit()
             flash('Event joined!', 'success')
             return redirect(url_for('main.home'))

@@ -1,3 +1,5 @@
+from idlelib.configdialog import is_int
+
 from flask_wtf.file import FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, FileField, IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
@@ -32,20 +34,18 @@ class RegistrationForm(FlaskForm):
 
     def validate_telephone(self, telephone):
         s = str(telephone.data)
+        u = Private.query.filter_by(telephone=telephone.data).first()
+        b = Business.query.filter_by(telephone=telephone.data).first()
         if len(s)!=10:
-
-            print(len(s))
             raise ValidationError('Your telephone number must have 10 numbers')
+        elif u or b :
+            raise ValidationError('Control the input: we already have an account with this telephone number')
 
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()], render_kw={'placeholder':'Email'})
     password = PasswordField('Password', validators=[DataRequired()], render_kw={'placeholder':'Password'})
     remember = BooleanField('Remember Me') #boolean --> cookie
     submit = SubmitField('Login')
-
-class AggiornaForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
-    viva = SubmitField('Update')
 
 class UpdateAccountBusinessForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(min=5, max=20)], render_kw={'placeholder':'Name'})
@@ -76,6 +76,30 @@ class UpdateAccountBusinessForm(FlaskForm):
           user = Private.query.filter_by(email=email.data).first()
           if business or user:
              raise ValidationError('This email is already taken')
+
+    def validate_vat_number(self, vat_number):
+        s = str(vat_number.data)
+        if len(s)!=11:
+            raise ValidationError('You must insert a correct VAT NUMBER')
+
+    def validate_address(self, address):
+        s = address.data.lower()
+        s = address.data.strip()
+        s = s.split()
+        info = len(s)
+        if (s[0] != 'corso' and s[0] != 'piazza' and s[0] != 'via' and s[0] != 'viale'):
+            raise ValidationError('You must insert a correct address')
+        if is_int(s[info - 1]) != True:
+            raise ValidationError('You must insert a correct address')
+
+    def validate_telephone(self, telephone):
+        s = str(telephone.data)
+        u = Private.query.filter_by(telephone=telephone.data).first()
+        b = Business.query.filter_by(telephone=telephone.data).first()
+        if len(s)!=10:
+            raise ValidationError('Your telephone number must have 10 numbers')
+        elif u or b :
+            raise ValidationError('Control the input: we already have an account with this telephone number')
 
 class UpdateAccountForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(min=5, max=20)], render_kw={'placeholder':'Name'})
@@ -132,28 +156,40 @@ class RegistrationBusinessForm(FlaskForm):
     submit = SubmitField('SignUp')
     #creo una funzione per questa classe
 
-    def validate_username(self, username):
-        #guardo se è nel db
-        user = Business.query.filter_by(username=username.data).first()
-        if user:
+    def validate_name(self, name):
+        business = Business.query.filter_by(name=name.data).first()
+        if business:
             raise ValidationError('This username is already taken')
 
     def validate_email(self, email):
-        #guardo se è nel db --> cerco l'user attraverso la mail questa volta
-        user = Private.query.filter_by(email=email.data).first()
         business = Business.query.filter_by(email=email.data).first()
-        if user or business:
+        user = Private.query.filter_by(email=email.data).first()
+        if business or user:
             raise ValidationError('This email is already taken')
 
     def validate_vat_number(self, vat_number):
-        s = str(vat_number)
-        if len(s) !=11:
-            raise ValidationError('Your VAT number must have 11 numbers')
+        s = str(vat_number.data)
+        if len(s)!=11:
+            raise ValidationError('You must insert a correct VAT NUMBER')
+
+    def validate_address(self, address):
+        s = address.data.lower()
+        s = address.data.strip()
+        s = s.split()
+        info = len(s)
+        if (s[0]!='corso' and s[0]!='piazza' and s[0]!='via' and s[0]!='viale'):
+            raise ValidationError('You must insert a correct address')
+        if is_int(s[info-1])!=True:
+            raise ValidationError('You must insert a correct address')
 
     def validate_telephone(self, telephone):
-        s = str(telephone)
-        if len(s) !=10:
+        s = str(telephone.data)
+        u = Private.query.filter_by(telephone=telephone.data).first()
+        b = Business.query.filter_by(telephone=telephone.data).first()
+        if len(s)!=10:
             raise ValidationError('Your telephone number must have 10 numbers')
+        elif u or b :
+            raise ValidationError('Control the input: we already have an account with this telephone number')
 
     def validate_terms(self, term_conditions):
         if term_conditions!=True:
