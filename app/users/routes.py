@@ -125,12 +125,12 @@ def login():
         user = Private.query.filter_by(email=form.email.data).first()
         business = Business.query.filter_by(email=form.email.data).first()
         if user != None:
-         if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user, remember=form.remember.data)
-            next_page=request.args.get('next') #get fa tornare none se non esiste
-            return redirect(next_page) if next_page else redirect(url_for('main.home'))
-         else:
-            flash('Login Unsuccessful. Please check email and password', 'danger')
+            if user and bcrypt.check_password_hash(user.password, form.password.data):
+                login_user(user, remember=form.remember.data)
+                next_page = request.args.get('next')  # get fa tornare none se non esiste
+                return redirect(next_page) if next_page else redirect(url_for('main.home'))
+            else:
+                flash('Login Unsuccessful. Please check email and password', 'danger')
         elif business!=None:
             if business and bcrypt.check_password_hash(business.password, form.password.data):
                 login_user(business, remember=form.remember.data)
