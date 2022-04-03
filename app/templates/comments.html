@@ -5,7 +5,7 @@
             <div class="col-xl-6 col-lg-8 pt-4">
                 <h2 class="font-weight-bold">Our customers reviews</h2>
                 {%  if current_user.username != null %}
-                    <p class="text-muted">Do you want to leave a review? <a href="{{ url_for('users.login') }}">Write it now!</a></p>
+                    <p class="text-muted">Do you want to leave a review? <a href="{{ url_for('posts.new_post') }}">Write it now!</a></p>
                 {% else %}
                     <p class="text-muted">A notice board full of reviews made by our loyal customers!</p>
                 {% endif %}

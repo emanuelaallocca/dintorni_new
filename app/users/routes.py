@@ -166,17 +166,6 @@ def user_events():
     return render_template('user_events.html', user=current_user, events = events, e_tot = len(events),
                            ea_tot = len(events_already_done), events_already_done=events_already_done)
 
-@users.route("/user/events_joined")
-@login_required
-def user_reviews_todo():
-    jevents = JoinEvent.query.filter_by(user_id= current_user.id).all()
-    events_already_done = []
-    for e in jevents:
-        ev = Event.query.filter_by(id=e.event_id).first()
-        if ev:
-            if ev.date_event < datetime.today().date():
-                events_already_done.append(ev)
-    return render_template('create_post.html', user=current_user, events = events_already_done)
 
 @users.route("/eventscreated")
 @login_required
