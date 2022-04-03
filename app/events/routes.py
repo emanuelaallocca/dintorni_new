@@ -129,44 +129,52 @@ def join_event(event_id):
     user= current_user
     user_id = user.id
     form = JoinEventForm()
-    if form.validate_on_submit():
-        if form.someonescar.data:
-            u= current_user.joined
-            for e in u:
-                if e.event_id == event_id:
-                    flash('You have already joined this event', 'danger')
-                    return redirect(url_for('main.home'))
-            join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='someonescar', time_hour= 0, time_minute= 0, place='null', number_of_sits=0)
-            db.session.add(join_event)
-            db.session.commit()
-            return redirect(url_for('events.someonescar_info', event_id=event_id, transport_type='someonescar'))
-        elif form.yourcar.data:
+    event = Event.query.get_or_404(event_id)
+    if event.date_event > datetime.today().date():
+        if form.validate_on_submit():
+            if form.someonescar.data:
+                u = current_user.joined
+                for e in u:
+                    if e.event_id == event_id:
+                        flash('You have already joined this event', 'danger')
+                        return redirect(url_for('main.home'))
+                join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='someonescar', time_hour=0,
+                                       time_minute=0, place='null', number_of_sits=0)
+                db.session.add(join_event)
+                db.session.commit()
+                return redirect(url_for('events.someonescar_info', event_id=event_id, transport_type='someonescar'))
+            elif form.yourcar.data:
                 u = current_user.joined
                 for e in u:
                     if e.event_id == event_id:
                         flash('You have already joined this event', 'danger')
                         return redirect(url_for('main.home'))
                 return redirect(url_for('events.your_car_info', event_id=event_id, transport_type='yourcar'))
-        elif form.bus.data:
+            elif form.bus.data:
                 u = current_user.joined
                 for e in u:
                     if e.event_id == event_id:
                         flash('You have already joined this event', 'danger')
                         return redirect(url_for('main.home'))
-                join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='bus', time_hour= 0, time_minute= 0, place='null', number_of_sits=0)
+                join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='bus', time_hour=0,
+                                       time_minute=0, place='null', number_of_sits=0)
                 db.session.add(join_event)
                 db.session.commit()
                 return redirect(url_for('events.event_joined', event_id=event_id, transport_type='bus'))
-        elif form.yourown.data:
+            elif form.yourown.data:
                 u = current_user.joined
                 for e in u:
                     if e.event_id == event_id:
                         flash('You have already joined this event', 'danger')
                         return redirect(url_for('main.home'))
-                join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='yourown', time_hour= 0, time_minute= 0, place='null', number_of_sits=0)
+                join_event = JoinEvent(event_id=event_id, user_id=user_id, transport_type='yourown', time_hour=0,
+                                       time_minute=0, place='null', number_of_sits=0)
                 db.session.add(join_event)
                 db.session.commit()
                 return redirect(url_for('events.event_joined', event_id=event_id, transport_type='yourown'))
+    else:
+        flash('You cannot join this event, it is expired', 'danger')
+        return redirect(url_for('main.home'))
     return render_template('join_event.html', title='Join Event', legend='Join Event', form=form)
 
 @events.route("/event/<int:event_id>/delete_event_joined", methods=['POST'])
