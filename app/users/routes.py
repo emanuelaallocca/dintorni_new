@@ -23,7 +23,7 @@ def registration(usertype):
 
     if usertype == 'private':
         form = RegistrationForm()
-        # if already logged in , i can use current user
+        # if already logged in , i can jjjuse current user
         if form.validate_on_submit():  # dice se è valido il form dopo il submit
             hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
             # create a new user
