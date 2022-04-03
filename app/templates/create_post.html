@@ -33,7 +33,7 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     {% if ea_tot!=0 %}
                                         {% for event in events %}
-                                            <a class="dropdown-item" href="#">{{ event.title }}</a>
+                                            <a class="dropdown-item" type="button" class="btnSubmit" value={{ event.title }}  href="#">{{ event.title }}</a>
                                         {% endfor %}
                                     {% endif %}
                                     </div>

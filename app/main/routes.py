@@ -88,5 +88,5 @@ def intialize_db():
             i = i + 1
         db.session.add(e)
         db.session.commit()
-    return redirect(url_for('users.logout'))
+    return redirect(url_for('main.home'))
 

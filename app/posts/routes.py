@@ -7,9 +7,7 @@ from models import Post, JoinEvent, Event
 from flask_login import current_user, login_required
 from app.posts import posts
 from app.events import events
-
-
-#from PIL import Image - non so perche non vada min 38.18 lezione 7
+#from PIL import Image
 
 
 @posts.route("/post/new", methods=['GET', 'POST'])
