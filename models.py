@@ -143,10 +143,10 @@ class JoinEvent(db.Model):
     event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     transport_type = db.Column(db.String, nullable=False)
-    time_hour = db.Column(db.Integer, nullable=False, default='null')
-    time_minute = db.Column(db.Integer, nullable=False, default='null')
+    time_hour = db.Column(db.Integer, nullable=False, default=0)
+    time_minute = db.Column(db.Integer, nullable=False, default=0)
     place = db.Column (db.String, nullable=False, default='null')
-    number_of_sits = db.Column(db.Integer, nullable=False, default='null')
+    number_of_sits = db.Column(db.Integer, nullable=False, default=0)
     user = db.relationship("Event")
     event = db.relationship("User")
 

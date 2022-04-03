@@ -76,5 +76,13 @@ def intialize_db():
             e = Event(title=event['title'], date_event = dt, creator=c)
         db.session.add(e)
         db.session.commit()
+
+
+
+    j = JoinEvent(event_id=3, user_id=1,transport_type='bus',
+                               time_hour=0, time_minute=0,
+                               place='null', number_of_sits=0)
+    db.session.add(j)
+    db.session.commit()
     return redirect(url_for('users.logout'))
 
