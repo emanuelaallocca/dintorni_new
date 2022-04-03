@@ -69,12 +69,13 @@ def intialize_db():
         list_business.append(c)
         db.session.add(c)
         events = [
-            {'title': 'Degustazione formaggi', 'date': '2022-06-10', 'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no'},
-            {'title': 'Ciaspolata + cena', 'date': '2022-05-03', 'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no'},
-            {'title': 'Degustazione vini', 'date': '2022-04-25',  'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no'},
-            {'title': 'Lago di Avigliana', 'date': '2022-04-25',  'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no'},
-            {'title': 'Raccolta tartufi', 'date': '2022-04-25',  'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no'},
-            {'title': 'Visita cantina', 'date': '2022-04-27',  'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no'}
+            {'title': 'Degustazione formaggi', 'date': '2022-06-10', 'location':'Alba', 'price':15,
+             'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no', 'image_event1':'event1_12.jpg', 'image_event2':'event1_2.jpg', 'image_event3':'event1_3.jpg'},
+            {'title': 'Ciaspolata + cena', 'date': '2022-05-03', 'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no', 'image_event1':'event1_1.jpg', 'image_event2':'event1_2.jpg', 'image_event3':'event1_3.jpg'},
+            {'title': 'Degustazione vini', 'date': '2022-04-25',  'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no', 'image_event1':'event1_1.jpg', 'image_event2':'event1_2.jpg', 'image_event3':'event1_3.jpg'},
+            {'title': 'Lago di Avigliana', 'date': '2022-04-25',  'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no', 'image_event1':'event1_1.jpg', 'image_event2':'event1_2.jpg', 'image_event3':'event1_3.jpg'},
+            {'title': 'Raccolta tartufi', 'date': '2022-04-25',  'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no', 'image_event1':'default_event2.PNG', 'image_event2':'event1_2.jpg', 'image_event3':'event1_3.jpg'},
+            {'title': 'Visita cantina', 'date': '2022-04-27',  'location':'Alba', 'price':15, 'equipment':'non richiesto', 'min_users':5, 'weaknesses':'no', 'image_event1':'default_event2.PNG', 'image_event2':'event1_2.jpg', 'image_event3':'event1_3.jpg'}
         ]
 
     i = 0
@@ -84,6 +85,7 @@ def intialize_db():
             dt = datetime.strptime(event['date'], '%Y-%m-%d')
             e = Event(title=event['title'], date_event=dt, location=event['location'], price=event['price'],
                       equipment=event['equipment'], min_users=event['min_users'], content='null', weaknesses='null',
+                      image_event1 = event['image_event1'], image_event2 = event['image_event2'], image_event3 = event['image_event3'],
                       creator=list_business[i])
             i = i + 1
         db.session.add(e)
