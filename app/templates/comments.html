@@ -1,16 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="container">
-        <div class="row text-center justify-content-center mb-5">
-            <div class="col-xl-6 col-lg-8 pt-5">
+        <div class="row text-center justify-content-center mb-3">
+            <div class="col-xl-6 col-lg-8 pt-4">
                 <h2 class="font-weight-bold">Our customers reviews</h2>
-                <p class="text-muted">A notice board full of reviews made by our loyal customers!</p>
+                {%  if current_user.username != null %}
+                    <p class="text-muted">Do you want to leave a review? <a href="{{ url_for('users.login') }}">Write it now!</a></p>
+                {% else %}
+                    <p class="text-muted">A notice board full of reviews made by our loyal customers!</p>
+                {% endif %}
             </div>
         </div>
 
 
-        <section class="hero">
-            <div class="container">
+            <div class="container pb-5 pt-3">
                 <div class="row">
                     <div class="col-lg-6 offset-lg-3">
                         {% for post in posts.items %}
@@ -26,7 +29,7 @@
                                     </div>
                                 </div><!--/ media -->
                             </div><!--/ cardbox-heading -->
-                            <div class="cardbox-item p-4">
+                            <div class="cardbox-item pr-4 pl-4 pb-4 pt-1">
                                 <h2><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h2>
                                 <p class="article-content">{{ post.content }}</p>
                             </div>
@@ -35,7 +38,7 @@
                     </div><!--/ col-lg-3 -->
                 </div><!--/ row -->
             </div><!--/ container -->
-        </section>
+
 
     </div>
 {% endblock content %}

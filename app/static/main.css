@@ -447,12 +447,13 @@ img {
 /*account business*/
 
 .section {
-    padding: 100px 0;
     position: relative;
 }
+
 .gray-bg {
     background-color: #f5f5f5;
 }
+
 img {
     max-width: 100%;
 }
@@ -843,8 +844,8 @@ a {
   margin: 0px !important;
 }
 .cardbox {
-  border-radius: 3px;
-  margin-bottom: 20px;
+    border-radius: 10px 10px 10px 10px;
+    margin-bottom: 20px;
   padding: 0px !important;
 }
 
@@ -884,7 +885,7 @@ text-align: center;
   padding: 4px 0px 4px 10px;
   clear: both;
   font-weight: 400;
-  font-family: 'Abhaya Libre', serif;
+  font-family: 'Poppins';
   font-size: 14px !important;
   color: #848484;
   text-align: inherit;

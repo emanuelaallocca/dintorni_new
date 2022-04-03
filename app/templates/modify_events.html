@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="container contact-form pt-0 pb-1 mt-5">
+    <div class="container contact-form pt-0 mb-2 mt-5">
         <div class="contact-image">
             <img src="{{ url_for('static', filename='img/' + 'icon0.png') }}"/>
         </div>
@@ -132,7 +132,7 @@
             </div>
 
             <!--choose img-->
-            <div class="row justify-content-center align-content-center pb-3">
+            <div class="row justify-content-center align-content-center pb-4">
                 <div class="col-md-4">
                     {{ form.picture1(class="form-control-file", id="formFileSm") }}
                     {% if form.picture1.errors %}
@@ -161,7 +161,7 @@
                 <!--btn-->
                 <div class="row row justify-content-center align-center pt-3">
                     <div class="col-md-6">
-                        {{ form.submit(class="btnSubmit text-white", style="background: #F06543; width: 100px") }}
+                        {{ form.submit(class="btn text-white align-center", style="background: #F06543; width: 100px;") }}
                     </div>
                 </div>
         </form>
@@ -169,20 +169,19 @@
 
     </div>
 
-    <div class="container align-center pb-4 mt-5">
-        <h3 class="" style="color: #313638">Delete your event</h3>
-        <button class="btnSubmit text-white align-center" style="background: #F06543;" onclick="document.getElementById('id01').style.display='block'">Delete</button>
+    <div class="container align-center pb-4 mt-4">
+        <button class="btn text-white align-center" style="background: #F06543; width: 100px;" onclick="document.getElementById('id01').style.display='block'">Delete</button>
+
             <div id="id01" class="modal">
                 <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
                 <form class="modal-content" action="{{ url_for('events.delete_event', event_id=event.id) }}" method="POST">
                     <div class="container">
                         <h1>Delete Event</h1>
                         <p>Are you sure you want to delete your event?</p>
-
                         <div class="clearfix">
-                            <button type="button" class="cancelbtn">Cancel</button>
+                            <button type="button" class="btn  align-center">Cancel</button>
                             <form action="{{ url_for('events.delete_event', event_id=event.id) }}" method="POST">
-                                <input class="btn btn-danger" type="submit" value="Delete"> <!-- il btn-danger è per farlo rosso -->
+                                <input class="btn align-center" style="background: #F06543;" type="submit" value="Delete"> <!-- il btn-danger è per farlo rosso -->
                             </form>
                         </div>
                     </div>
