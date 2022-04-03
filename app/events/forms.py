@@ -25,8 +25,6 @@ class EventForm(FlaskForm):
         if date.data<datetime.today().date():
             raise ValidationError('Date should be grater than today')
 
-
-
 class ModifyEventForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()], render_kw={'placeholder':'New title'})
     date = DateField('Date', validators=[DataRequired()], render_kw={'placeholder':'New date'})
