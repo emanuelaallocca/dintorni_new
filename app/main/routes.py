@@ -36,7 +36,8 @@ def intialize_db():
         {'name': 'Emanuela', 'surname':'Allocca'},
         {'name': 'Giulia', 'surname': 'Borna'},
         {'name': 'Federico', 'surname': 'Marchini'},
-        {'name': 'Chiara', 'surname': 'Martucci'}
+        {'name': 'Chiara', 'surname': 'Martucci'},
+        {'name': 'Giorgio', 'surname': 'Aruta'}
     ]
 
     for user in users:
@@ -98,7 +99,7 @@ def intialize_db():
              'content': 'In order to tell the story of our work, the truffle and its legends, we have decided to give our customers the opportunity to experience the search for both white and black truffles. Our truffle hunts take place in natural truffle grounds according to the growing season and the regional truffle hunting calendar, and are rich in educational and historical content so that you can return home with a true cultural and experiential heritage of the truffle.',
              'image_event1': 'event5_1.jpg', 'image_event2': 'event5_2.jpg', 'image_event3': 'event5_3.png'},
 
-            {'title': 'Wakeboard on artificial lake', 'date': '2022-04-27',  'location':'Settimo Torinese', 'price':30, 'equipment':'Swimwear', 'min_users':1, 'weaknesses':'No',
+            {'title': 'Wakeboard on artificial lake', 'date': '2022-03-27',  'location':'Settimo Torinese', 'price':30, 'equipment':'Swimwear', 'min_users':1, 'weaknesses':'No',
              'content': 'Have you ever wanted to try wakeboarding or wake surfing? Come and have a look and see how much fun it is to be in the water. You can even go tubing if you want. All travellers are welcome, from beginners to experts. During your experience you can stand on the board and take a wakeboard ride on your own, but most importantly, you will enjoy incredible energy surrounded by nature.',
              'image_event1':'event6_1.jpg', 'image_event2':'event6_2.jpg', 'image_event3':'event6_3.jpg'}
         ]
@@ -115,5 +116,10 @@ def intialize_db():
             i = i + 1
         db.session.add(e)
         db.session.commit()
+
+    join_event = JoinEvent(event_id = 6, user_id = 1,transport_type = 'bus', time_hour = 0, time_minute = 0,place='null', number_of_seats = 0 )
+    db.session.add(join_event)
+    db.session.commit()
+
     return redirect(url_for('users.logout'))
 

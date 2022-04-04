@@ -22,7 +22,7 @@ def new_post():
             if ev.date_event < datetime.today().date():
                 events_already_done.append(ev)
     if form.validate_on_submit():
-        post = Post(title=form.title.data, content=form.content.data, author=current_user)#, event_title = form.event_title.data)
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
         db.session.add(post)
         db.session.commit()
         flash('post created', 'success')

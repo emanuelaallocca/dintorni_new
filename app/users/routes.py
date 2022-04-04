@@ -42,8 +42,6 @@ def registration(usertype):
             # create a new user
             business = Business(name=form.name.data, email=form.email.data, vat_number=form.vat_number.data,
                                 telephone=form.telephone.data, city=form.city.data, address=form.address.data,
-                                link_facebook= form.link_facebook.data, link_instagram = form.link_instagram.data,
-                                link_twitter = form.link_twitter.data, link_website = form.link_website.data,
                                 password=hashed_password )
             db.session.add(business)
             db.session.commit()

@@ -1,3 +1,5 @@
+from idlelib.configdialog import is_int
+
 import wtforms
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
@@ -67,3 +69,13 @@ class UseYourCarForm(FlaskForm):
     def validate_time_minute(self, time_minute):
         if time_minute.data > 59 or time_minute.data < 0:
             raise ValidationError('You have to insert the time in the 24h standard')
+
+    def validate_place(self, place):
+        s = place.data.lower()
+        s = place.data.strip()
+        s = s.split()
+        info = len(s)
+        if (s[0] != 'corso' and s[0] != 'piazza' and s[0] != 'via' and s[0] != 'viale'):
+            raise ValidationError('You must insert a correct address')
+        if is_int(s[info - 1]) != True:
+            raise ValidationError('You must insert a correct address')

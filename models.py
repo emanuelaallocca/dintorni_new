@@ -81,10 +81,7 @@ class Business(User, db.Model):
     city = db.Column(db.String(20))
     address = db.Column(db.String(30))
     events = db.relationship('Event', backref='creator', lazy=True)
-    link_facebook = db.Column(db.String())
-    link_instagram = db.Column(db.String())
-    link_twitter = db.Column(db.String())
-    link_website = db.Column(db.String())
+
 
     __mapper_args__ = {
         'polymorphic_identity': 'business',

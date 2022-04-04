@@ -24,21 +24,6 @@
                                     {{ form.title(class="form-control") }}
                                 {% endif %}
                             </div>
-                            <div class="form-group">
-                                <!--<input type="text" name="txtEmail" class="form-control" placeholder="Your Email *" value="" />-->
-                                <div class="dropdown">
-                                    <button class="form-control" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Select an event
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    {% if ea_tot!=0 %}
-                                        {% for event in events %}
-                                            <a class="dropdown-item" type="button" class="btnSubmit" value={{ event.title }}  href="#">{{ event.title }}</a>
-                                        {% endfor %}
-                                    {% endif %}
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="form-group">
                                 {{ form.submit(class="btnSubmit text-white", style="background: #F06543") }}
