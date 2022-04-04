@@ -91,10 +91,6 @@ def account_business():
         current_user.telephone = form.telephone.data
         current_user.city = form.city.data
         current_user.address = form.address.data
-        current_user.link_facebook = form.link_facebook.data
-        current_user.link_instagram = form.link_instagram.data
-        current_user.link_twitter = form.link_twitter.data
-        current_user.link_website = form.link_website.data
         db.session.commit()
         flash('your account has been updated', 'success')
         return redirect(url_for('users.account_business'))
@@ -105,10 +101,7 @@ def account_business():
             form.telephone.data = current_user.telephone
             form.city.data = current_user.city
             form.address.data = current_user.address
-            form.link_facebook.data = current_user.link_facebook
-            form.link_instagram.data = current_user.link_instagram
-            form.link_twitter.data = current_user.link_twitter
-            form.link_website.data = current_user.link_website
+
     image_file = url_for('static', filename='profile_pics/'+current_user.image_file)#devo mettere la cartella+la route
     return render_template('update_account_business.html', title='Account Business',image_file=image_file, form=form)
 

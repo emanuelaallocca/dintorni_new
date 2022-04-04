@@ -55,12 +55,6 @@ class UpdateAccountBusinessForm(FlaskForm):
     telephone = IntegerField('Telephone', validators=[DataRequired()], render_kw={'placeholder':'Telephone'})
     city = StringField('City', validators=[DataRequired()], render_kw={'placeholder':'City'})
     address = StringField('Address', validators=[DataRequired()], render_kw={'placeholder':'Address'})
-    link_facebook = StringField('Link Facebook',
-                                render_kw={'placeholder': 'Link Facebook'})
-    link_instagram = StringField('Link Instagram',
-                                 render_kw={'placeholder': 'Link Instagram'})
-    link_twitter = StringField('Link Twitter', render_kw={'placeholder': 'Link Twitter'})
-    link_website = StringField('Link Website', render_kw={'placeholder': 'Link Website'})
     submit = SubmitField('Update')
 
 
