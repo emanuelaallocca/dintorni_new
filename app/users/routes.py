@@ -23,8 +23,7 @@ def registration(usertype):
 
     if usertype == 'private':
         form = RegistrationForm()
-        # if already logged in , i can jjjuse current user
-        if form.validate_on_submit():  # dice se è valido il form dopo il submit
+        if form.validate_on_submit():
             hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
             # create a new user
             user = Private(name = form.name.data, surname = form.surname.data, username=form.username.data, email=form.email.data, telephone=form.telephone.data,
@@ -37,7 +36,7 @@ def registration(usertype):
 
     elif usertype == 'business':
         form = RegistrationBusinessForm()
-        if form.validate_on_submit():  # dice se è valido il form dopo il submit
+        if form.validate_on_submit():
             hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
             # create a new user
             business = Business(name=form.name.data, email=form.email.data, vat_number=form.vat_number.data,
@@ -52,9 +51,7 @@ def registration(usertype):
 @users.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
-    #image file is where we store --> now create a variable
-    form= UpdateAccountForm() #importo il form sopra e poi gli dico form= al tipo di form importato sopra
-    #e poi lo faccio returnare sotto
+    form= UpdateAccountForm()
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
@@ -73,7 +70,7 @@ def account():
         form.username.data = current_user.username
         form.email.data = current_user.email
         form.telephone.data = current_user.telephone
-    image_file = url_for('static', filename='profile_pics/'+current_user.image_file)#devo mettere la cartella+la route
+    image_file = url_for('static', filename='profile_pics/'+current_user.image_file)
     return render_template('update_account_user.html', title='Account',image_file=image_file, form=form)
 
 @users.route("/account_business", methods=['GET', 'POST'])
@@ -118,14 +115,14 @@ def login():
         if user != None:
             if user and bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user, remember=form.remember.data)
-                next_page = request.args.get('next')  # get fa tornare none se non esiste
+                next_page = request.args.get('next')
                 return redirect(next_page) if next_page else redirect(url_for('main.home'))
             else:
                 flash('Login Unsuccessful. Please check email and password', 'danger')
         elif business!=None:
             if business and bcrypt.check_password_hash(business.password, form.password.data):
                 login_user(business, remember=form.remember.data)
-                next_page = request.args.get('next')  # get fa tornare none se non esiste
+                next_page = request.args.get('next')
                 return redirect(next_page) if next_page else redirect(url_for('main.home'))
             else:
                 flash('Login Unsuccessful. Please check email and password', 'danger')
@@ -157,11 +154,9 @@ def user_events():
     return render_template('user_events.html', user=current_user, events = events, e_tot = len(events),
                            ea_tot = len(events_already_done), events_already_done=events_already_done)
 
-
 @users.route("/eventscreated")
 @login_required
 def events_created():
-
     page = request.args.get('page', 1, type=int)
     business = Business.query.filter_by(name=current_user.name).first_or_404()
     events = Event.query.filter_by(creator=business).order_by(Event.date_posted.desc()).paginate(page=page, per_page=9)

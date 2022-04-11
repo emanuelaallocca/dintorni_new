@@ -72,10 +72,13 @@ class UpdateAccountBusinessForm(FlaskForm):
              raise ValidationError('This email is already taken')
 
     def validate_vat_number(self, vat_number):
+        business = Business.query.filter_by(vat_number=vat_number.data).first()
         if vat_number.data != current_user.vat_number:
             s = str(vat_number.data)
             if len(s) != 11:
                 raise ValidationError('You must insert a correct VAT NUMBER')
+            elif business:
+                raise ValidationError('This VAT NUMBER is already registered in our website')
 
     def validate_address(self, address):
         if address.data != current_user.address:
@@ -134,9 +137,8 @@ class UpdateAccountForm(FlaskForm):
 
 class RequestResetForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()], render_kw={'placeholder':'Email'})
-    submit = SubmitField('Request Password Reset') #button per fare il submit
+    submit = SubmitField('Request Password Reset')
     def validate_email(self, email):
-        #guardo se è nel db --> cerco l'user attraverso la mail questa volta
         user = User.query.filter_by(email=email.data).first()
         if user is None:
              raise ValidationError('there is not an account')
@@ -171,9 +173,12 @@ class RegistrationBusinessForm(FlaskForm):
             raise ValidationError('This email is already taken')
 
     def validate_vat_number(self, vat_number):
+        business = Business.query.filter_by(vat_number=vat_number.data).first()
         s = str(vat_number.data)
         if len(s)!=11:
             raise ValidationError('You must insert a correct VAT NUMBER')
+        elif business:
+            raise ValidationError('This VAT NUMBER is already registered in our website')
 
     def validate_address(self, address):
         s = address.data.lower()
@@ -194,6 +199,4 @@ class RegistrationBusinessForm(FlaskForm):
         elif u or b :
             raise ValidationError('Control the input: we already have an account with this telephone number')
 
-    #def validate_terms(self, term_conditions):
-        #if term_conditions.data!=True:
-            #raise ValidationError('You have to accept terms and conditions')
+

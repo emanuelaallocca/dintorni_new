@@ -12,7 +12,7 @@ import app
 @main.route("/")
 @main.route("/home")
 def home():
-    page = request.args.get('page', 1, type=int) #possiamo passare il numero di post che vogliamo per pagina
+    page = request.args.get('page', 1, type=int)
     events = Event.query.order_by(Event.date_event.desc()).paginate(page=page, per_page=10)
     return render_template('home.html', events = events)
 
@@ -64,7 +64,7 @@ def intialize_db():
         s = business['name'].lower().replace(" ", "")
         email = s.lower() +'@mail.com'
         telephone = 3397960955
-        vat_number = 123456
+        vat_number = 12345678911
         c = Business(name=business['name'], email=email, password=bcrypt.generate_password_hash('1234567890').decode('utf-8'),
                      vat_number=vat_number,
                      city=business['city'], address=business['address'], telephone=telephone)

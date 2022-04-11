@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 {% block content%}
 
+{% if ea_tot!=0 %}
         <div class="container contact-form" style="height: 450px">
             <div class="contact-image">
                 <img src="{{ url_for('static', filename='img/' + 'icon0.png') }}"/>
             </div>
-
                 <form method="POST" action="" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
                     <h3 style="color: #313638">Write a review!</h3>
@@ -46,6 +46,20 @@
                         </div>
                     </div>
                 </form>
-
+            </div>
+        {% endif %}
+        {% if ea_tot==0 %}
+            <div class="container login-container pb-5 mb-0" style="height: 500px">
+        <div class="row justify-content-center pb-5">
+            <div class="col pr-0 pl-0 pb-5 login-form-1">
+                <h3 class="pb-3">You don't have enjoyed our events so you cannot share your review !</h3>
+                    <div class="p-7">
+                        <p class="text-center font-weight-light">Follow our website and enjoy our experiences!</p>
+                        <p class="text-center font-weight-light"></p>
+                        <p class="text-center font-weight-light">See you there!</p>
+                    </div>
+                </div>
+            </div>
         </div>
+        {% endif %}
 {% endblock content%}
