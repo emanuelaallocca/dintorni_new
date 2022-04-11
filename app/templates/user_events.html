@@ -40,25 +40,22 @@
                                 <div class="container align-center pb-4 mt-5">
                                     <p class="font-weight-bold" style="color: #313638">Delete your event?</p>
                                     <button class="btnSubmit text-white align-center" style="background: #F06543; width: 150px" onclick="document.getElementById('id01').style.display='block'">Delete</button>
-                                    <div id="id01" class="modal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                                        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                                    <div id="id01" class="modal" tabindex="0" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <span onclick="document.getElementById('id01').style.display='none'" class="close" style="color: #F06543" title="Close Modal">CLOSE</span>
                                         <form class="modal-content" action="{{ url_for('events.delete_event_joined', event_id=event.id) }}" method="POST">
-                                            <div class="container m-5 text-center">
+                                            <div class="container p-5 text-center">
                                                 <h1>Are you sure?</h1>
                                                 <p>You won't be able to participate anymore unless you subscribe again!</p>
 
                                                 <div class="clearfix justify-content-center">
                                                     <div class="row">
-                                                        <div class="col-md-3"></div>
-                                                        <div class="col-md-3 justify-content-end">
-                                                            <button type="button" class="btnSubmit" data-dismiss="modal">Close</button>
-                                                        </div>
-                                                        <div class="col-md-3 justify-content-start">
+
+                                                        <div class="col-md-12 justify-content-start">
                                                             <form action="{{ url_for('events.delete_event_joined', event_id=event.id) }}" method="POST">
                                                                 <input class="btnSubmit text-white" type="submit" style="background: #F06543" value="Delete"> <!-- il btn-danger è per farlo rosso -->
                                                             </form>
                                                         </div>
-                                                        <div class="col-md-3"></div>
+
                                                     </div>
                                                 </div>
                                             </div>

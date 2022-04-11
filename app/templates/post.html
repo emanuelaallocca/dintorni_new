@@ -1,39 +1,63 @@
 {% extends "layout.html" %}
 {% block content %}
-  <article class="media content-section">
-    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
-    <div class="media-body">
-      <div class="article-metadata">
-        <a class="mr-2" href="">{{ post.author.username }}</a>
-        <small class="">{{ post.date_posted.strftime('%d-%m-%Y') }}</small>
-        {% if post.author == current_user %}
-          <div>
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('posts.update_post', post_id=post.id) }}">Update</a>
-            <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button> <!-- bootstrap button-->
-          </div>
-        {% endif %}
-      </div>
-      <h2 class="article-title">{{ post.title }}</h2>    <!-- titolo del post, ho tolto reference -->
-      <p class="article-content">{{ post.content }}</p>
-    </div>
-  </article>
-  <!-- delete Modal preso da bootstrap-->
-  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <form action="{{ url_for('posts.delete_post', post_id=post.id) }}" method="POST">
-            <input class="btn btn-danger" type="submit" value="Delete"> <!-- il btn-danger è per farlo rosso -->
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="container pb-5 pt-5 mt-2 mb-5">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 mb-5">
+                <div class="cardbox shadow-lg bg-white p-3">
+                    <div class="cardbox-heading">
+                        <div class="media m-0">
+                            <div class="d-flex m-1">
+                                <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+                            </div>
+                            <div class="media-body">
+                                <a class="mr-2" href="">{{ post.author.username }}</a>
+                                <small><span><i class="icon ion-md-time"></i>{{ post.date_posted.strftime('%Y-%m-%d') }}</span></small>
+                            </div>
+                        </div><!--/ media -->
+                    </div><!--/ cardbox-heading -->
+                    <div class="cardbox-item pr-4 pl-4 pb-4 pt-1">
+                        <h2><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h2>
+                        <p class="article-content">{{ post.content }}</p>
+                    </div>
+                    {% if post.author == current_user %}
+                        <div class="container align-center pb-4">
+                            <div class="row">
+                            <div class="col-md-6 justify-content-start">
+                                <form action="{{ url_for('posts.update_post', post_id=post.id) }}" method="POST">
+                                    <input class="btnSubmit text-white" type="submit" style="background: #F06543" value="Update"> <!-- il btn-danger è per farlo rosso -->
+                                </form>
+                            </div>
+                            <div class="col-md-6 justify-content-start">
+                                <button class="btnSubmit text-white"  style="background: #F06543;" onclick="document.getElementById('id01').style.display='block'">Delete</button>
+                            </div>
+                                <div id="id01" class="modal align-center" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <span onclick="document.getElementById('id01').style.display='none'" class="close" style="color: #F06543" title="Close Modal">CLOSE</span>
+                                    <form class="modal-content" action="{{ url_for('posts.delete_post', post_id=post.id) }}" method="POST">
+                                        <div class="container p-5">
+                                            <h1 class="justify-content-center align-center">Are you sure?</h1>
+                                            <p>Your post will be no longer available for other users!
+                                            </p>
+                                            <div class="clearfix justify-content-center">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-md-12 justify-content-start">
+                                                        <form action="{{ url_for('posts.delete_post', post_id=post.id) }}" method="POST">
+                                                            <input class="btnSubmit text-white" type="submit" style="background: #F06543" value="Delete"> <!-- il btn-danger è per farlo rosso -->
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    {% endif %}
+                </div>
+            </div><!--/ col-lg-3 -->
+        </div><!--/ row -->
+  </div><!--/ container -->
+
+
+
 {% endblock content %}

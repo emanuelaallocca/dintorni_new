@@ -72,7 +72,7 @@ def delete_event(event_id):
         abort(403)
     db.session.delete(event)
     db.session.commit()
-    flash('Your post has been deleted!', 'success')
+    flash('Your event has been deleted!', 'success')
     return redirect(url_for('main.home'))
 
 @events.route("/event/<int:event_id>/update", methods=['GET', 'POST'])

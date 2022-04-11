@@ -101,7 +101,7 @@ def intialize_db():
 
             {'title': 'Wakeboard on artificial lake', 'date': '2022-03-27',  'location':'Settimo Torinese', 'price':30, 'equipment':'Swimwear', 'min_users':1, 'weaknesses':'No',
              'content': 'Have you ever wanted to try wakeboarding or wake surfing? Come and have a look and see how much fun it is to be in the water. You can even go tubing if you want. All travellers are welcome, from beginners to experts. During your experience you can stand on the board and take a wakeboard ride on your own, but most importantly, you will enjoy incredible energy surrounded by nature.',
-             'image_event1':'event6_1.jpg', 'image_event2':'event6_2.jpg', 'image_event3':'event6_3.jpg'}
+             'image_event1':'event6_5.png', 'image_event2':'event6_2.jpg', 'image_event3':'event6_3.jpg'}
         ]
 
     i = 0

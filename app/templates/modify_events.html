@@ -173,16 +173,16 @@
         <button class="btn text-white align-center" style="background: #F06543; width: 100px;" onclick="document.getElementById('id01').style.display='block'">Delete</button>
 
             <div id="id01" class="modal">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" style="color: #F06543" title="Close Modal">CLOSE</span>
                 <form class="modal-content" action="{{ url_for('events.delete_event', event_id=event.id) }}" method="POST">
-                    <div class="container">
+                    <div class="container p-5">
                         <h1>Delete Event</h1>
                         <p>Are you sure you want to delete your event?</p>
                         <div class="clearfix">
-                            <button type="button" class="btn  align-center">Cancel</button>
+
                             <form action="{{ url_for('events.delete_event', event_id=event.id) }}" method="POST">
-                                <input class="btn align-center" style="background: #F06543;" type="submit" value="Delete"> <!-- il btn-danger è per farlo rosso -->
-                            </form>
+                                                            <input class="btnSubmit text-white" type="submit" style="background: #F06543" value="Delete"> <!-- il btn-danger è per farlo rosso -->
+                                                        </form>
                         </div>
                     </div>
                 </form>
